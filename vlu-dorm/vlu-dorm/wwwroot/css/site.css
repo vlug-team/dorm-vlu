@@ -11,6 +11,7 @@ h1:focus {
 a {
     color: #fff;
 }
+
 .content {
     padding-top: 1.1rem;
 }
@@ -55,10 +56,12 @@ a {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
 .logo {
     width: 4em;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
+
 .video {
     margin-top: 6em;
     margin-bottom: 12em;
