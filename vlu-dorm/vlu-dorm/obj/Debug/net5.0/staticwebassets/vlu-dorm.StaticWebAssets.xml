@@ -1,5 +1,0 @@
-﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="_content/AntDesign" Path="/Users/morclaw/.nuget/packages/antdesign/0.10.3.1/build/../staticwebassets/" />
-  <ContentRoot BasePath="/" Path="/Users/morclaw/Projects/dorm-vlu/vlu-dorm/vlu-dorm/obj/Debug/net5.0/scopedcss/bundle/" />
-  <ContentRoot BasePath="/Identity" Path="/Users/morclaw/.nuget/packages/microsoft.aspnetcore.identity.ui/5.0.13/staticwebassets/V4/" />
-</StaticWebAssets>
