@@ -59,3 +59,9 @@ a {
     width: 4em;
     margin-bottom:5px;
 }
+.video {
+    margin-top: 6em;
+    margin-bottom: 12em;
+    width: 200vh;
+    height: 100vh;
+}
