@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{3BA8EE38-B5F0-44E9-B3FC-F1D77D311F8C}|vlu-dorm">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.vlu-dorm PreferredExecutionTarget="/Applications/CocCoc.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="vlu-dorm/Pages/Homepage/Homepage.razor">
+    <Files>
+      <File FileName="vlu-dorm/Shared/NavMenu.razor" Line="13" Column="38" />
+      <File FileName="vlu-dorm/Pages/Homepage/Index.razor" Line="24" Column="33" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="vlu-dorm" expanded="True">
+            <Node name="vlu-dorm" expanded="True">
+              <Node name="Data" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="Homepage" expanded="True" />
+              </Node>
+              <Node name="Shared" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+</Properties>

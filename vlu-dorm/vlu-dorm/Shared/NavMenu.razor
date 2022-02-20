@@ -1,15 +1,20 @@
 ﻿<Row Style="margin-left:5em">
-    <Col>
+    <Col />
     <a href='/'>
         <img class="logo" src="/media/vlu-logo.png" />
         <Text Style="color:#fff; font-size:20px;" Strong="true">Ký Túc Xá Văn Lang</Text>
     </a>
-    </Col>
-    <Col Offset="9">
-    <Menu Mode="MenuMode.Horizontal" Theme="MenuTheme.Dark" Style="background-color: #10294A;">
-        <MenuItem Style="color:#fff">Trang chủ</MenuItem>
-        <MenuItem Style="color:#fff">Giới thiệu</MenuItem>
-        <MenuItem Style="color:#fff">Kí Túc Xá</MenuItem>
+
+    <Col Offset="9" />
+    <Menu Mode="MenuMode.Horizontal" Theme="MenuTheme.Dark" Style="background-color: #10294A;" DefaultSelectedKeys=@(new []{ "1" })>
+        <MenuItem Key="1" Style="color:#fff">Trang chủ</MenuItem>
+        <MenuItem Key="2" Style="color:#fff">Giới thiệu</MenuItem>
+        <MenuItem Key="3" Style="color:#fff">
+           <SubMenu Title="Kí túc xá">
+               <MenuItem>Đăng ký</MenuItem>
+               <MenuItem>Quản lý</MenuItem>
+           </SubMenu>
+        </MenuItem>
         <AuthorizeView>
             <Authorized>
                 <a href="Identity/Account/Manage">Hello, @context.User.Identity?.Name!</a>
@@ -22,7 +27,6 @@
             </NotAuthorized>
         </AuthorizeView>
     </Menu>
-    </Col>
 </Row>
 <style>
     span:hover {
