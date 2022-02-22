@@ -11,8 +11,8 @@
         <MenuItem Key="2" Style="color:#fff">Giới thiệu</MenuItem>
         <MenuItem Key="3" Style="color:#fff">
            <SubMenu Title="Kí túc xá">
-               <MenuItem>Đăng ký</MenuItem>
-               <MenuItem>Quản lý</MenuItem>
+               <MenuItem RouterLink="dang-ky">Đăng ký</MenuItem>
+               <MenuItem RouterLink="quan-ly">Quản lý</MenuItem>
            </SubMenu>
         </MenuItem>
         <AuthorizeView>
@@ -28,8 +28,3 @@
         </AuthorizeView>
     </Menu>
 </Row>
-<style>
-    span:hover {
-        color: gray;
-    }
-</style>

@@ -18,8 +18,14 @@
 
   <ItemGroup>
     <None Remove="Pages\Homepage\" />
+    <None Remove="Pages\Manager\" />
+    <None Remove="Services\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\Homepage\" />
+    <Folder Include="Pages\Manager\" />
+    <Folder Include="Services\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>
