@@ -1,5 +1,3 @@
-using System;
-
 namespace vlu_dorm.Data
 {
     public class WeatherForecast
@@ -10,6 +8,6 @@ namespace vlu_dorm.Data
 
         public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 
-        public string Summary { get; set; }
+        public string? Summary { get; set; }
     }
 }
