@@ -103,3 +103,8 @@ a {
 span:hover {
     color: gray;
 }
+.backgroud-about {
+    background: url("https://tuyensinh.vanlanguni.edu.vn/wp-content/uploads/2017/02/vlu_phoi_canh_ktx-1-scaled.jpg");
+    width: 100%;
+    height:30%;
+}
