@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{E7335086-88A7-4300-BBD8-00A8CE3D91DC}|vlu-dorm">
+  <MonoDevelop.Ide.Workbench ActiveDocument="vlu-dorm/Pages/Aboutus/AboutUs.razor">
+    <Files>
+      <File FileName="vlu-dorm/Pages/Aboutus/AboutUs.razor" Line="13" Column="35" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="vlu-dorm" expanded="True">
+            <Node name="vlu-dorm" expanded="True" selected="True">
+              <Node name="Pages" expanded="True">
+                <Node name="Aboutus" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.vlu-dorm PreferredExecutionTarget="/Applications/CocCoc.app" />
+</Properties>
