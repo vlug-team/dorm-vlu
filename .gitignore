@@ -1,0 +1,5 @@
+
+*.cs
+*.json
+*.cache
+*.sentinel
