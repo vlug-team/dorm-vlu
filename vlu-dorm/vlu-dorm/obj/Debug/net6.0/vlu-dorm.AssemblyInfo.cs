@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-vlu_dorm-55E5EC42-DADD-41C1-B2C2-0D52A9E0B73B")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("vlu-dorm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

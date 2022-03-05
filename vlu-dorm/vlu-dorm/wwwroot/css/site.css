@@ -144,3 +144,6 @@ span:hover {
 .img-main{
     margin-top:5em;
 }
+.text-danger ul li {
+    color: #000;
+}
