@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using vlu_dorm.Models;
 
 namespace vlu_dorm.Data
 {
@@ -9,7 +10,7 @@ namespace vlu_dorm.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options) { }
      
-
+        public DbSet<Students> Students { set; get; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

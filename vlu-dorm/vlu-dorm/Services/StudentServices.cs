@@ -6,30 +6,22 @@ namespace vlu_dorm.Services
 {
     public class StudentServices
     {
-        private readonly DormDbContext _context;
-
-        public StudentServices(DormDbContext context)
+        readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
+        public StudentServices(IDbContextFactory<ApplicationDbContext> dbContextFactory)
         {
-            _context = context;
+            _contextFactory = dbContextFactory;
         }
-
+        public async Task<List<Students>> GetAllAsync()
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return await context.Students.ToListAsync();
+        }
         public void Add(Students students)
         {
-            _context.Students.Add(students);
-            _context.SaveChanges();
-        }
-        public void SaveChanges()
-        {
-            _context.SaveChangesAsync();
-        }
-        public List<Students> GetAll()
-        {
-            return _context.Students.Include(c => c.Id).ToList();
-        }
-
-        public void Dispose()
-        {
-            ((IDisposable)_context).Dispose();
+            using var context = _contextFactory.CreateDbContext();
+            context.Students.Add(students);
+            context.SaveChanges();
         }
     }
+
 }

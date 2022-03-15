@@ -9,6 +9,7 @@
       "vlu-dorm/1.0.0": {
         "dependencies": {
           "AntDesign": "0.10.4",
+          "FluentValidation": "10.4.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.3",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.3",
           "Microsoft.AspNetCore.Identity.UI": "6.0.3",
@@ -31,6 +32,14 @@
           "lib/net5.0/AntDesign.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "FluentValidation/10.4.0": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "10.4.0.0"
           }
         }
       },
@@ -2406,6 +2415,13 @@
       "sha512": "sha512-0vioSIDh0poG6ZyuZ3W+yo0McfLo2yeSHx2NItaIsVXfD7i/WTR1+Xafw9v7vWEm7CBoXE6jkGIT62cEPOb/zg==",
       "path": "antdesign/0.10.4",
       "hashPath": "antdesign.0.10.4.nupkg.sha512"
+    },
+    "FluentValidation/10.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rVI1b5L3pq3layrRKIo3N7AT3PWey8ocPZhf6zeHYf6LBBvnP1KzW3bm7KmeazOWW8m1KXMD+shfviIcKSgQ0g==",
+      "path": "fluentvalidation/10.4.0",
+      "hashPath": "fluentvalidation.10.4.0.nupkg.sha512"
     },
     "Humanizer.Core/2.8.26": {
       "type": "package",
