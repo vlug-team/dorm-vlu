@@ -27,8 +27,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Components/TableView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29tcG9uZW50c1xUYWJsZVZpZXcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Homepage/Homepage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZXBhZ2VcSG9tZXBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Registration/Registration.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cmF0aW9uXFJlZ2lzdHJhdGlvbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Shared/FooterComponent.razor]

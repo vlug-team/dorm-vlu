@@ -119,12 +119,23 @@ span:hover {
 }
 .img-vlu{
     width:500px;
-    height:600px;
+    height:550px;
+    margin-bottom: 5em;
+    margin-top: -2em;
+}
+.login-page {
+    overflow: hidden;
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 .vlu-brand {
     color: #000;
     text-decoration: none;
-    margin-top: 5em;
+    margin-top: 3em;
     text-align: center;
     font-size: 20px;
 }
@@ -146,4 +157,7 @@ span:hover {
 }
 .text-danger ul li {
     color: #000;
+}
+.btn-admin {
+    margin-right: 2em;
 }

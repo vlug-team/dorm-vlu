@@ -1,8 +1,25 @@
 ﻿@page "/quan-ly"
 @using Microsoft.AspNetCore.Authorization
+@using vlu_dorm.Pages.Admin.Components
 @attribute [Authorize(Roles = "Admin")]
 
 <PageTitle>Quản lý</PageTitle>
-<Row>
-    <Button>Click</Button>
+<Row Style="margin: 3em;">
+    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý đăng ký nội trú</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý phòng</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý dịch vụ sử dụng</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý tuân thủ các nội quy</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý điện, nước</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý phòng</Button>
 </Row>
+<Row>
+    <Col Style="margin-left: 3em; margin-bottom: 5em">
+    @*<AutoComplete @bind-Value="@value" Options="@options" OnSelectionChange="OnSelectionChange" OnActiveChange="OnActiveChange" Placeholder="input here" />*@
+    </Col>
+</Row>
+<Row>
+    <TableView/>
+</Row>
+@code {
+
+}

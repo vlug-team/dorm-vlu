@@ -1,0 +1,38 @@
+﻿@page "/dang-ky"
+@inject StudentServices StudentsServices
+<Form Model="@students"
+      OnFinish="OnFinish">
+    <FormItem>
+        <Text>Họ và tên</Text>
+        <Input @bind-Value="context.FullName" Placeholder="Họ và tên"></Input>
+    </FormItem>
+    <FormItem>
+        <Text>Địa chỉ thường chú</Text>
+        <Input @bind-Value="context.PermanentAddress" Placeholder="Địa chỉ: 69 Đặng thùy trâm,....."></Input>
+    </FormItem>
+    <FormItem>
+        <Text>Ngày sinh</Text>
+        <DatePicker @bind-Value="context.BirthDay" Format="dd/MM/yyyy" />
+    </FormItem>
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+    <FormItem>
+        @if (visible)
+        {
+            <Alert Type="@AlertType.Success" Message="Đăng kí thành công" />
+        }
+    </FormItem>
+</Form>
+@code {
+    bool visible = false;
+    Students students = new();
+    private void OnFinish(EditContext editContext)
+    {
+        visible = true;
+        StudentsServices.Add(students);
+
+    }
+}
