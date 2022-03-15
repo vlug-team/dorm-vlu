@@ -6,20 +6,24 @@
     </a>
     <Col Offset="9" />
     <Menu Mode="MenuMode.Horizontal" Theme="MenuTheme.Dark" Style="background-color: #10294A;" DefaultSelectedKeys=@(new []{ "1" })>
-        <MenuItem Key="1" Style="color:#fff">Trang chủ</MenuItem>
+        <MenuItem Key="1" Style="color:#fff" RouterLink="/">Trang chủ</MenuItem>
         <MenuItem Key="2" Style="color:#fff" RouterLink="gioi-thieu">Giới thiệu</MenuItem>
         <MenuItem Key="3" Style="color:#fff">
-           <SubMenu Title="Kí túc xá">
-               <MenuItem RouterLink="dang-ky">Đăng ký</MenuItem>
-               <MenuItem RouterLink="quan-ly">Quản lý</MenuItem>
-           </SubMenu>
+            <SubMenu Title="Kí túc xá">
+                <MenuItem RouterLink="dang-ky">Đăng ký</MenuItem>
+                <AuthorizeView>
+                    <Authorized>
+                        <MenuItem RouterLink="quan-ly">Quản lý</MenuItem>
+                    </Authorized>
+                </AuthorizeView>
+            </SubMenu>
         </MenuItem>
         <AuthorizeView>
             <Authorized>
-                <a href="Identity/Account/Manage">Hello, @context.User.Identity?.Name!</a>
-                <form method="post" action="Identity/Account/LogOut">
-                    <button type="submit" class="nav-link btn btn-link">Log out</button>
-                </form>
+                <a href="quan-ly" style="color: #fff">@context.User.Identity?.Name</a>
+                <a href="Identity/Account/LogOut" style="margin-left:5px">
+                    <Button Danger Type="@ButtonType.Primary" Icon="@IconType.Outline.Logout"></Button>
+                </a>
             </Authorized>
             <NotAuthorized>
                 <MenuItem Style="color:#fff" Class="link-light" RouterLink="Identity/Account/Login">Log in</MenuItem>
