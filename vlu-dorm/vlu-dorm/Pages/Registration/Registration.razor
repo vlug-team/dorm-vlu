@@ -1,0 +1,91 @@
+﻿@page "/dang-ky"
+@inject StudentServices StudentServices
+@inject MessageService MessageService
+<PageTitle>Đăng ký kí túc xá</PageTitle>
+<Row Justify="center" Style="margin-top: 5em; margin-bottom:6em">
+    <Col Span="20" Offset="10">
+    <Form Model="@students"
+          OnFinish="OnFinish"
+          LabelColSpan="8"
+          WrapperColSpan="16"
+          Size="AntSizeLDSType.Small">
+        <FormItem>
+            <InputGroup>
+                <Row>
+                    <Col Span="7" Style="margin-right: 2em; margin-left: 2em">
+                    <Text>Họ và tên: </Text>
+                    <Input @bind-Value="context.FullName" Placeholder="Họ và tên" Size=""></Input>
+                    </Col>
+                    <Col Span="7">
+                    <Text>Mã số sinh viên: </Text>
+                    <Input @bind-Value="context.StudentCode" Placeholder="Mã số sinh viên"></Input>
+                    </Col>
+                </Row>
+            </InputGroup>
+        </FormItem>
+        <Row>
+            <Col Span="3" Offset="3" Style="margin-left: 2em;">
+            <Text>Khóa học: </Text>
+            <Select Value="@context.Course" TItem="string" TItemValue="string" DefaultValue="@("K28")">
+                <SelectOptions>
+                            @foreach (var item in _course)
+                            {
+                        <SelectOption TItemValue="string" TItem="string" Value=@item Label=@item />
+                            }
+                </SelectOptions>
+            </Select>
+            </Col>
+            <Col Style="margin-left:3em">
+            <Text>Ngày sinh:</Text>
+            <br />
+            <DatePicker @bind-Value="context.BirthDay" Format="dd/MM/yyyy" />
+            </Col>
+        </Row>
+
+        <FormItem>
+            <Row>
+                <Col Span="15" Style="margin-left:2em; margin-top: 2em;">
+                <Text>Địa chỉ thường chú: </Text>
+                <Input @bind-Value="context.PermanentAddress" Placeholder="Địa chỉ: 69 Đặng thùy trâm,..."></Input>
+                </Col>
+            </Row>
+        </FormItem>
+
+        <FormItem WrapperColOffset="4" WrapperColSpan="1">
+            <Button Type="@ButtonType.Primary" HtmlType="submit">
+                Submit
+            </Button>
+        </FormItem>
+    </Form>
+    </Col>
+</Row>
+@code {
+    List<string> _course = new() { "K23", "K24", "K25", "K26", "K27", "K28" };
+    Students students = new();
+    private async Task OnFinish(EditContext editContext)
+    {
+        if (students != null)
+        {
+            await Success();
+            students.CreateAt = DateTime.Today;
+            StudentServices.Add(students);
+            students = new();
+        }
+        else
+        {
+            await Error();
+            students = new();
+        }
+
+    }
+    private async Task Success()
+    {
+        await MessageService.Success("Đã gửi đăng ký kí túc xá");
+    }
+
+    private async Task Error()
+    {
+        await MessageService.Error("Gửi đăng kí không thành công");
+
+    }
+}

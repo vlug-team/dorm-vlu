@@ -1,3 +1,9 @@
+D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
+D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
+D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-arm64\lib\net6.0\dotnet-aspnet-codegenerator-design.exe
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\obj\Debug\net6.0\vlu-dorm.csproj.AssemblyReference.cache
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\obj\Debug\net6.0\vlu-dorm.GeneratedMSBuildEditorConfig.editorconfig
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\obj\Debug\net6.0\vlu-dorm.AssemblyInfoInputs.cache
@@ -29,7 +35,6 @@ D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.AspNetCore.
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.Build.Locator.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.CodeAnalysis.AnalyzerUtilities.dll
-D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Features.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.Scripting.dll
@@ -107,7 +112,6 @@ D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\ru\Microsoft.CodeAnal
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
-D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
@@ -147,7 +151,6 @@ D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\tr\Microsoft.CodeAnal
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Scripting.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
-D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
@@ -220,7 +223,6 @@ D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\ja\Microsoft.CodeAnal
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
-D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
@@ -252,12 +254,10 @@ D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hans\Microsoft.Cod
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
-D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-arm\lib\net6.0\dotnet-aspnet-codegenerator-design.exe
-D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win-arm64\lib\net6.0\dotnet-aspnet-codegenerator-design.exe
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
@@ -276,3 +276,4 @@ D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\obj\Debug\net6.0\refint\vlu-dorm.dll
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\obj\Debug\net6.0\vlu-dorm.pdb
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\obj\Debug\net6.0\vlu-dorm.genruntimeconfig.cache
 D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\obj\Debug\net6.0\ref\vlu-dorm.dll
+D:\GithubClone\dorm-vlu\vlu-dorm\vlu-dorm\bin\Debug\net6.0\FluentValidation.dll

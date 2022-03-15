@@ -1,0 +1,31 @@
+﻿@inject StudentServices StudentService
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Create at</th>
+        <th>Name</th>
+        <th>Birth day</th>
+        <th>PermanentAddress</th>
+    </tr>
+    @foreach (var item in _student)
+    {
+        <tr>
+            <th>@item.Id</th>
+            <th>@item.CreateAt</th>
+            <th>@item.FullName</th>
+            <th>@item.BirthDay</th>
+            <th>@item.PermanentAddress</th>
+        </tr>
+    }
+
+</table>
+
+@code {
+    List<Students> _student = new();
+
+    protected override void OnInitialized()
+    {
+      //  _student = StudentService.GetAll();
+    }
+
+}
