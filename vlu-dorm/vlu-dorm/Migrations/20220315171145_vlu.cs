@@ -73,11 +73,23 @@ namespace vlu_dorm.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    StudentCode = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     FullName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    BirthDay = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    BirthDay = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     PermanentAddress = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Course = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Department = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumeber = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Gender = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -216,12 +228,12 @@ namespace vlu_dorm.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "557d55b9-250f-4425-82bf-9c1aefba3f5e", "Admin", "ADMIN" });
+                values: new object[] { "3dcbbf38-7eec-4115-b872-0ff7aa665554", "0fb4860b-48b3-4e1d-a43c-c3f511833173", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "b8f950c6-7596-4119-b6ba-30fc9515c0d6", "dd1d171a-7a94-49f1-81b3-baed36efdba3", "User", "USER" });
+                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "5e3f6147-52a4-40f3-8ed0-a6a37bdf9191", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",

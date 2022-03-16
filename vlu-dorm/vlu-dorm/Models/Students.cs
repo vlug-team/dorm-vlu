@@ -9,9 +9,13 @@ namespace vlu_dorm.Models
         public int Id { get; set; }
         public string StudentCode { get; set; }
         public string FullName { get; set; }
-        public DateTime? CreateAt { get; set; }
-        public DateTime? BirthDay { get; set; }
+        public DateTime CreateAt { get; set; }
+        public DateTime BirthDay { get; set; }
         public string PermanentAddress { get; set; }
         public string Course { get; set; }
+        public string Department { get; set; }
+        public string PhoneNumeber { get; set; }
+        public string Email { get; set; }
+        public string Gender { get; set; }
     }
 }

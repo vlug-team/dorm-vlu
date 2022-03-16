@@ -47,15 +47,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "b8f950c6-7596-4119-b6ba-30fc9515c0d6",
-                            ConcurrencyStamp = "dd1d171a-7a94-49f1-81b3-baed36efdba3",
+                            Id = "3dcbbf38-7eec-4115-b872-0ff7aa665554",
+                            ConcurrencyStamp = "0fb4860b-48b3-4e1d-a43c-c3f511833173",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "557d55b9-250f-4425-82bf-9c1aefba3f5e",
+                            ConcurrencyStamp = "5e3f6147-52a4-40f3-8ed0-a6a37bdf9191",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -258,16 +258,34 @@ namespace vlu_dorm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("BirthDay")
+                    b.Property<DateTime>("BirthDay")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("CreateAt")
+                    b.Property<string>("Course")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Department")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("FullName")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Gender")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("PermanentAddress")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PhoneNumeber")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("StudentCode")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

@@ -11,16 +11,16 @@ namespace vlu_dorm.Services
         {
             _contextFactory = dbContextFactory;
         }
-        public async Task<List<Students>> GetAllAsync()
+        public List<Students> GetAll()
         {
             using var context = _contextFactory.CreateDbContext();
-            return await context.Students.ToListAsync();
+            return context.Students.ToList();
         }
-        public void Add(Students students)
+        public async Task AddAsync(Students students)
         {
             using var context = _contextFactory.CreateDbContext();
             context.Students.Add(students);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 

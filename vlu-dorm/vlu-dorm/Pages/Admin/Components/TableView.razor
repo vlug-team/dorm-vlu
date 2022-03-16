@@ -1,31 +1,35 @@
 ﻿@inject StudentServices StudentService
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Create at</th>
-        <th>Name</th>
-        <th>Birth day</th>
-        <th>PermanentAddress</th>
-    </tr>
-    @foreach (var item in _student)
-    {
-        <tr>
-            <th>@item.Id</th>
-            <th>@item.CreateAt</th>
-            <th>@item.FullName</th>
-            <th>@item.BirthDay</th>
-            <th>@item.PermanentAddress</th>
-        </tr>
-    }
-
-</table>
-
+<Table TItem="Students" DataSource="data" Style="margin:2em;">
+    <Selection Key="@(context.Id.ToString())" />
+    <Column Title="STT" @bind-Field="@context.Id" Sortable />
+    <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
+    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Sortable />
+    <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
+    <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
+    <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
+    <Column Title="Khoa" @bind-Field="@context.Department" Sortable />
+    <Column Title="Giới tính"  @bind-Field="@context.Gender" Sortable />
+    <ActionColumn Title="Action">
+        <Space>
+            <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">Delete</Button></SpaceItem>
+        </Space>
+    </ActionColumn>
+</Table>
+<p>PageIndex: @_pageIndex | PageSize: @_pageSize | Total: @_total</p>
 @code {
     List<Students> _student = new();
-
+    Students[] data;
+    int _total = 0;
+    int _pageIndex = 1;
+    int _pageSize = 10;
     protected override void OnInitialized()
     {
-      //  _student = StudentService.GetAll();
+        _student = StudentService.GetAll();
+        data = _student.ToArray();
     }
-
+    private void Delete(int id)
+    {
+        data = _student.Where(x => x.Id != id).ToArray();
+        _total = data.Length;
+    }
 }

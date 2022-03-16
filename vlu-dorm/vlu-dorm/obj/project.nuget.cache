@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "yr+6qrIdJqLt+laY32WPCe+ZXfqHOm157vYw6vEdhtAt1tFyocsMnf3w1eOnEhsRQ+6A3/7L9kcbhEjs4cqj+A==",
+  "dgSpecHash": "gWYkpXU/MyyleCp9sHaBe3QQGKwooDqxtFnX3uwC63lpouVDoGjUwU3M0bEbFR1yGyN7VWBJWlsIYEpZ/9u1og==",
   "success": true,
   "projectFilePath": "D:\\GithubClone\\dorm-vlu\\vlu-dorm\\vlu-dorm\\vlu-dorm.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moclaw\\.nuget\\packages\\antdesign\\0.10.4\\antdesign.0.10.4.nupkg.sha512",
+    "C:\\Users\\Moclaw\\.nuget\\packages\\blazored.fluentvalidation\\2.0.3\\blazored.fluentvalidation.2.0.3.nupkg.sha512",
     "C:\\Users\\Moclaw\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",
     "C:\\Users\\Moclaw\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Moclaw\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
