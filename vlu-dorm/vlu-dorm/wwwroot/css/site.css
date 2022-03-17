@@ -164,3 +164,7 @@ span:hover {
 div[role=alert] {
     margin-left: 2em;
 }
+.footer {
+    bottom: 0;
+    position: absolute;
+}

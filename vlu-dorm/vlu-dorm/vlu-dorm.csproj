@@ -11,8 +11,6 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'vlu-dorm' " />
   <ItemGroup>
     <PackageReference Include="AntDesign" Version="0.10.4" />
-    <PackageReference Include="Blazored.FluentValidation" Version="2.0.3" />
-    <PackageReference Include="FluentValidation" Version="10.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.3" />

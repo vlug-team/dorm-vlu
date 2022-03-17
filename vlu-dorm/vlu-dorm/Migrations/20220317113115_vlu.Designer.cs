@@ -11,7 +11,7 @@ using vlu_dorm.Data;
 namespace vlu_dorm.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220315171145_vlu")]
+    [Migration("20220317113115_vlu")]
     partial class vlu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,15 +49,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3dcbbf38-7eec-4115-b872-0ff7aa665554",
-                            ConcurrencyStamp = "0fb4860b-48b3-4e1d-a43c-c3f511833173",
+                            Id = "4f70b982-8fef-4b87-80af-d8b0a82b4907",
+                            ConcurrencyStamp = "19cc3b41-c84d-4c9f-b0ce-122950c07903",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "5e3f6147-52a4-40f3-8ed0-a6a37bdf9191",
+                            ConcurrencyStamp = "f4c8c9eb-e687-40fd-aebc-b5658e370912",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -264,30 +264,41 @@ namespace vlu_dorm.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Course")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Department")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Gender")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsConfirm")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("PermanentAddress")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumeber")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(11)
+                        .HasColumnType("varchar(11)");
 
                     b.Property<string>("StudentCode")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

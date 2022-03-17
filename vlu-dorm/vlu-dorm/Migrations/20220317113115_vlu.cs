@@ -73,24 +73,25 @@ namespace vlu_dorm.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    StudentCode = table.Column<string>(type: "longtext", nullable: true)
+                    StudentCode = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    FullName = table.Column<string>(type: "longtext", nullable: true)
+                    FullName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     BirthDay = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    PermanentAddress = table.Column<string>(type: "longtext", nullable: true)
+                    PermanentAddress = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Course = table.Column<string>(type: "longtext", nullable: true)
+                    Course = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Department = table.Column<string>(type: "longtext", nullable: true)
+                    Department = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    PhoneNumeber = table.Column<string>(type: "longtext", nullable: true)
+                    PhoneNumeber = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: true)
+                    Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Gender = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsConfirm = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,12 +229,12 @@ namespace vlu_dorm.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "3dcbbf38-7eec-4115-b872-0ff7aa665554", "0fb4860b-48b3-4e1d-a43c-c3f511833173", "User", "USER" });
+                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "f4c8c9eb-e687-40fd-aebc-b5658e370912", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "5e3f6147-52a4-40f3-8ed0-a6a37bdf9191", "Admin", "ADMIN" });
+                values: new object[] { "4f70b982-8fef-4b87-80af-d8b0a82b4907", "19cc3b41-c84d-4c9f-b0ce-122950c07903", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",

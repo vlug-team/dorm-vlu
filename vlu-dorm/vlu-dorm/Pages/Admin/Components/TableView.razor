@@ -1,9 +1,9 @@
 ﻿@inject StudentServices StudentService
-<Table TItem="Students" DataSource="data" Style="margin:2em;">
+<Table DataSource="data" Style="margin:2em;">
     <Selection Key="@(context.Id.ToString())" />
     <Column Title="STT" @bind-Field="@context.Id" Sortable />
     <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
-    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Sortable />
+    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="HH:mm dd-MM-yyyy" Sortable />
     <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
     <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
     <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
@@ -25,7 +25,7 @@
     protected override void OnInitialized()
     {
         _student = StudentService.GetAll();
-        data = _student.ToArray();
+        data = _student.Where(c=>c.IsConfirm == true).ToArray();
     }
     private void Delete(int id)
     {
