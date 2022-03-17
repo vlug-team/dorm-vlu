@@ -1,35 +1,23 @@
 ﻿@inject StudentServices StudentService
-<Table DataSource="data" Style="margin:2em;">
+@using vlu_dorm.Pages.Admin.Modals
+<Table DataSource="Data" Style="margin:2em;">
     <Selection Key="@(context.Id.ToString())" />
-    <Column Title="STT" @bind-Field="@context.Id" Sortable />
+    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy | HH:mm" Sortable />
     <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
-    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="HH:mm dd-MM-yyyy" Sortable />
     <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
     <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
+    <Column Title="Email" @bind-Field="@context.Email" Sortable />
     <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
     <Column Title="Khoa" @bind-Field="@context.Department" Sortable />
-    <Column Title="Giới tính"  @bind-Field="@context.Gender" Sortable />
+    <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
     <ActionColumn Title="Action">
         <Space>
-            <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">Delete</Button></SpaceItem>
+            <EditModals Id="context.Id" />
         </Space>
     </ActionColumn>
 </Table>
-<p>PageIndex: @_pageIndex | PageSize: @_pageSize | Total: @_total</p>
 @code {
-    List<Students> _student = new();
-    Students[] data;
-    int _total = 0;
-    int _pageIndex = 1;
-    int _pageSize = 10;
-    protected override void OnInitialized()
-    {
-        _student = StudentService.GetAll();
-        data = _student.Where(c=>c.IsConfirm == true).ToArray();
-    }
-    private void Delete(int id)
-    {
-        data = _student.Where(x => x.Id != id).ToArray();
-        _total = data.Length;
-    }
+       
+    [Parameter] public List<Students> Students { set; get; }
+    [Parameter] public Students[] Data { set; get; }
 }

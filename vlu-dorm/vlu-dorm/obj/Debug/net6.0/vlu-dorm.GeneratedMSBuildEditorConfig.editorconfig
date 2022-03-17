@@ -31,6 +31,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29tcG9uZW50c1xUYWJsZVZpZXcucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Modals/EditModals.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXEVkaXRNb2RhbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Modals/SubscriptionManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXFN1YnNjcmlwdGlvbk1hbmFnZW1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Homepage/Homepage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZXBhZ2VcSG9tZXBhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

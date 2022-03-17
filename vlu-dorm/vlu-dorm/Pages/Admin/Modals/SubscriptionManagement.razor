@@ -1,0 +1,63 @@
+﻿@inject StudentServices StudentServices
+
+<Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModal">Quản lý đăng ký nội trú</Button>
+<Modal Title="@("Duyệt đăng kí kí túc xá")"
+       Visible="@_visible"
+       OnOk="@HandleOk"
+       OnCancel="@HandleCancel"
+       MaxBodyHeight="@("50vh")"
+       Width="1200">
+    <Table DataSource="data">
+        <Selection Key="@(context.Id.ToString())" />
+        <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy | HH:mm" Sortable />
+        <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
+        <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
+        <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
+        <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
+        <Column Title="Khoa" @bind-Field="@context.Department" Sortable />
+        <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
+        <ActionColumn Title="Action">
+            <Space>
+                <SpaceItem><Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>Ok(context.Id)">Duyệt</Button></SpaceItem>
+                <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">Xóa</Button></SpaceItem>
+            </Space>
+        </ActionColumn>
+    </Table>
+</Modal>
+<Modal Title="@("Chọn phòng")">
+
+</Modal>
+@code {
+    bool _visible = false;
+    List<Students> _student;
+    Students[] data;
+    private void ShowModal()
+    {
+        _visible = true;
+    }
+
+    private void HandleOk(MouseEventArgs e)
+    {
+        _visible = false;
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        _visible = false;
+    }
+    protected override void OnInitialized()
+    {
+        _student = StudentServices.GetAll();
+        data = _student.Where(c => c.IsConfirm == false).ToArray();
+    }
+    private void Ok(int id)
+    {
+        data = _student.Where(x => x.Id == id).ToArray();
+        StudentServices.Confirm(id);
+    }
+    private void Delete(int id)
+    {
+        data = _student.Where(x => x.Id != id).ToArray();
+        StudentServices.Delete(id);
+    }
+}

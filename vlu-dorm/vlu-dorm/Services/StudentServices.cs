@@ -22,6 +22,21 @@ namespace vlu_dorm.Services
             context.Students.Add(students);
             await context.SaveChangesAsync();
         }
+        public void Confirm(int id)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            var student = context.Students.Where(c => c.Id == id).First();
+            student.IsConfirm = true;
+            context.Students.Update(student);
+            context.SaveChanges();
+        }
+        public void Delete(int id)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            var student = context.Students.Where(c => c.Id == id).First();
+            context.Students.Remove(student);
+            context.SaveChanges();
+        }
     }
 
 }

@@ -5,7 +5,7 @@
 <PageTitle>Đăng ký kí túc xá</PageTitle>
 
 
-<Row Justify="left">
+<Row Justify="left" Style="margin-bottom: 10vh; margin-top:10vh">
     <Col Span="20" Offset="0">
     <Form Model="@students"
           OnFinish="OnFinish"
@@ -13,6 +13,14 @@
           WrapperColSpan="16"
           OnFinishFailed="OnFinishFailed"
           Size="AntSizeLDSType.Small">
+        <Row Justify="center" Gutter="8">
+            <Col Span="16" Offset="8">
+
+            <FormItem>
+                <Title Level="4">Điền vào form đăng ký này BQT sẽ xem xét và duyệt sớm nhất có thể</Title>
+            </FormItem>
+            </Col>
+        </Row>
             @if (isSucess)
             {
             <Row Justify="center" Style="margin-top:1em">

@@ -1,27 +1,63 @@
 ﻿@page "/quan-ly"
+@inject ModalService ModalService
+@inject StudentServices StudentServices
+
 @using Microsoft.AspNetCore.Authorization
 @using vlu_dorm.Pages.Admin.Components
+@using vlu_dorm.Pages.Admin.Modals
 @attribute [Authorize(Roles = "Admin")]
 
 <PageTitle>Quản lý</PageTitle>
 <Row Style="margin: 3em;">
-    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý đăng ký nội trú</Button>
+    <SubscriptionManagement />
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý phòng</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý dịch vụ sử dụng</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý tuân thủ các nội quy</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý điện, nước</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý phòng</Button>
 </Row>
-<Row>
-    <Col Style="margin-left: 3em; margin-bottom: 5em">
-    @*<AutoComplete @bind-Value="@value" Options="@options" OnSelectionChange="OnSelectionChange" OnActiveChange="OnActiveChange" Placeholder="input here" />*@
+<Row Style="align-items: flex-end">
+    <Col Span="6" Offset="1">
+    <Text>Tìm kiếm MSSV</Text>
+    <Select DataSource="@(data.Select(c=>c.StudentCode).ToList())"
+            @bind-Value="@value"
+            SortByLabel="@SortDirection.Ascending"
+            Placeholder="Tìm MSSV:"
+            OnSelectedItemChanged="OnSearch"
+            OnClearSelected="Reload"
+            EnableSearch
+            AllowClear>
+    </Select>
+    </Col>
+    <Col Offset="1">
+    <Button Icon="@IconType.Outline.Reload" OnClick="Reload"></Button>
     </Col>
 </Row>
-<Row>
+<Row Style="margin-top: 5em;">
     <Col Offset="1">
-    <TableView/>
+    <TableView Data="data" Students="_student" />
     </Col>
 </Row>
 @code {
+    string value;
+    bool clear;
+    List<Students> _student { set; get; }
+    Students[] data { set; get; }
+
+    protected override void OnInitialized()
+    {
+        _student = StudentServices.GetAll();
+
+        data = _student.Where(c => c.IsConfirm == true).ToArray();
+
+    }
+    void Reload()
+    {
+        data = _student.Where(c => c.IsConfirm == true).ToArray();
+    }
+    void OnSearch(string e)
+    {
+        data = data.Where(c => c.StudentCode == e).ToArray();
+    }
 
 }
