@@ -1,8 +1,8 @@
 ﻿@inject StudentServices StudentService
 @using vlu_dorm.Pages.Admin.Modals
-<Table DataSource="Data" Style="margin:2em;">
+<Table DataSource="Data.Where(c=>c.IsConfirm == true)" Style="margin:2em;" @bind-PageSize="pageSize">
     <Selection Key="@(context.Id.ToString())" />
-    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy | HH:mm" Sortable />
+    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy" Sortable />
     <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
     <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
     <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
@@ -17,7 +17,7 @@
     </ActionColumn>
 </Table>
 @code {
-       
+    int pageSize = 10;
     [Parameter] public List<Students> Students { set; get; }
     [Parameter] public Students[] Data { set; get; }
 }

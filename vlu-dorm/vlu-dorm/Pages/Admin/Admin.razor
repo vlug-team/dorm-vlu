@@ -9,8 +9,8 @@
 
 <PageTitle>Quản lý</PageTitle>
 <Row Style="margin: 3em;">
-    <SubscriptionManagement />
-    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý phòng</Button>
+    <SubscriptionManagement Data="data" Students="_student" />
+    <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin">Quản lý phòng</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý dịch vụ sử dụng</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý tuân thủ các nội quy</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý điện, nước</Button>
@@ -40,7 +40,6 @@
 </Row>
 @code {
     string value;
-    bool clear;
     List<Students> _student { set; get; }
     Students[] data { set; get; }
 
@@ -48,7 +47,7 @@
     {
         _student = StudentServices.GetAll();
 
-        data = _student.Where(c => c.IsConfirm == true).ToArray();
+        data = _student.ToArray();
 
     }
     void Reload()
