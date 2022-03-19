@@ -46,7 +46,7 @@
     [Parameter] public Students[] Data { get; set; }
     bool visible = false;
     string value;
-    int pageSize = 5;
+    const int pageSize = 5;
     private void ShowModal() => visible = true;
 
     private void HandleOk(MouseEventArgs e)

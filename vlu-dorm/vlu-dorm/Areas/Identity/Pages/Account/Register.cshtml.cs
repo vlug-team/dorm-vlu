@@ -22,8 +22,7 @@ using vlu_dorm.Services;
 
 namespace vlu_dorm.Areas.Identity.Pages.Account
 {
-    /* [Authorize(Roles = "Admin")]*/
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
