@@ -11,9 +11,14 @@
         <MenuItem Key="3" Style="color:#fff">
             <SubMenu Title="Kí túc xá">
                 <MenuItem RouterLink="dang-ky">Đăng ký</MenuItem>
-                <AuthorizeView>
-                    <Authorized>
+                <AuthorizeView Roles="Admin">
+                   <Authorized>
                         <MenuItem RouterLink="quan-ly">Quản lý</MenuItem>
+                    </Authorized>
+                </AuthorizeView>
+                <AuthorizeView Roles="User">
+                    <Authorized>
+                        <MenuItem RouterLink="thong-ke">Thống kê</MenuItem>
                     </Authorized>
                 </AuthorizeView>
             </SubMenu>

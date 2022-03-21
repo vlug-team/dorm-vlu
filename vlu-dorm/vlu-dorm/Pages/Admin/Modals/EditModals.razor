@@ -4,5 +4,5 @@
 
 @code {
     [Parameter] public int Id { get; set; }
-    void OnDelete(int id) => StudentService.Delete(id);
+    private void OnDelete(int id) => StudentService.Delete(id);
 }

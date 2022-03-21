@@ -1,65 +1,45 @@
 ﻿@inject StudentServices StudentServices
 
-<Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModal">Quản lý đăng ký nội trú</Button>
-<Modal Title="@("Duyệt đăng kí kí túc xá")"
-       Visible="@visible"
-       OnOk="@HandleOk"
-       OnCancel="@HandleCancel"
-       MaxBodyHeight="@("60vh")"
-       Width="1200">
-    <Col Span="6">
-    <Text>Tìm kiếm MSSV</Text>
-    <Select DataSource="@(Data.Select(c=>c.StudentCode).ToList())"
-            @bind-Value="@value"
-            SortByLabel="@SortDirection.Ascending"
-            Placeholder="Tìm MSSV:"
-            OnSelectedItemChanged="OnSearch"
-            OnClearSelected="Reload"
-            EnableSearch
-            AllowClear>
-    </Select>
+
+<Col Span="6">
+<Text>Tìm kiếm MSSV</Text>
+<Select DataSource="@(Data.Where(c=>c.IsConfirm == false).Select(c=>c.StudentCode).ToList())"
+        @bind-Value="@value"
+        SortByLabel="@SortDirection.Ascending"
+        Placeholder="Tìm MSSV:"
+        OnSelectedItemChanged="OnSearch"
+        OnClearSelected="Reload"
+        EnableSearch
+        AllowClear>
+</Select>
     </Col>
-    <Table DataSource="Data.Where(c=>c.IsConfirm == false)"
-           @bind-PageSize="pageSize">
-        <Selection Key="@(context.Id.ToString())" />
-        <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy | HH:mm" Sortable />
-        <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
-        <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
-        <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
-        <Column Title="Email" @bind-Field="@context.Email" Sortable />
-        <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
-        <Column Title="Khoa" @bind-Field="@context.Department" Sortable />
-        <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
-        <ActionColumn Title="Action">
-            <Space>
-                <SpaceItem><Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>Ok(context.Id)">Duyệt</Button></SpaceItem>
-                <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">Xóa</Button></SpaceItem>
-            </Space>
-        </ActionColumn>
-    </Table>
-</Modal>
+<Table DataSource="Data.Where(c=>c.IsConfirm == false)"
+       @bind-PageSize="pageSize">
+    <Selection Key="@(context.Id.ToString())" />
+    <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy | HH:mm" Sortable />
+    <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
+    <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
+    <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
+    <Column Title="Email" @bind-Field="@context.Email" Sortable />
+    <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
+    <Column Title="Khoa" @bind-Field="@context.Department" Sortable />
+    <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
+    <ActionColumn Title="Action">
+        <Space>
+            <SpaceItem><Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>Ok(context.Id)">Duyệt</Button></SpaceItem>
+            <SpaceItem><Button Danger OnClick="()=>Delete(context.Id)">Xóa</Button></SpaceItem>
+        </Space>
+    </ActionColumn>
+</Table>
 <Modal Title="@("Chọn phòng")">
 
 </Modal>
 @code {
     [Parameter] public List<Students> Students { get; set; }
     [Parameter] public Students[] Data { get; set; }
-    bool visible = false;
-    string value;
-    const int pageSize = 5;
-    private void ShowModal() => visible = true;
+    private string value;
+    private int pageSize = 5;
 
-    private void HandleOk(MouseEventArgs e)
-    {
-        visible = false;
-
-    }
-
-    private void HandleCancel(MouseEventArgs e)
-    {
-        visible = false;
-
-    }
     private void Ok(int id)
     {
         StudentServices.Confirm(id);
@@ -70,12 +50,12 @@
         StudentServices.Delete(id);
         Reload();
     }
-    void Reload()
+    private void Reload()
     {
         Students = StudentServices.GetAll();
         Data = Students.Where(c => c.IsConfirm == false).ToArray();
     }
-    void OnSearch(string e)
+    private void OnSearch(string e)
     {
         Data = Students.Where(c => c.IsConfirm == false).ToArray();
         Data = Data.Where(c => c.StudentCode == e).ToArray();
