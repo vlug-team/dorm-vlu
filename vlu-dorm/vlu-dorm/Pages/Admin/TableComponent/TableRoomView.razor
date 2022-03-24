@@ -16,7 +16,7 @@
        Visible="isVisible"
        OnOk="@HandleOk"
        OnCancel="@HandleCancel">
-    <RoomManager Room="room" />
+    <RoomManager Room="room" isNew="false"/>
 </Modal>
 @code {
     [Parameter] public Room[] Rooms { get; set; }

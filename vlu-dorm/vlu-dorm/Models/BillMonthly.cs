@@ -13,6 +13,7 @@ namespace vlu_dorm.Models
         [Required(AllowEmptyStrings = false)]
         public int WaterNumber { get; set; }
         public DateTime CreateAt { get; set; }
-        public List<RoomExploit> RoomExploits { get; set; }
+        public virtual ICollection<Students> StudentsNavgation { get; set; }
+        
     }
 }

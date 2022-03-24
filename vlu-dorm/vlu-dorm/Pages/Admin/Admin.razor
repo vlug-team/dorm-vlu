@@ -25,7 +25,7 @@
            OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")"
            Width="900">
-        <RoomManager Room="room" />
+        <RoomManager Room="room" isNew="true" />
     </Modal>
 
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý dịch vụ sử dụng</Button>
@@ -51,7 +51,7 @@
 </Row>
 <Row Style="margin-top: 5em;">
     <Col Offset="1">
-    <TableView Data="data" />
+    <TableView Data="data"/>
     </Col>
     <Col Offset="1">
     <TableRoomView Rooms="rooms" />

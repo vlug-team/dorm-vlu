@@ -32,11 +32,9 @@ namespace vlu_dorm.Services
             context.Students.Add(students);
             await context.SaveChangesAsync();
         }
-        public void Confirm(int id)
+        public void Confirm(Students student)
         {
             using var context = _contextFactory.CreateDbContext();
-            var student = context.Students.Where(c => c.Id == id).First();
-            student.IsConfirm = true;
             context.Students.Update(student);
             context.SaveChanges();
         }
@@ -45,6 +43,20 @@ namespace vlu_dorm.Services
             using var context = _contextFactory.CreateDbContext();
             var student = context.Students.Where(c => c.Id == id).First();
             context.Students.Remove(student);
+            context.SaveChanges();
+        }
+        //update async students
+        public async Task UpdateAsync(Students students)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            context.Students.Update(students);
+            await context.SaveChangesAsync();
+        }
+        //update students
+        public void Update(Students students)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            context.Students.Update(students);
             context.SaveChanges();
         }
     }

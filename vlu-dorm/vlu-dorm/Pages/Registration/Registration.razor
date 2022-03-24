@@ -1,5 +1,6 @@
 ﻿@page "/dang-ky"
 @inject StudentServices StudentServices
+@inject RoomServices RoomServices
 <PageTitle>Đăng ký kí túc xá</PageTitle>
 
 
@@ -108,6 +109,7 @@
     List<string> _course = new() { "K23", "K24", "K25", "K26", "K27", "K28" };
     List<string> _department = new() { "Công nghệ thông tin", "Khoa học dữ liệu", "Công nghệ kỹ thuật ô tô", "Thiết kế đồ họa", "Thanh nhạc", "Piano", "Thiết kế công nghiệp", "Thiết kế thời trang", "Diễn viên kịch, điện ảnh - truyền hình", "Đạo diễn điện ảnh, truyền hình", "Ngôn ngữ Anh", "Ngôn ngữ Trung Quốc", "Văn học", "Tâm lý học", "Đông phương học", "Quan hệ công chúng", "Quản trị kinh doanh", "Marketing", "Bất động sản", "Kinh doanh thương mại", "Tài chính - Ngân hàng", "Kế toán", "Luật kinh tế", "Luật", "Công nghệ sinh học", "Công nghệ sinh học y dược", "Quản trị công nghệ sinh học", "Kỹ thuật phần mềm", "Công nghệ kỹ thuật điện, điện tử", "Công nghệ kỹ thuật môi trường", "Logistics và quản lý chuỗi cung ứng", "Quản trị môi trường doanh nghiệp", "Kỹ thuật cơ điện tử", "Kỹ thuật nhiệt", "Công nghệ thực phẩm", "Kiến trúc", "Thiết kế nội thất", "Kỹ thuật xây dựng", "Kỹ thuật xây dựng công trình giao thông", "Quản lý xây dựng", "Thiết kế xanh", "Nông nghiệp công nghệ cao", "Dược học", "Điều dưỡng", "Răng - Hàm - Mặt", "Kỹ thuật xét nghiệm y học", "Công tác xã hội", "Quản trị dịch vụ du lịch và lữ hành", "Quản trị khách sạn", "Quản trị nhà hàng và dịch vụ ăn uống" };
     Students students = new();
+
     private async Task OnFinish(EditContext editContext)
     {
         if (isSucess == false)

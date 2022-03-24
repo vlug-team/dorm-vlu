@@ -102,38 +102,6 @@ namespace vlu_dorm.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    StudentCode = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FullName = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    BirthDay = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    PermanentAddress = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Course = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Department = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PhoneNumeber = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Gender = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsConfirm = table.Column<bool>(type: "tinyint(1)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -261,48 +229,58 @@ namespace vlu_dorm.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "RoomExploit",
+                name: "Students",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoomId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    BillId = table.Column<int>(type: "int", nullable: false)
+                    StudentCode = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    FullName = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    BirthDay = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    PermanentAddress = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Course = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Department = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    PhoneNumeber = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Gender = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsConfirm = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: true),
+                    BillId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomExploit", x => x.Id);
+                    table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoomExploit_BillMonthlies_BillId",
+                        name: "fk_Student_Bill",
                         column: x => x.BillId,
                         principalTable: "BillMonthlies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_RoomExploit_Rooms_RoomId",
+                        name: "fk_Student_Room",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoomExploit_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0f5eac01-d302-4f9c-aa5a-4e80e9511067", "8b777907-114d-4fae-bcdc-3cea3cca4e0f", "User", "USER" });
+                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "f2844d57-7e73-46ff-866e-c1c1d1413e6a", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "f060a526-59b7-42de-94d7-4ca7430fdeff", "Admin", "ADMIN" });
+                values: new object[] { "854fbb8e-4dba-445e-b684-f6cb4ee64dec", "0b21d0af-15cd-4479-a2c5-6a7578d0e0ea", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
@@ -352,19 +330,14 @@ namespace vlu_dorm.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoomExploit_BillId",
-                table: "RoomExploit",
+                name: "IX_Students_BillId",
+                table: "Students",
                 column: "BillId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoomExploit_RoomId",
-                table: "RoomExploit",
+                name: "IX_Students_RoomId",
+                table: "Students",
                 column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoomExploit_StudentId",
-                table: "RoomExploit",
-                column: "StudentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -385,7 +358,7 @@ namespace vlu_dorm.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "RoomExploit");
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -398,9 +371,6 @@ namespace vlu_dorm.Migrations
 
             migrationBuilder.DropTable(
                 name: "Rooms");
-
-            migrationBuilder.DropTable(
-                name: "Students");
         }
     }
 }

@@ -35,27 +35,59 @@
     </FormItem>
     <FormItem WrapperColOffset="13" WrapperColSpan="4">
         <Button Type="@ButtonType.Primary" HtmlType="submit">
-            @(strBtn = Room.RoomNumber == 0 ? "Thêm Phòng" : "Sửa phòng")
+            @(strBtn = isNew == true ? "Thêm Phòng" : "Sửa phòng")
         </Button>
     </FormItem>
 </Form>
 
 @code {
     [Parameter] public Room Room { get; set; }
+    [Parameter] public bool isNew { get; set; }
     private bool isSucess = false;
     private string notice;
     private string type;
     private string strBtn;
+
+    protected override void OnInitialized()
+    {
+        if (isNew == true)
+        {
+            Room = new Room();
+        }
+    }
     private async Task OnFinish(EditContext editContext)
     {
         if (isSucess == false)
         {
-            isSucess = true;
-            await OnSubmit(editContext);
+            if (isNew == true)
+            {
+                notice = "Thêm Thành Công";
+                type = "success";
+                await RoomServices.AddRoomAsync(Room);
+                Room = new();
+            }
+            else
+            {
+                notice = "Sửa Thành Công";
+                type = "success";
+                RoomServices.UpdateRoom(Room);
+            }
         }
         else
         {
-            await OnSubmit(editContext);
+             if (isNew == true)
+            {
+                notice = "Thêm Thành Công";
+                type = "success";
+                await RoomServices.AddRoomAsync(Room);
+                Room = new();
+            }
+            else
+            {
+                notice = "Sửa Thành Công";
+                type = "success";
+                RoomServices.UpdateRoom(Room);
+            }
         }
     }
     private void OnFinishFailed(EditContext editContext)
@@ -63,21 +95,5 @@
         isSucess = true;
         notice = "Thêm phòng không thành công";
         type = "error";
-    }
-    private async Task OnSubmit(EditContext editContext)
-    {
-        if (Room.RoomNumber == 0)
-        {
-            notice = "Thêm Phòng Thành Công";
-            type = "success";
-            await RoomServices.AddRoomAsync(Room);
-            Room = new();
-        }
-        else
-        {
-            notice = "Sửa Phòng Thành Công";
-            type = "success";
-            RoomServices.UpdateRoom(Room);
-        }
     }
  }

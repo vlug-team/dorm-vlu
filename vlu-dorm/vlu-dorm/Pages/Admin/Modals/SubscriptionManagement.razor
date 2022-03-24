@@ -35,12 +35,15 @@
     [Parameter] public List<Students> Students { get; set; }
     [Parameter] public Students[] Data { get; set; }
     [Parameter] public Room[] Rooms { get; set; }
+    
     private string value;
     string value2;
     private int pageSize = 5;
     private void Ok(int id)
     {
-        StudentServices.Confirm(id);
+        Students students = Students.Find(c => c.Id == id);
+        students.IsConfirm = true;
+        StudentServices.Confirm(students);
         Reload();
     }
   

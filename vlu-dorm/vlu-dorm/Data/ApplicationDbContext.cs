@@ -16,25 +16,17 @@ namespace vlu_dorm.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             //Add the shadow property to the Student class
+            builder.Entity<Room>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+                entity.HasMany(c => c.StudentsNavgation).WithOne(c => c.RoomNavgation).HasForeignKey(c => c.RoomId).HasConstraintName("fk_Student_Room");
+            });
+            builder.Entity<BillMonthly>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+                entity.HasMany(c => c.StudentsNavgation).WithOne(c => c.BillMonthlyNavgation).HasForeignKey(c => c.BillId).HasConstraintName("fk_Student_Bill");
+            });
 
-            builder.Entity<RoomExploit>()
-            .Property<int>("StudentId");
-
-            builder.Entity<RoomExploit>()
-            .Property<int>("BillId");
-            
-            builder.Entity<RoomExploit>()
-            .Property<int>("RoomId");
-            
-            builder.Entity<RoomExploit>()
-            .HasOne(p => p.Students)
-            .WithMany(b => b.RoomExploits)
-            .HasForeignKey("StudentId");
-
-            builder.Entity<RoomExploit>()
-            .HasOne(p => p.BillMonthly)
-            .WithMany(b => b.RoomExploits)
-            .HasForeignKey("BillId");
 
             //Create roles Admin && User
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "User", NormalizedName = "USER", Id = Guid.NewGuid().ToString(), ConcurrencyStamp = Guid.NewGuid().ToString() });
