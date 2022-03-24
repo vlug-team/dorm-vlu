@@ -1,8 +1,7 @@
-﻿@inject StudentServices StudentService
-
-<SpaceItem><Button Danger OnClick="()=>OnDelete(Id)">Tùy chọn</Button></SpaceItem>
+﻿@inject RoomServices RoomServices
+@inject StudentServices StudentServices
 
 @code {
-    [Parameter] public int Id { get; set; }
-    private void OnDelete(int id) => StudentService.Delete(id);
+    [Parameter] public int StudentId { get; set; }
+
 }

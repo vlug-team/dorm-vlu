@@ -1,9 +1,8 @@
 ﻿@page "/quan-ly"
-@inject ModalService ModalService
 @inject StudentServices StudentServices
-
+@inject RoomServices RoomServices
 @using Microsoft.AspNetCore.Authorization
-@using vlu_dorm.Pages.Admin.Components
+@using vlu_dorm.Pages.Admin.TableComponent
 @using vlu_dorm.Pages.Admin.Modals
 @attribute [Authorize(Roles = "Admin")]
 
@@ -16,10 +15,19 @@
            OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")"
            Width="1200">
-        <SubscriptionManagement Data="data" Students="_student" />
+        <SubscriptionManagement Data="data" Students="_student" Rooms="rooms"/>
     </Modal>
 
-    <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin">Quản lý phòng</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModalRoom">Thêm phòng</Button>
+    <Modal Title="@("Thêm Phòng")"
+           Visible="@visibleRoom"
+           OnOk="@HandleOk"
+           OnCancel="@HandleCancel"
+           MaxBodyHeight="@("60vh")"
+           Width="900">
+        <RoomManager Room="room" />
+    </Modal>
+
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý dịch vụ sử dụng</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý tuân thủ các nội quy</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý điện, nước</Button>
@@ -43,42 +51,52 @@
 </Row>
 <Row Style="margin-top: 5em;">
     <Col Offset="1">
-    <TableView Data="data" Students="_student" />
+    <TableView Data="data" />
+    </Col>
+    <Col Offset="1">
+    <TableRoomView Rooms="rooms" />
     </Col>
 </Row>
 @code {
-    private List<Students> _student { set; get; }
-    private Students[] data { set; get; }
+    List<Students> _student;
+    Students[] data;
+    Room[] rooms;
+    Room room = new();
     private bool visible = false;
+    private bool visibleRoom = false;
     private string value;
 
-    protected override void OnInitialized()
-    {
-        _student = StudentServices.GetAll();
+    private void ShowModal() => visible = true;
+    private void ShowModalRoom() => visibleRoom = true;
 
-        data = _student.ToArray();
-
-    }
     private void Reload()
     {
         _student = StudentServices.GetAll();
         data = _student.Where(c => c.IsConfirm == true).ToArray();
+        rooms = RoomServices.GetAll().ToArray();
     }
     private void OnSearch(string e)
     {
         data = data.Where(c => c.StudentCode == e).ToArray();
     }
-    private void ShowModal() => visible = true;
 
     private void HandleOk(MouseEventArgs e)
     {
         Reload();
+        visibleRoom = false;
         visible = false;
     }
 
     private void HandleCancel(MouseEventArgs e)
     {
         Reload();
+        visibleRoom = false;
         visible = false;
+    }
+    protected override void OnInitialized()
+    {
+        _student = StudentServices.GetAll();
+        data = _student.ToArray();
+        rooms = RoomServices.GetAll().ToArray();
     }
 }

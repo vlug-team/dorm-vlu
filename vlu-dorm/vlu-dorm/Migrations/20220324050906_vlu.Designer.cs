@@ -11,7 +11,7 @@ using vlu_dorm.Data;
 namespace vlu_dorm.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220317113115_vlu")]
+    [Migration("20220324050906_vlu")]
     partial class vlu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,15 +49,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4f70b982-8fef-4b87-80af-d8b0a82b4907",
-                            ConcurrencyStamp = "19cc3b41-c84d-4c9f-b0ce-122950c07903",
+                            Id = "0f5eac01-d302-4f9c-aa5a-4e80e9511067",
+                            ConcurrencyStamp = "8b777907-114d-4fae-bcdc-3cea3cca4e0f",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "f4c8c9eb-e687-40fd-aebc-b5658e370912",
+                            ConcurrencyStamp = "f060a526-59b7-42de-94d7-4ca7430fdeff",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -254,6 +254,78 @@ namespace vlu_dorm.Migrations
                         });
                 });
 
+            modelBuilder.Entity("vlu_dorm.Models.BillMonthly", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("ElectricNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WaterNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BillMonthlies");
+                });
+
+            modelBuilder.Entity("vlu_dorm.Models.Room", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ElectricPrice")
+                        .HasColumnType("double");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<double>("RoomPrice")
+                        .HasColumnType("double");
+
+                    b.Property<double>("WaterPrice")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("vlu_dorm.Models.RoomExploit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BillId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillId");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("RoomExploit");
+                });
+
             modelBuilder.Entity("vlu_dorm.Models.Students", b =>
                 {
                     b.Property<int>("Id")
@@ -355,6 +427,43 @@ namespace vlu_dorm.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("vlu_dorm.Models.RoomExploit", b =>
+                {
+                    b.HasOne("vlu_dorm.Models.BillMonthly", "BillMonthly")
+                        .WithMany("RoomExploits")
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vlu_dorm.Models.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("vlu_dorm.Models.Students", "Students")
+                        .WithMany("RoomExploits")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BillMonthly");
+
+                    b.Navigation("Room");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("vlu_dorm.Models.BillMonthly", b =>
+                {
+                    b.Navigation("RoomExploits");
+                });
+
+            modelBuilder.Entity("vlu_dorm.Models.Students", b =>
+                {
+                    b.Navigation("RoomExploits");
                 });
 #pragma warning restore 612, 618
         }

@@ -27,16 +27,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Components/TableView.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29tcG9uZW50c1xUYWJsZVZpZXcucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Modals/EditModals.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXEVkaXRNb2RhbHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Modals/RoomManager.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXFJvb21NYW5hZ2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Modals/SubscriptionManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXFN1YnNjcmlwdGlvbk1hbmFnZW1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/TableComponent/TableRoomView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVGFibGVDb21wb25lbnRcVGFibGVSb29tVmlldy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/TableComponent/TableView.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVGFibGVDb21wb25lbnRcVGFibGVWaWV3LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Homepage/Homepage.razor]

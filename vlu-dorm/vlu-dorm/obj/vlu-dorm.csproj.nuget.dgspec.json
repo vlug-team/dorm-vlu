@@ -10,15 +10,11 @@
         "projectUniqueName": "D:\\GithubClone\\dorm-vlu\\vlu-dorm\\vlu-dorm\\vlu-dorm.csproj",
         "projectName": "vlu-dorm",
         "projectPath": "D:\\GithubClone\\dorm-vlu\\vlu-dorm\\vlu-dorm\\vlu-dorm.csproj",
-        "packagesPath": "C:\\Users\\Moclaw\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\mocdu\\.nuget\\packages\\",
         "outputPath": "D:\\GithubClone\\dorm-vlu\\vlu-dorm\\vlu-dorm\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Moclaw\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\mocdu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

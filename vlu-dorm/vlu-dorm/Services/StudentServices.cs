@@ -16,6 +16,16 @@ namespace vlu_dorm.Services
             using var context = _contextFactory.CreateDbContext();
             return context.Students.ToList();
         }
+        public List<Students> GetAllById(int id)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return context.Students.Where(c => c.Id == id).ToList();
+        }
+        public Students GetStudentById(int id)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return context.Students.FirstOrDefault(c => c.Id == id);
+        }
         public async Task AddAsync(Students students)
         {
             using var context = _contextFactory.CreateDbContext();

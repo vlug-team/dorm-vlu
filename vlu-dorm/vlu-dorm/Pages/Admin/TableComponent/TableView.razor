@@ -1,23 +1,18 @@
-﻿@inject StudentServices StudentService
+﻿@inject RoomServices RoomServices
+@inject StudentServices StudentServices
 @using vlu_dorm.Pages.Admin.Modals
-<Table DataSource="Data.Where(c=>c.IsConfirm == true)" Style="margin:2em;" @bind-PageSize="pageSize">
+<Table DataSource="Data.Where(c=>c.IsConfirm ==true)" Style="margin:2em;" @bind-PageSize="pageSize">
     <Selection Key="@(context.Id.ToString())" />
     <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy" Sortable />
     <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
     <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
     <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
     <Column Title="Email" @bind-Field="@context.Email" Sortable />
-    <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
     <Column Title="Khoa" @bind-Field="@context.Department" Sortable />
+    <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
     <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
-    <ActionColumn Title="Action">
-        <Space>
-            <EditModals Id="context.Id" />
-        </Space>
-    </ActionColumn>
 </Table>
 @code {
     private int pageSize = 10;
-    [Parameter] public List<Students> Students { set; get; }
-    [Parameter] public Students[] Data { set; get; }
+    [Parameter] public Students[] Data { get; set; }
 }

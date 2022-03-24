@@ -37,5 +37,6 @@ namespace vlu_dorm.Models
         [DisplayName("Giới tính")]
         public string Gender { get; set; }
         public bool IsConfirm { get; set; }
+        public List<RoomExploit> RoomExploits { set; get; }
     }
 }

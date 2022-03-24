@@ -1,0 +1,46 @@
+﻿@inject RoomServices RoomServices
+<Table DataSource="Rooms">
+    <Column Title="Số Phòng" @bind-Field="@context.RoomNumber" Sortable />
+    <Column Title="Tiền Phòng" @bind-Field="@context.RoomPrice" Sortable />
+    <Column Title="Tiền Điện / m3" @bind-Field="@context.ElectricPrice" Sortable />
+    <Column Title="Tiền Nước / m3" @bind-Field="@context.WaterPrice" Sortable />
+    <Column Title="Số lượng người" @bind-Field="@context.Capacity" Sortable />
+    <ActionColumn Title="Action">
+        <Space>
+            <Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>ShowModal(context.Id)">Sửa</Button>
+            <Button Type="@ButtonType.Primary" Color="Color.Red2" OnClick="()=> Delete(context.Id)">Xóa</Button>
+        </Space>
+    </ActionColumn>
+</Table>
+<Modal Title="Sửa Phòng"
+       Visible="isVisible"
+       OnOk="@HandleOk"
+       OnCancel="@HandleCancel">
+    <RoomManager Room="room" />
+</Modal>
+@code {
+    [Parameter] public Room[] Rooms { get; set; }
+    Room room;
+    private bool isVisible = false;
+    private void Delete(int id) => RoomServices.Delete(id);
+    private void ShowModal(int id)
+    {
+        isVisible = true;
+        room = RoomServices.GetRoomByID(id);
+    }
+    private void HandleOk(MouseEventArgs e)
+    {
+        Reload();
+        isVisible = false;
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        Reload();
+        isVisible = false;
+    }
+    private void Reload()
+    {
+        Rooms = RoomServices.GetAll().ToArray();
+    }
+}
