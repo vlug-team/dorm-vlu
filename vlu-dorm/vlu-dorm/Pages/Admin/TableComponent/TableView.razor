@@ -15,6 +15,8 @@
         <Space>
             <SpaceItem>
                 <Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>OnShow(context.Id)">Edit</Button>
+                <Button Type="@ButtonType.Primary" Color="Color.Red5" OnClick="()=>Delete(context.Id)">Delete</Button>
+
             </SpaceItem>
         </Space>
     </ActionColumn>
@@ -115,17 +117,11 @@
     bool isSucess = false;
     string notice;
     string type;
-    protected override void OnParametersSet()
-    {
-        if (Data != null)
-        {
-            Data = Data.Where(x => x.IsConfirm == true).ToArray();
-        }
-    }
+
     void OnShow(int id)
     {
         isShow = true;
-        Student = StudentServices.GetStudentById(id);
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
     }
     private void HandleOk(MouseEventArgs e)
     {
@@ -142,13 +138,15 @@
             type = "success";
             StudentServices.Update(Student);
         }
-        Data = Data.Where(c => c.IsConfirm == true).ToArray();
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+
         isShow = false;
 
     }
     private void HandleCancel(MouseEventArgs e)
     {
-        Data = Data.Where(c => c.IsConfirm == true).ToArray();
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+
         isShow = false;
     }
     private async Task OnFinish(EditContext editContext)
@@ -166,7 +164,8 @@
             type = "success";
             await StudentServices.UpdateAsync(Student);
         }
-        Data = Data.Where(c => c.IsConfirm == true).ToArray();
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+
 
     }
     private void OnFinishFailed(EditContext editContext)
@@ -174,7 +173,12 @@
         isSucess = true;
         notice = "Đăng kí không thành công";
         type = "error";
-        Data = Data.Where(c => c.IsConfirm == true).ToArray();
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
 
+    }
+    private void Delete(int id)
+    {
+        StudentServices.Delete(id);
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
     }
 }
