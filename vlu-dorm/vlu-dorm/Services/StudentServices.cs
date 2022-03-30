@@ -14,12 +14,12 @@ namespace vlu_dorm.Services
         public List<Students> GetAll()
         {
             using var context = _contextFactory.CreateDbContext();
-            return context.Students.ToList();
+            return context.Students.Include(c=>c.RoomNavgation).ToList();
         }
         public List<Students> GetAllById(int id)
         {
             using var context = _contextFactory.CreateDbContext();
-            return context.Students.Where(c => c.Id == id).ToList();
+            return context.Students.Where(c => c.Id == id).Include(c=>c.RoomNavgation).ToList();
         }
         public Students GetStudentById(int id)
         {

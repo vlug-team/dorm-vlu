@@ -1,0 +1,84 @@
+﻿@inject StudentServices StudentServices
+@inject RoomServices RoomServices
+<Row>
+    <Form Model="_student"
+          OnFinish="OnFinish"
+          OnFinishFailed="OnFinishFailed">
+        <FormItem>
+            <Text>Sinh viên: @context.FullName</Text>
+            <br />
+            <Text>Giới tính: @context.Gender</Text>
+            <br />
+            <Text>Năm sinh: @context.BirthDay.Year</Text>
+            <br />
+            <Text>Khóa: @context.Course</Text>
+            <br />
+            <Text>Khoa: @context.Department</Text>
+        </FormItem>
+        @if (isSucess)
+        {
+            <Row Justify="center" Style="margin-top:1em">
+                <FormItem>
+                    <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+                </FormItem>
+            </Row>
+        }
+        <FormItem>
+            <Text>Chọn Phòng:</Text>
+        </FormItem>
+        <FormItem>
+            <Select DataSource="@Data"
+                    @bind-Value="@value"
+                    LabelName="@nameof(Room.RoomNumber)"
+                    ValueName="@nameof(Room.RoomNumber)"
+                    SortByLabel="@SortDirection.Ascending"
+                    Placeholder="Chọn Phòng:"
+                    EnableSearch
+                    OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)"
+                    AllowClear>
+            </Select>
+        </FormItem>
+          <FormItem WrapperColOffset="13" WrapperColSpan="4">
+            <Button Type="@ButtonType.Primary" HtmlType="submit">
+                Chọn phòng
+            </Button>
+        </FormItem>
+    </Form>
+</Row>
+
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    private List<Room> Data;
+    private Students _student;
+
+    private string value;
+    private bool isSucess = false;
+    private string type;
+    private string notice;
+
+    protected override void OnInitialized()
+    {
+        Data = RoomServices.GetAll();
+        _student = StudentServices.GetStudentById(Id);
+    }
+    private void OnSelectedItemChangedHandler(Room value)
+    {
+        _student.RoomId = value.Id;
+        _student.RoomNavgation = value;
+    }
+    private async Task OnFinish(EditContext editContext)
+    {
+        notice = "Chọn phòng thành công";
+        type = "success";
+        await StudentServices.UpdateAsync(_student);
+    }
+    private void OnFinishFailed(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Chọn phòng không thành công";
+        type = "error";
+
+    }
+}

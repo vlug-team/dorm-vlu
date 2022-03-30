@@ -26,8 +26,4 @@
   <ItemGroup>
     <None Remove="Pomelo.EntityFrameworkCore.MySql" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Admin\Componets\" />
-  </ItemGroup>
 </Project>

@@ -27,6 +27,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Componets/AddStudentToRoom.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29tcG9uZXRzXEFkZFN0dWRlbnRUb1Jvb20ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Componets/EditStudent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQ29tcG9uZXRzXEVkaXRTdHVkZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Modals/RoomManager.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXFJvb21NYW5hZ2VyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
