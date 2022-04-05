@@ -16,10 +16,15 @@ namespace vlu_dorm.Services
             using var context = _contextFactory.CreateDbContext();
             return context.Rooms.ToList();
         }
+        public List<Room> GetAllAndBill()
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return context.Rooms.Include(c=>c.StudentsNavgation).ToList();
+        }
         public Room GetRoomByID(int id)
         {
             using var context = _contextFactory.CreateDbContext();
-            return context.Rooms.FirstOrDefault(c => c.Id == id);
+            return context.Rooms.Include(c=>c.BillNavgation).FirstOrDefault(c => c.Id == id);
         }
         public void UpdateRoom(Room room)
         {

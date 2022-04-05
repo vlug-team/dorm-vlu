@@ -15,7 +15,7 @@
            OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")"
            Width="1200">
-        <SubscriptionManagement Data="data" Students="_student" Rooms="rooms"/>
+        <SubscriptionManagement Data="data" Students="_student" Rooms="rooms" />
     </Modal>
 
     <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModalRoom">Thêm phòng</Button>
@@ -25,12 +25,20 @@
            OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")"
            Width="900">
-        <RoomManager Room="room" isNew="true" />
+        <RoomManager Room="room" isNew="isNew" />
     </Modal>
 
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý dịch vụ sử dụng</Button>
     <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý tuân thủ các nội quy</Button>
-    <Button Style="color: #000;  background-color: #05AC48;" Danger Class="btn-admin">Quản lý điện, nước</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" OnClick="@ShowModalElc" Danger Class="btn-admin">Quản lý điện, nước</Button>
+    <Modal Title="@("Điện nước theo phòng")"
+           Visible="@visibleElectric"
+           OnOk="@HandleOk"
+           OnCancel="@HandleCancel"
+           MaxBodyHeight="@("60vh")"
+           Width="900">
+        <WaterElectricManager />
+    </Modal>
 </Row>
 <Row Style="align-items: flex-end">
     <Col Span="6" Offset="1">
@@ -51,7 +59,7 @@
 </Row>
 <Row Style="margin-top: 5em;">
     <Col Offset="1">
-    <TableView Data="data"/>
+    <TableView Data="data" />
     </Col>
     <Col Offset="1">
     <TableRoomView Rooms="rooms" />
@@ -64,10 +72,15 @@
     Room room = new();
     private bool visible = false;
     private bool visibleRoom = false;
+    private bool visibleElectric = false;
+    private bool isNew = true;
     private string value;
 
     private void ShowModal() => visible = true;
-    private void ShowModalRoom() => visibleRoom = true;
+
+    private void ShowModalRoom() { visibleRoom = true; isNew = true; }
+    private void ShowModalElc() => visibleElectric = true;
+
 
     private void Reload()
     {
@@ -85,6 +98,7 @@
         Reload();
         visibleRoom = false;
         visible = false;
+        visibleElectric = false;
     }
 
     private void HandleCancel(MouseEventArgs e)
@@ -92,6 +106,7 @@
         Reload();
         visibleRoom = false;
         visible = false;
+        visibleElectric = false;
     }
     protected override void OnInitialized()
     {

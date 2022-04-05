@@ -38,6 +38,8 @@ namespace vlu_dorm.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    FullName = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -64,40 +66,6 @@ namespace vlu_dorm.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "BillMonthlies",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ElectricNumber = table.Column<int>(type: "int", nullable: false),
-                    WaterNumber = table.Column<int>(type: "int", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BillMonthlies", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Rooms",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RoomNumber = table.Column<int>(type: "int", nullable: false),
-                    Capacity = table.Column<int>(type: "int", nullable: false),
-                    RoomPrice = table.Column<double>(type: "double", nullable: false),
-                    ElectricPrice = table.Column<double>(type: "double", nullable: false),
-                    WaterPrice = table.Column<double>(type: "double", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rooms", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -229,6 +197,48 @@ namespace vlu_dorm.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "BillMonthlies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ElectricNumber = table.Column<double>(type: "double", nullable: false),
+                    WaterNumber = table.Column<double>(type: "double", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    RoomNavgationId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillMonthlies", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Rooms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RoomNumber = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    RoomPrice = table.Column<double>(type: "double", nullable: false),
+                    ElectricPrice = table.Column<double>(type: "double", nullable: false),
+                    WaterPrice = table.Column<double>(type: "double", nullable: false),
+                    BillId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "fk_Room_Bill",
+                        column: x => x.BillId,
+                        principalTable: "BillMonthlies",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -253,17 +263,12 @@ namespace vlu_dorm.Migrations
                     Gender = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsConfirm = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: true),
-                    BillId = table.Column<int>(type: "int", nullable: true)
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
-                    table.ForeignKey(
-                        name: "fk_Student_Bill",
-                        column: x => x.BillId,
-                        principalTable: "BillMonthlies",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "fk_Student_Room",
                         column: x => x.RoomId,
@@ -275,17 +280,17 @@ namespace vlu_dorm.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "f2844d57-7e73-46ff-866e-c1c1d1413e6a", "Admin", "ADMIN" });
+                values: new object[] { "2b784af2-8a66-485e-8f05-0a04e58d2660", "673fe5cb-0870-4070-93cc-3c2bf3ef4146", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "854fbb8e-4dba-445e-b684-f6cb4ee64dec", "0b21d0af-15cd-4479-a2c5-6a7578d0e0ea", "User", "USER" });
+                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "6e82ec43-e2af-4460-aaeb-d58913946ee4", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "33e90769-dc14-43cd-a62d-baac45c91ae7", 0, "46cf4368-64a0-45ba-a804-61358816c6b3", "admin@gmail.com", true, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEEY/DHwYSPjx4vi8Kb2B2+anD5UAzEbSFpV1VRGMwd2Ektf2T1zpluc0yPVYO4f/hg==", null, false, "L72NQFAWWWW7OX2PMA7MHUQ3KMCEBWUM", false, "Admin" });
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "33e90769-dc14-43cd-a62d-baac45c91ae7", 0, "46cf4368-64a0-45ba-a804-61358816c6b3", "admin@gmail.com", true, null, false, null, "ADMIN@GMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEEY/DHwYSPjx4vi8Kb2B2+anD5UAzEbSFpV1VRGMwd2Ektf2T1zpluc0yPVYO4f/hg==", null, false, "L72NQFAWWWW7OX2PMA7MHUQ3KMCEBWUM", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -330,18 +335,34 @@ namespace vlu_dorm.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_BillId",
-                table: "Students",
+                name: "IX_BillMonthlies_RoomNavgationId",
+                table: "BillMonthlies",
+                column: "RoomNavgationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rooms_BillId",
+                table: "Rooms",
                 column: "BillId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_RoomId",
                 table: "Students",
                 column: "RoomId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_BillMonthlies_Rooms_RoomNavgationId",
+                table: "BillMonthlies",
+                column: "RoomNavgationId",
+                principalTable: "Rooms",
+                principalColumn: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_BillMonthlies_Rooms_RoomNavgationId",
+                table: "BillMonthlies");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -367,10 +388,10 @@ namespace vlu_dorm.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "BillMonthlies");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "BillMonthlies");
         }
     }
 }

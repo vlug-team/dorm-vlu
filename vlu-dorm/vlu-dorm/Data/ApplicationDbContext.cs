@@ -19,12 +19,19 @@ namespace vlu_dorm.Data
             builder.Entity<Room>(entity =>
             {
                 entity.HasKey(c => c.Id);
-                entity.HasMany(c => c.StudentsNavgation).WithOne(c => c.RoomNavgation).HasForeignKey(c => c.RoomId).HasConstraintName("fk_Student_Room");
+                entity.HasMany(c => c.StudentsNavgation)
+                .WithOne(c => c.RoomNavgation)
+                .HasForeignKey(c => c.RoomId)
+                .HasConstraintName("fk_Student_Room");
             });
+
             builder.Entity<BillMonthly>(entity =>
             {
                 entity.HasKey(c => c.Id);
-                entity.HasMany(c => c.StudentsNavgation).WithOne(c => c.BillMonthlyNavgation).HasForeignKey(c => c.BillId).HasConstraintName("fk_Student_Bill");
+                entity.HasMany(c => c.RoomsNavgation)
+                .WithOne(c => c.BillNavgation)
+                .HasForeignKey(c => c.BillId)
+                .HasConstraintName("fk_Room_Bill");
             });
 
 

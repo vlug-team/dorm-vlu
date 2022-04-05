@@ -21,6 +21,7 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddAntDesign();
 builder.Services.AddSingleton<StudentServices>();
 builder.Services.AddSingleton<RoomServices>();
+builder.Services.AddSingleton<BillServices>();
 
 builder.Services.AddSignalR();
 var app = builder.Build();

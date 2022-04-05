@@ -43,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXFN1YnNjcmlwdGlvbk1hbmFnZW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/Modals/WaterElectricManager.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cTW9kYWxzXFdhdGVyRWxlY3RyaWNNYW5hZ2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GithubClone/dorm-vlu/vlu-dorm/vlu-dorm/Pages/Admin/TableComponent/TableRoomView.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVGFibGVDb21wb25lbnRcVGFibGVSb29tVmlldy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

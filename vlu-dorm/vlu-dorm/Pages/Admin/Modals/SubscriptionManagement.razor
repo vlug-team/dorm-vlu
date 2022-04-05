@@ -35,9 +35,9 @@
     [Parameter] public List<Students> Students { get; set; }
     [Parameter] public Students[] Data { get; set; }
     [Parameter] public Room[] Rooms { get; set; }
-    
+
     private string value;
-    string value2;
+    private string value2;
     private int pageSize = 5;
     private void Ok(int id)
     {
@@ -46,7 +46,7 @@
         StudentServices.Confirm(students);
         Reload();
     }
-  
+
     private void Delete(int id)
     {
         StudentServices.Delete(id);

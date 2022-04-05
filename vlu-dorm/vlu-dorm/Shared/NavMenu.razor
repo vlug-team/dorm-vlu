@@ -1,4 +1,5 @@
-﻿<Row Style="margin-left:5em">
+﻿@inject StudentServices studentServices
+<Row Style="margin-left:5em">
     <Col />
     <a href='/'>
         <img class="logo" src="/media/vlu-logo.png" />
@@ -12,7 +13,7 @@
             <SubMenu Title="Kí túc xá">
                 <MenuItem RouterLink="dang-ky">Đăng ký</MenuItem>
                 <AuthorizeView Roles="Admin">
-                   <Authorized>
+                    <Authorized>
                         <MenuItem RouterLink="quan-ly">Quản lý</MenuItem>
                     </Authorized>
                 </AuthorizeView>
@@ -23,13 +24,27 @@
                 </AuthorizeView>
             </SubMenu>
         </MenuItem>
-        <AuthorizeView>
+        <AuthorizeView Roles="Admin">
             <Authorized>
-                <a href="quan-ly" style="color: #fff">@context.User.Identity?.Name</a>
+                <a href="quan-ly" style="color: #fff">@context.User.Identity.Name</a>
                 <a href="Identity/Account/LogOut" style="margin-left:5px">
                     <Button Danger Type="@ButtonType.Primary" Icon="@IconType.Outline.Logout"></Button>
                 </a>
             </Authorized>
+        </AuthorizeView>
+        <AuthorizeView Roles="User">
+            <Authorized>
+                @{
+                    var user = studentServices.GetStudentsByEmail(context.User.Identity.Name);
+                    <a href="thong-ke" style="color: #fff">@user.FullName</a>
+                    <a href="Identity/Account/LogOut" style="margin-left:5px">
+                        <Button Danger Type="@ButtonType.Primary" Icon="@IconType.Outline.Logout"></Button>
+                    </a>
+                }
+            </Authorized>
+
+        </AuthorizeView>
+        <AuthorizeView>
             <NotAuthorized>
                 <MenuItem Style="color:#fff" Class="link-light" RouterLink="Identity/Account/Login">Log in</MenuItem>
             </NotAuthorized>
