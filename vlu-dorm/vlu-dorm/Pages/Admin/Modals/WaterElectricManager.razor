@@ -15,18 +15,8 @@
         <br />
     </Row>
     <Row>
-            @if (isSucess)
-            {
-            <Row Justify="center" Style="margin-top:1em">
-                <FormItem>
-                    <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
-                </FormItem>
-            </Row>
-            }
-            else
-            {
-            <FormItem></FormItem>
-            }
+        <Col Span="10">
+            
         <Text>Chọn phòng:</Text>
         <br />
         <Select DataSource="@Rooms"
@@ -36,17 +26,31 @@
                 SortByLabel="@SortDirection.Ascending"
                 Placeholder="Chọn Phòng:"
                 EnableSearch
-                OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)"
-                AllowClear>
+                OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)">
         </Select>
-        <Form Model="room.BillNavgation"
+        </Col>
+            @if (value != null)
+            {
+            <Form Model="room"
+              OnFinishFailed="OnFinishFailed"
               OnFinish="OnFinish">
-
+                    @if (isSucess)
+                {
+                <Row Justify="center" Style="margin-top:1em">
+                    <FormItem>
+                        <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+                    </FormItem>
+                </Row>
+                }
+                else
+                {
+                <FormItem></FormItem>
+                }
             <FormItem>
-                <Input @bind-Value="context.ElectricNumber" Placeholder="Số điện"></Input>
+                <Input @bind-Value="context.BillNavgation.ElectricNumber" Placeholder="Số điện"></Input>
             </FormItem>
             <FormItem>
-                <Input @bind-Value="context.WaterNumber" Placeholder="Số nước"></Input>
+                <Input @bind-Value="context.BillNavgation.WaterNumber" Placeholder="Số nước"></Input>
             </FormItem>
             <FormItem>
                 <Button Type="@ButtonType.Primary" HtmlType="submit">
@@ -54,6 +58,7 @@
                 </Button>
             </FormItem>
         </Form>
+            }
     </Row>
     </Col>
 </Row>
@@ -64,7 +69,7 @@
     private string notice;
     private string type;
     List<Room> Rooms;
-    private Room room = new();
+    private Room room;
     protected override void OnInitialized()
     {
         Rooms = RoomServices.GetAll();
@@ -74,9 +79,17 @@
         isSucess = true;
         notice = "Cập nhật thành công";
         type = "success";
-
+        await RoomServices.UpdateRoomAsync(room);
     }
     private void OnSelectedItemChangedHandler(Room value)
     {
+        room = value;
+        room.BillNavgation = new();
+    }
+    private void OnFinishFailed(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Thêm phòng không thành công";
+        type = "error";
     }
 }

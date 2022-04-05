@@ -13,7 +13,6 @@ namespace vlu_dorm.Models
         [Required(AllowEmptyStrings = false)]
         public double WaterNumber { get; set; }
         public DateTime CreateAt { get; set; }
-        public virtual Room RoomNavgation { get; set; }
         
         public virtual ICollection<Room>  RoomsNavgation { get; set; }
 

@@ -32,6 +32,14 @@ namespace vlu_dorm.Services
             context.Rooms.Update(room);
             context.SaveChanges();
         }
+        public async Task UpdateRoomAsync(Room room)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            context.Rooms.Update(room);
+            await context.SaveChangesAsync();
+        }
+
+
         public void Delete(int id)
         {
             using var context = _contextFactory.CreateDbContext();
