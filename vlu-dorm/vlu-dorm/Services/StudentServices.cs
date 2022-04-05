@@ -1,12 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using vlu_dorm.Data;
 using vlu_dorm.Models;
 
 namespace vlu_dorm.Services
 {
-    public class StudentServices
+    public class StudentServices : PageModel
     {
         readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
+
         public StudentServices(IDbContextFactory<ApplicationDbContext> dbContextFactory)
         {
             _contextFactory = dbContextFactory;
@@ -14,12 +17,17 @@ namespace vlu_dorm.Services
         public List<Students> GetAll()
         {
             using var context = _contextFactory.CreateDbContext();
-            return context.Students.Include(c=>c.RoomNavgation).ToList();
+            return context.Students.Include(c => c.RoomNavgation).ToList();
         }
         public List<Students> GetAllById(int id)
         {
             using var context = _contextFactory.CreateDbContext();
-            return context.Students.Where(c => c.Id == id).Include(c=>c.RoomNavgation).ToList();
+            return context.Students.Where(c => c.Id == id).Include(c => c.RoomNavgation).ToList();
+        }
+        public Students GetStudentsByEmail(string email)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return context.Students.FirstOrDefault(c => c.Email == email);
         }
         public Students GetStudentById(int id)
         {
@@ -42,17 +50,17 @@ namespace vlu_dorm.Services
         {
             using var context = _contextFactory.CreateDbContext();
             var student = context.Students.Where(c => c.Id == id).First();
+            var account = context.Users.Where(c => c.Email == student.Email).First();
+            context.Users.Remove(account);
             context.Students.Remove(student);
             context.SaveChanges();
         }
-        //update async students
         public async Task UpdateAsync(Students students)
         {
             using var context = _contextFactory.CreateDbContext();
             context.Students.Update(students);
             await context.SaveChangesAsync();
         }
-        //update students
         public void Update(Students students)
         {
             using var context = _contextFactory.CreateDbContext();

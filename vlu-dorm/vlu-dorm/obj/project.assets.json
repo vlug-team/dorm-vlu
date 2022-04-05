@@ -10535,24 +10535,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/morclaw/.nuget/packages/": {}
+    "C:\\Users\\mocdu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/morclaw/Projects/dorm-vlu/vlu-dorm/vlu-dorm/vlu-dorm.csproj",
+      "projectUniqueName": "D:\\GithubClone\\dorm-vlu\\vlu-dorm\\vlu-dorm\\vlu-dorm.csproj",
       "projectName": "vlu-dorm",
-      "projectPath": "/Users/morclaw/Projects/dorm-vlu/vlu-dorm/vlu-dorm/vlu-dorm.csproj",
-      "packagesPath": "/Users/morclaw/.nuget/packages/",
-      "outputPath": "/Users/morclaw/Projects/dorm-vlu/vlu-dorm/vlu-dorm/obj/",
+      "projectPath": "D:\\GithubClone\\dorm-vlu\\vlu-dorm\\vlu-dorm\\vlu-dorm.csproj",
+      "packagesPath": "C:\\Users\\mocdu\\.nuget\\packages\\",
+      "outputPath": "D:\\GithubClone\\dorm-vlu\\vlu-dorm\\vlu-dorm\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/morclaw/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\mocdu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10624,7 +10626,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

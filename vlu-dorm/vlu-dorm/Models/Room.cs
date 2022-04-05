@@ -21,7 +21,10 @@ namespace vlu_dorm.Models
         [DisplayName("Tiền Nước / m3")]
         [Required(AllowEmptyStrings = false)]
         public double WaterPrice { get; set; }
+        public int? BillId { get; set; }
+        public virtual BillMonthly BillNavgation { get; set; }
         public virtual ICollection<Students> StudentsNavgation { get; set; }
+
 
     }
 }

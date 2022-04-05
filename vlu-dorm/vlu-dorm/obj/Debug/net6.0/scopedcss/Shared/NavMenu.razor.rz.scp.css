@@ -1,37 +1,37 @@
-.navbar-toggler[b-dcz0sceycq] {
+.navbar-toggler[b-789jkhr8ki] {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.top-row[b-dcz0sceycq] {
+.top-row[b-789jkhr8ki] {
     height: 3.5rem;
     background-color: rgba(0,0,0,0.4);
 }
 
-.navbar-brand[b-dcz0sceycq] {
+.navbar-brand[b-789jkhr8ki] {
     font-size: 1.1rem;
 }
 
-.oi[b-dcz0sceycq] {
+.oi[b-789jkhr8ki] {
     width: 2rem;
     font-size: 1.1rem;
     vertical-align: text-top;
     top: -2px;
 }
 
-.nav-item[b-dcz0sceycq] {
+.nav-item[b-789jkhr8ki] {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
 }
 
-    .nav-item:first-of-type[b-dcz0sceycq] {
+    .nav-item:first-of-type[b-789jkhr8ki] {
         padding-top: 1rem;
     }
 
-    .nav-item:last-of-type[b-dcz0sceycq] {
+    .nav-item:last-of-type[b-789jkhr8ki] {
         padding-bottom: 1rem;
     }
 
-    .nav-item[b-dcz0sceycq]  a {
+    .nav-item[b-789jkhr8ki]  a {
         color: #d7d7d7;
         border-radius: 4px;
         height: 3rem;
@@ -40,22 +40,22 @@
         line-height: 3rem;
     }
 
-.nav-item[b-dcz0sceycq]  a.active {
+.nav-item[b-789jkhr8ki]  a.active {
     background-color: rgba(255,255,255,0.25);
     color: white;
 }
 
-.nav-item[b-dcz0sceycq]  a:hover {
+.nav-item[b-789jkhr8ki]  a:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
 }
 
 @media (min-width: 641px) {
-    .navbar-toggler[b-dcz0sceycq] {
+    .navbar-toggler[b-789jkhr8ki] {
         display: none;
     }
 
-    .collapse[b-dcz0sceycq] {
+    .collapse[b-789jkhr8ki] {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }

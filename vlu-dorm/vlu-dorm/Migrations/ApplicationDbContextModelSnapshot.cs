@@ -47,15 +47,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "854fbb8e-4dba-445e-b684-f6cb4ee64dec",
-                            ConcurrencyStamp = "0b21d0af-15cd-4479-a2c5-6a7578d0e0ea",
+                            Id = "2b784af2-8a66-485e-8f05-0a04e58d2660",
+                            ConcurrencyStamp = "673fe5cb-0870-4070-93cc-3c2bf3ef4146",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "f2844d57-7e73-46ff-866e-c1c1d1413e6a",
+                            ConcurrencyStamp = "6e82ec43-e2af-4460-aaeb-d58913946ee4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -189,6 +189,9 @@ namespace vlu_dorm.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<string>("FullName")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -261,13 +264,18 @@ namespace vlu_dorm.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("ElectricNumber")
+                    b.Property<double>("ElectricNumber")
+                        .HasColumnType("double");
+
+                    b.Property<int?>("RoomNavgationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WaterNumber")
-                        .HasColumnType("int");
+                    b.Property<double>("WaterNumber")
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoomNavgationId");
 
                     b.ToTable("BillMonthlies");
                 });
@@ -278,14 +286,18 @@ namespace vlu_dorm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("BillId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
                     b.Property<double>("ElectricPrice")
                         .HasColumnType("double");
 
-                    b.Property<int>("RoomNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("RoomNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<double>("RoomPrice")
                         .HasColumnType("double");
@@ -295,6 +307,8 @@ namespace vlu_dorm.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BillId");
+
                     b.ToTable("Rooms");
                 });
 
@@ -302,9 +316,6 @@ namespace vlu_dorm.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BillId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("BirthDay")
@@ -332,6 +343,9 @@ namespace vlu_dorm.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsConfirm")
                         .HasColumnType("tinyint(1)");
 
@@ -352,8 +366,6 @@ namespace vlu_dorm.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BillId");
 
                     b.HasIndex("RoomId");
 
@@ -411,26 +423,38 @@ namespace vlu_dorm.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("vlu_dorm.Models.BillMonthly", b =>
+                {
+                    b.HasOne("vlu_dorm.Models.Room", "RoomNavgation")
+                        .WithMany()
+                        .HasForeignKey("RoomNavgationId");
+
+                    b.Navigation("RoomNavgation");
+                });
+
+            modelBuilder.Entity("vlu_dorm.Models.Room", b =>
+                {
+                    b.HasOne("vlu_dorm.Models.BillMonthly", "BillNavgation")
+                        .WithMany("RoomsNavgation")
+                        .HasForeignKey("BillId")
+                        .HasConstraintName("fk_Room_Bill");
+
+                    b.Navigation("BillNavgation");
+                });
+
             modelBuilder.Entity("vlu_dorm.Models.Students", b =>
                 {
-                    b.HasOne("vlu_dorm.Models.BillMonthly", "BillMonthlyNavgation")
-                        .WithMany("StudentsNavgation")
-                        .HasForeignKey("BillId")
-                        .HasConstraintName("fk_Student_Bill");
-
                     b.HasOne("vlu_dorm.Models.Room", "RoomNavgation")
                         .WithMany("StudentsNavgation")
                         .HasForeignKey("RoomId")
                         .HasConstraintName("fk_Student_Room");
-
-                    b.Navigation("BillMonthlyNavgation");
 
                     b.Navigation("RoomNavgation");
                 });
 
             modelBuilder.Entity("vlu_dorm.Models.BillMonthly", b =>
                 {
-                    b.Navigation("StudentsNavgation");
+                    b.Navigation("RoomsNavgation");
                 });
 
             modelBuilder.Entity("vlu_dorm.Models.Room", b =>

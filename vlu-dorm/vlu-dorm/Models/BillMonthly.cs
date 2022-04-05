@@ -8,12 +8,14 @@ namespace vlu_dorm.Models
         public int Id { get; set; }
         [DisplayName("Số điện")]
         [Required(AllowEmptyStrings = false)]
-        public int ElectricNumber { get; set; }
+        public double ElectricNumber { get; set; }
         [DisplayName("Số nước")]
         [Required(AllowEmptyStrings = false)]
-        public int WaterNumber { get; set; }
+        public double WaterNumber { get; set; }
         public DateTime CreateAt { get; set; }
-        public virtual ICollection<Students> StudentsNavgation { get; set; }
+        public virtual Room RoomNavgation { get; set; }
         
+        public virtual ICollection<Room>  RoomsNavgation { get; set; }
+
     }
 }

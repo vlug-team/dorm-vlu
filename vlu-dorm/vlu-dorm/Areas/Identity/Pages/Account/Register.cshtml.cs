@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using vlu_dorm.Data;
+using vlu_dorm.Models;
 using vlu_dorm.Services;
 
 namespace vlu_dorm.Areas.Identity.Pages.Account
@@ -29,17 +30,24 @@ namespace vlu_dorm.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext context;
+        private readonly StudentServices student;
+
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, 
+            SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext _context,
+            StudentServices services,
             ILogger<RegisterModel> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _roleManager = roleManager;
+            context = _context;
+            student = services;
         }
 
         [BindProperty]
@@ -49,6 +57,7 @@ namespace vlu_dorm.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
         public List<IdentityRole> Roles { get; set; }
+        public List<Students> Emails { get; set; }
 
         public class InputModel
         {
@@ -56,22 +65,11 @@ namespace vlu_dorm.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
-            [Display(Name = "Username")]
-            public string UserName { get; set; }
 
-            [Required]
-            [Display(Name = "Quyền")]
-            public string Role { get; set; }
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
-
-            [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-            public string ConfirmPassword { get; set; }
+            public string Role { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -79,40 +77,49 @@ namespace vlu_dorm.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             Roles = _roleManager.Roles.ToList();
+            Emails = context.Students.Where(c => c.IsConfirm == true && c.IsActive == false).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/quan-ly");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, EmailConfirmed = true };
-                var result = await _userManager.CreateAsync(user, Input.Password);
-                await _userManager.AddToRoleAsync(user, Input.Role);
-                var user_check = await _userManager.GetUserIdAsync(user);
-                if (user.Id != user_check)
-                {
-                    if (result.Succeeded)
-                    {
-                        _logger.LogInformation("User created a new account with password.");
-                        return LocalRedirect(returnUrl);
-                    }
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
-                }
-                else
-                {
-                    _logger.LogInformation("User da ton tai");
-                    return Page();
-                }
+                var userInput = student.GetStudentsByEmail(Input.Email);
+                var Password = $"Vlu@{userInput.StudentCode}";
+                var user = new ApplicationUser { UserName = Input.Email, FullName = userInput.FullName, Email = Input.Email, EmailConfirmed = true };
+                var result = await _userManager.CreateAsync(user, Password);
+                await _userManager.AddToRoleAsync(user, "User");
 
+                if (result.Succeeded)
+                {
+                    Success(Input.Email);
+                    _logger.LogInformation("User created a new account with password.");
+                    return LocalRedirect(returnUrl);
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
             }
-
-            // If we got this far, something failed, redisplay form
+            else
+            {
+                _logger.LogInformation("Đăng kí không thành công");
+                return Page();
+            }
             return Page();
+
         }
+        private void Success(string email)
+        {
+            var student = context.Students.Where(c => c.Email == email).FirstOrDefault();
+            student.IsActive = true;
+            context.Update(student);
+            context.SaveChanges();
+
+        }
+
     }
+
 }

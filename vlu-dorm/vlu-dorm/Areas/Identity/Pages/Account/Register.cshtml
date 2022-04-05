@@ -3,57 +3,78 @@
 @{
     ViewData["Title"] = "Đăng kí";
 }
-
-
-<div class="row">
-    <div class="col-md-4">
-        <form id="account" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.UserName" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.UserName"></label>
-                <span asp-validation-for="Input.UserName" class="text-danger"></span>
+<div class="row justify-content-center">
+    <div class="card card-contents shadow">
+        <div class="row d-block mt-2">
+            <div class="col">
+                <a href="/quan-ly">
+                    <button class="btn btn-danger  shadow">
+                        Quay lại
+                    </button>
+                </a>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Email"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            <div class="col">
+                <a href="/quan-ly">
+                    <div class="col d-flex justify-content-center">
+                        <img src="https://online.vlu.edu.vn/Content/logo/logosona.jpg" class="logo-vlu" />
+                    </div>
+                </a>
+                <div class="col d-flex justify-content-center">
+                    <h5>
+                        TRƯỜNG ĐẠI HỌC VĂN LANG
+                    </h5>
+                </div>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.Password"></label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.ConfirmPassword"></label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-                <label asp-for="Input.Role"></label>
-                <select asp-for="Input.Role" class="form-control">
-                    @if (Model.Roles != null)
-                    {
-                        @foreach (var item in Model.Roles)
+        </div>
+        <div class="row">
+            <form id="account" method="post">
+                <div class="col mt-2">
+                    <label>Email:</label>
+                </div>
+                <div class="col">
+                    <select asp-for="Input.Email" class="form-control">
+                        <option>Chọn Email đăng kí</option>
+                        @if (Model.Emails != null)
                         {
-                            <option value="@item.Name">@item.Name</option>
+                            foreach (var email in Model.Emails)
+                            {
+                                <option value="@email.Email">@email.Email</option>
+                            }
                         }
-                    }
-                    else
-                    {
-                        <option value="Admin">Admin</option>
-                        <option value="User">User</option>
-                    }
-                </select>
-                <span asp-validation-for="Input.Role" class="text-danger"></span>
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
+                        else
+                        {
+                            <option value="@null">Không có sinh viên</option>
+                        }
+                    </select>
+                </div>
+                <div class="col mt-5 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-register shadow">Đăng kí</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+<style>
+    .card-contents {
+        margin-top: 20%;
+        width: 400px;
+        height: 45vh;
+    }
 
+    .btn-register {
+        background-color: #003768;
+        border-color: #427fed;
+        color: #fff;
+    }
+
+        .btn-register:hover {
+            background-color: #427fed
+        }
+
+    .logo-vlu {
+        width: 150px;
+    }
+</style>
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 }

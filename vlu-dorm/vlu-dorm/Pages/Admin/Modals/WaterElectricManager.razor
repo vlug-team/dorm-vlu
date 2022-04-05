@@ -1,0 +1,82 @@
+﻿@inject RoomServices RoomServices
+@inject BillServices BillServices
+<Row>
+    <Col>
+    <Row>
+        <Text>
+            Điện nước ngày: <b>
+                    @DateTime.Today.ToString("dd/MM/yyyy")
+            </b>
+            cho tháng
+            <b>
+                    @DateTime.Today.AddMonths(1).ToString("dd/MM/yyyy")
+            </b>
+        </Text>
+        <br />
+    </Row>
+    <Row>
+            @if (isSucess)
+            {
+            <Row Justify="center" Style="margin-top:1em">
+                <FormItem>
+                    <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+                </FormItem>
+            </Row>
+            }
+            else
+            {
+            <FormItem></FormItem>
+            }
+        <Text>Chọn phòng:</Text>
+        <br />
+        <Select DataSource="@Rooms"
+                @bind-Value="value"
+                LabelName="@nameof(Room.RoomNumber)"
+                ValueName="@nameof(Room.RoomNumber)"
+                SortByLabel="@SortDirection.Ascending"
+                Placeholder="Chọn Phòng:"
+                EnableSearch
+                OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)"
+                AllowClear>
+        </Select>
+        <Form Model="room.BillNavgation"
+              OnFinish="OnFinish">
+
+            <FormItem>
+                <Input @bind-Value="context.ElectricNumber" Placeholder="Số điện"></Input>
+            </FormItem>
+            <FormItem>
+                <Input @bind-Value="context.WaterNumber" Placeholder="Số nước"></Input>
+            </FormItem>
+            <FormItem>
+                <Button Type="@ButtonType.Primary" HtmlType="submit">
+                    Xác nhận
+                </Button>
+            </FormItem>
+        </Form>
+    </Row>
+    </Col>
+</Row>
+
+@code {
+    private string value;
+    private bool isSucess = false;
+    private string notice;
+    private string type;
+    List<Room> Rooms;
+    private Room room = new();
+    protected override void OnInitialized()
+    {
+        Rooms = RoomServices.GetAll();
+    }
+    private async Task OnFinish(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Cập nhật thành công";
+        type = "success";
+
+    }
+    private void OnSelectedItemChangedHandler(Room value)
+    {
+    }
+}
