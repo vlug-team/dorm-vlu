@@ -3,6 +3,8 @@
 @inject ModalService ModalService
 @using System.Globalization
 @using vlu_dorm.Pages.Admin.Modals
+
+
 <Table DataSource="Data.Where(c => c.IsConfirm == true).ToArray()" Style="margin:2em;" @bind-PageSize="pageSize">
     <Selection Key="@(context.Id.ToString())" />
     <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
@@ -10,10 +12,7 @@
     <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
     <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
     <Column Title="Phòng" Field="@(context?.RoomNavgation?.RoomNumber == null? "Chưa": context.RoomNavgation.RoomNumber)" Sortable />
-    @{
-        string total = double.Parse((context.RoomNavgation?.ElectricPrice * context.RoomNavgation?.BillNavgation?.ElectricNumber) + (context.RoomNavgation?.WaterPrice * context.RoomNavgation?.BillNavgation?.WaterNumber) + context.RoomNavgation?.RoomPrice) / context.RoomNavgation?.Capacity).ToString("#,###", cul.NumberFormat);
-        <Column Title="Tiền Đã Thu" Field="@total" />
-    }
+    <Column Title="Tiền Phải" Field="@(((context.RoomNavgation?.ElectricPrice * context.RoomNavgation?.BillNavgation?.ElectricNumber) + (context.RoomNavgation?.WaterPrice * context.RoomNavgation?.BillNavgation?.WaterNumber) + context.RoomNavgation?.RoomPrice) / context.RoomNavgation?.Capacity)" Format=""/>
     <ActionColumn Title="Action">
         <Space>
             <SpaceItem>
