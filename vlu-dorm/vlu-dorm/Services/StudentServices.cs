@@ -24,6 +24,13 @@ namespace vlu_dorm.Services
             using var context = _contextFactory.CreateDbContext();
             return context.Students.Where(c => c.Id == id).Include(c => c.RoomNavgation).ToList();
         }
+        public List<Students> GetAllByEmail(string email)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            return context.Students.Where(c => c.Email == email).Include(c => c.RoomNavgation)
+                .Include(c => c.RoomNavgation.BillNavgation)
+                .ToList();
+        }
         public Students GetStudentsByEmail(string email)
         {
             using var context = _contextFactory.CreateDbContext();

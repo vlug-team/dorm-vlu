@@ -94,7 +94,7 @@ namespace vlu_dorm.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    Success(Input.Email);
+                    Success(Input.Email, user);
                     _logger.LogInformation("User created a new account with password.");
                     return LocalRedirect(returnUrl);
                 }
@@ -111,10 +111,11 @@ namespace vlu_dorm.Areas.Identity.Pages.Account
             return Page();
 
         }
-        private void Success(string email)
+        private void Success(string email, ApplicationUser user)
         {
             var student = context.Students.Where(c => c.Email == email).FirstOrDefault();
             student.IsActive = true;
+            student.UserNavgation = user;
             context.Update(student);
             context.SaveChanges();
 

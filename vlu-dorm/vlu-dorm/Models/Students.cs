@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using vlu_dorm.Data;
 
 namespace vlu_dorm.Models
 {
@@ -40,6 +41,9 @@ namespace vlu_dorm.Models
         public bool IsActive { get; set; }
 
         public int? RoomId { get; set; }
+        public string UserId { get; set; }
+
         public virtual Room RoomNavgation { set; get; }
+        public virtual ApplicationUser UserNavgation { set; get; }
     }
 }

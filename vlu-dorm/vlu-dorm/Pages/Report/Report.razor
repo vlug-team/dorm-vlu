@@ -1,0 +1,64 @@
+﻿@page "/thong-ke"
+@using Microsoft.AspNetCore.Identity
+@using System.ComponentModel.DataAnnotations
+@using vlu_dorm.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject StudentServices studentServices
+@inject IHttpContextAccessor httpContextAccessor
+<PageTitle>Thống kê</PageTitle>
+<Row>
+    <Col>
+        @if (Data != null)
+        {
+        <Table DataSource="Data.ToArray()">
+            <Column Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Title="Tháng" />
+            <Column Field="context?.RoomNavgation?.RoomNumber" Title="Số phòng" />
+            <Column Field="context?.RoomNavgation?.RoomPrice" Title="Giá phòng" />
+            <Column Field="context?.RoomNavgation?.WaterPrice" Title="Giá nước" />
+            <Column Field="context?.RoomNavgation?.ElectricPrice" Title="Giá điện" />
+            <Column Field="context?.RoomNavgation?.BillNavgation?.ElectricNumber" Title="Số điện" />
+            <Column Field="context?.RoomNavgation?.BillNavgation?.WaterNumber" Title="Số nước" />
+        </Table>
+        }
+    </Col>
+    <Col>
+    <Button OnClick="ShowModal">Đổi mật khẩu</Button>
+    <Modal Visible="visible"
+           OnOk="@HandleOk"
+           OnCancel="@HandleCancel">
+
+    </Modal>
+    </Col>
+</Row>
+@code {
+    private List<Students> Data;
+    private bool visible = false;
+
+    protected override void OnInitialized()
+    {
+        var username = httpContextAccessor.HttpContext.User.Identity.Name;
+        Data = studentServices.GetAllByEmail(username);
+    }
+    public void ShowModal()
+    {
+        visible = true;
+    }
+    private void HandleOk(MouseEventArgs e)
+    {
+        visible = false;
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        visible = false;
+    }
+    public class ChangePassword
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Current password")]
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+    }
+}

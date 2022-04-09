@@ -1,25 +1,23 @@
 ﻿@inject RoomServices RoomServices
-@inject BillServices BillServices
 <Row>
     <Col>
     <Row>
         <Text>
-            Điện nước ngày: <b>
-                    @DateTime.Today.ToString("dd/MM/yyyy")
+            Điện nước Tháng: <b>
+                    @DateTime.Today.Month
             </b>
-            cho tháng
-            <b>
-                    @DateTime.Today.AddMonths(1).ToString("dd/MM/yyyy")
-            </b>
+          
         </Text>
         <br />
     </Row>
     <Row>
-        <Col Span="10">
-            
+        <Col Span="12">
+
         <Text>Chọn phòng:</Text>
         <br />
-        <Select DataSource="@Rooms"
+        <Select
+        
+        DataSource="@Rooms"
                 @bind-Value="value"
                 LabelName="@nameof(Room.RoomNumber)"
                 ValueName="@nameof(Room.RoomNumber)"

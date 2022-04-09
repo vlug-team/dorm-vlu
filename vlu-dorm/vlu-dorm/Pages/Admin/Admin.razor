@@ -28,7 +28,7 @@
         <RoomManager Room="room" isNew="isNew" />
     </Modal>
 
-    <Button Style="color: #000;  background-color: #05AC48;" OnClick="@ShowModalElc" Danger Class="btn-admin">Quản lý điện, nước</Button>
+    <Button Style="color: #000;  background-color: #05AC48;" Type="primary" OnClick="@ShowModalElc" Class="btn-admin">Quản lý điện, nước</Button>
     <Modal Title="@("Điện nước theo phòng")"
            Visible="@visibleElectric"
            OnOk="@HandleOk"

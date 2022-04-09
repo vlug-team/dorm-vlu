@@ -33,7 +33,14 @@ namespace vlu_dorm.Data
                 .HasForeignKey(c => c.BillId)
                 .HasConstraintName("fk_Room_Bill");
             });
-
+            builder.Entity<ApplicationUser>(entity =>
+            {
+                entity.HasKey(c => c.Id);
+                entity.HasMany(c => c.Students)
+                .WithOne(c => c.UserNavgation)
+                .HasForeignKey(c => c.UserId)
+                .HasConstraintName("fk_User_Stundet");
+            });
 
             //Create roles Admin && User
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "User", NormalizedName = "USER", Id = Guid.NewGuid().ToString(), ConcurrencyStamp = Guid.NewGuid().ToString() });

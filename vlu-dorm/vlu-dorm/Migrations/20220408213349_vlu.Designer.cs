@@ -11,7 +11,7 @@ using vlu_dorm.Data;
 namespace vlu_dorm.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220405130621_vlu")]
+    [Migration("20220408213349_vlu")]
     partial class vlu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,15 +49,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2b784af2-8a66-485e-8f05-0a04e58d2660",
-                            ConcurrencyStamp = "673fe5cb-0870-4070-93cc-3c2bf3ef4146",
+                            Id = "74ef940a-4ca4-4a2c-911a-60b64ae813e2",
+                            ConcurrencyStamp = "019b704b-a047-41fd-aa91-1719915f9c23",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "6e82ec43-e2af-4460-aaeb-d58913946ee4",
+                            ConcurrencyStamp = "4f04ff34-8488-4d3a-a1cf-b13d463c7984",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -220,6 +220,9 @@ namespace vlu_dorm.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("StudentsNavigationId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("tinyint(1)");
 
@@ -235,6 +238,8 @@ namespace vlu_dorm.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("StudentsNavigationId");
 
                     b.ToTable("AspNetUsers", (string)null);
 
@@ -263,21 +268,16 @@ namespace vlu_dorm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime(6)");
+                    b.Property<int>("BillMonth")
+                        .HasColumnType("int");
 
                     b.Property<double>("ElectricNumber")
                         .HasColumnType("double");
-
-                    b.Property<int?>("RoomNavgationId")
-                        .HasColumnType("int");
 
                     b.Property<double>("WaterNumber")
                         .HasColumnType("double");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoomNavgationId");
 
                     b.ToTable("BillMonthlies");
                 });
@@ -367,9 +367,14 @@ namespace vlu_dorm.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Students");
                 });
@@ -425,13 +430,13 @@ namespace vlu_dorm.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("vlu_dorm.Models.BillMonthly", b =>
+            modelBuilder.Entity("vlu_dorm.Data.ApplicationUser", b =>
                 {
-                    b.HasOne("vlu_dorm.Models.Room", "RoomNavgation")
+                    b.HasOne("vlu_dorm.Models.Students", "StudentsNavigation")
                         .WithMany()
-                        .HasForeignKey("RoomNavgationId");
+                        .HasForeignKey("StudentsNavigationId");
 
-                    b.Navigation("RoomNavgation");
+                    b.Navigation("StudentsNavigation");
                 });
 
             modelBuilder.Entity("vlu_dorm.Models.Room", b =>
@@ -451,7 +456,19 @@ namespace vlu_dorm.Migrations
                         .HasForeignKey("RoomId")
                         .HasConstraintName("fk_Student_Room");
 
+                    b.HasOne("vlu_dorm.Data.ApplicationUser", "UserNavgation")
+                        .WithMany("Students")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_User_Stundet");
+
                     b.Navigation("RoomNavgation");
+
+                    b.Navigation("UserNavgation");
+                });
+
+            modelBuilder.Entity("vlu_dorm.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("vlu_dorm.Models.BillMonthly", b =>
