@@ -12,7 +12,7 @@ namespace vlu_dorm.Models
         [DisplayName("Số nước")]
         [Required(AllowEmptyStrings = false)]
         public double WaterNumber { get; set; }
-        public int BillMonth { get; set; }
+        public DateTime BillMonth { get; set; }
         
         public virtual ICollection<Room>  RoomsNavgation { get; set; }
 

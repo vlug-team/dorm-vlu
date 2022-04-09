@@ -77,7 +77,7 @@
         isSucess = true;
         notice = "Cập nhật thành công";
         type = "success";
-        room.BillNavgation.BillMonth = DateTime.Today.Month;
+        room.BillNavgation.BillMonth = DateTime.Today;
         await RoomServices.UpdateRoomAsync(room);
     }
     private void OnSelectedItemChangedHandler(Room value)
