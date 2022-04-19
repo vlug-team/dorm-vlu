@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace vlu_dorm.Migrations
 {
-    public partial class vlu : Migration
+    public partial class vl : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace vlu_dorm.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ElectricNumber = table.Column<double>(type: "double", nullable: false),
                     WaterNumber = table.Column<double>(type: "double", nullable: false),
-                    BillMonth = table.Column<int>(type: "int", nullable: false)
+                    BillMonth = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -269,12 +269,12 @@ namespace vlu_dorm.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "4f04ff34-8488-4d3a-a1cf-b13d463c7984", "Admin", "ADMIN" });
+                values: new object[] { "37d2bd91-d8b8-4709-8f29-54a5d1358498", "81625d90-483a-4585-a6f0-2ab6d84f958c", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "74ef940a-4ca4-4a2c-911a-60b64ae813e2", "019b704b-a047-41fd-aa91-1719915f9c23", "User", "USER" });
+                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "05ba8821-bc76-42c0-a542-20cd04b81d21", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",

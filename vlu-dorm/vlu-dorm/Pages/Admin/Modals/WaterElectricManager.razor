@@ -1,94 +1,88 @@
 ﻿@inject RoomServices RoomServices
 <Row>
-    <Col>
-    <Row>
-        <Text>
-            Điện nước Tháng: <b>
-                    @DateTime.Today.Month
-            </b>
-          
-        </Text>
-        <br />
-    </Row>
-    <Row>
-        <Col Span="12">
+	<Col>
+	<Row>
+		<Text>
+			Điện nước Tháng: <b>
+				@DateTime.Today.Month
+			</b>
 
-        <Text>Chọn phòng:</Text>
-        <br />
-        <Select
-        
-        DataSource="@Rooms"
-                @bind-Value="value"
-                LabelName="@nameof(Room.RoomNumber)"
-                ValueName="@nameof(Room.RoomNumber)"
-                SortByLabel="@SortDirection.Ascending"
-                Placeholder="Chọn Phòng:"
-                EnableSearch
-                OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)">
-        </Select>
-        </Col>
-            @if (value != null)
-            {
-            <Form Model="room"
-              OnFinishFailed="OnFinishFailed"
-              OnFinish="OnFinish">
-                    @if (isSucess)
-                {
-                <Row Justify="center" Style="margin-top:1em">
-                    <FormItem>
-                        <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
-                    </FormItem>
-                </Row>
-                }
-                else
-                {
-                <FormItem></FormItem>
-                }
-            <FormItem>
-                <Input @bind-Value="context.BillNavgation.ElectricNumber" Placeholder="Số điện"></Input>
-            </FormItem>
-            <FormItem>
-                <Input @bind-Value="context.BillNavgation.WaterNumber" Placeholder="Số nước"></Input>
-            </FormItem>
-            <FormItem>
-                <Button Type="@ButtonType.Primary" HtmlType="submit">
-                    Xác nhận
-                </Button>
-            </FormItem>
-        </Form>
-            }
-    </Row>
-    </Col>
+		</Text>
+		<br />
+	</Row>
+	<Row>
+		<Col Span="12">
+
+		<Text>Chọn phòng:</Text>
+		<br />
+		<Select DataSource="@Rooms" @bind-Value="value" LabelName="@nameof(Room.RoomNumber)"
+			ValueName="@nameof(Room.RoomNumber)" SortByLabel="@SortDirection.Ascending" Placeholder="Chọn Phòng:"
+			EnableSearch OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)">
+		</Select>
+		</Col>
+		@if (value != null)
+			{
+			<Form Model="room" OnFinishFailed="OnFinishFailed" OnFinish="OnFinish">
+					@if (isSucess)
+				{
+				<Row Justify="center" Style="margin-top:1em">
+					<FormItem>
+						<Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+					</FormItem>
+				</Row>
+				}
+				else
+				{
+				<FormItem></FormItem>
+				}
+			<FormItem>
+				<Input @bind-Value="context.BillNavgation.ElectricNumber" Placeholder="Số điện"></Input>
+			</FormItem>
+			<FormItem>
+				<Input @bind-Value="context.BillNavgation.WaterNumber" Placeholder="Số nước"></Input>
+			</FormItem>
+			<FormItem>
+				<Input @bind-Value="context.BillNavgation.BikeNumber" Placeholder="Tiền xe / Tháng"></Input>
+			</FormItem>
+			<FormItem>
+				<Button Type="@ButtonType.Primary" HtmlType="submit">
+					Xác nhận
+				</Button>
+			</FormItem>
+		</Form>
+			}
+	</Row>
+	</Col>
 </Row>
 
 @code {
-    private string value;
-    private bool isSucess = false;
-    private string notice;
-    private string type;
-    List<Room> Rooms;
-    private Room room;
-    protected override void OnInitialized()
-    {
-        Rooms = RoomServices.GetAll();
-    }
-    private async Task OnFinish(EditContext editContext)
-    {
-        isSucess = true;
-        notice = "Cập nhật thành công";
-        type = "success";
-        room.BillNavgation.BillMonth = DateTime.Today;
-        await RoomServices.UpdateRoomAsync(room);
-    }
-    private void OnSelectedItemChangedHandler(Room value)
-    {
-        room = value;
-        room.BillNavgation = new();
-    }
-    private void OnFinishFailed(EditContext editContext)
-    {
-        isSucess = true;
-        notice = "Thêm phòng không thành công";
-        type = "error";
-    }
+	private string value;
+	private bool isSucess = false;
+	private string notice;
+	private string type;
+	List<Room> Rooms;
+	private Room room;
+	protected override void OnInitialized()
+	{
+		Rooms = RoomServices.GetAll();
+	}
+	private async Task OnFinish(EditContext editContext)
+	{
+		isSucess = true;
+		notice = "Cập nhật thành công";
+		type = "success";
+		room.BillNavgation.BillMonth = DateTime.Today;
+		await RoomServices.UpdateRoomAsync(room);
+	}
+	private void OnSelectedItemChangedHandler(Room value)
+	{
+		room = value;
+		room.BillNavgation = new();
+	}
+	private void OnFinishFailed(EditContext editContext)
+	{
+		isSucess = true;
+		notice = "Thêm phòng không thành công";
+		type = "error";
+	}
 }

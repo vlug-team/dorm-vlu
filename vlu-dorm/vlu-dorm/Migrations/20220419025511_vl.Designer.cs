@@ -11,8 +11,8 @@ using vlu_dorm.Data;
 namespace vlu_dorm.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220408213349_vlu")]
-    partial class vlu
+    [Migration("20220419025511_vl")]
+    partial class vl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,15 +49,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "74ef940a-4ca4-4a2c-911a-60b64ae813e2",
-                            ConcurrencyStamp = "019b704b-a047-41fd-aa91-1719915f9c23",
+                            Id = "37d2bd91-d8b8-4709-8f29-54a5d1358498",
+                            ConcurrencyStamp = "81625d90-483a-4585-a6f0-2ab6d84f958c",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "4f04ff34-8488-4d3a-a1cf-b13d463c7984",
+                            ConcurrencyStamp = "05ba8821-bc76-42c0-a542-20cd04b81d21",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -268,8 +268,8 @@ namespace vlu_dorm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("BillMonth")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("BillMonth")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<double>("ElectricNumber")
                         .HasColumnType("double");
