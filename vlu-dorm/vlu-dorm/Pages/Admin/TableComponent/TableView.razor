@@ -15,7 +15,7 @@
 		Field="@(context?.RoomNavgation?.RoomNumber == null? "Chưa": context.RoomNavgation.RoomNumber)" Sortable />
 	<Column Title="Tháng" Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Format="MM/yyyy" Sortable />
 	<Column Title="Tổng tiền"
-		Field="((context?.RoomNavgation?.RoomPrice + (context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.RoomNavgation?.BillNavgation?.BikeNumber"
+		Field="(context?.RoomNavgation?.RoomPrice +((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.RoomNavgation?.BillNavgation?.BikeNumber"
 		Sortable />
 	<ActionColumn Title="Action">
 		<Space>
@@ -65,7 +65,8 @@
 	void OnShow(int id)
 	{
 		isShow = true;
-		content =@<EditStudent Id="id" />;
+		content =@<EditStudent Id="id" />
+		;
 
 		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
 	}
@@ -73,7 +74,8 @@
 	{
 		isRoom = true;
 
-		content =@<AddStudentToRoom Id="id" />;
+		content =@<AddStudentToRoom Id="id" />
+		;
 		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
 
 	}

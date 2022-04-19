@@ -21,7 +21,7 @@
 			<Column Field="context?.RoomNavgation?.BillNavgation?.ElectricNumber" Title="Số điện" />
 			<Column Field="context?.RoomNavgation?.BillNavgation?.WaterNumber" Title="Số nước" />
 			<Column
-			Field="((context?.RoomNavgation?.RoomPrice + (context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.RoomNavgation?.BillNavgation?.BikeNumber"
+			Field="(context?.RoomNavgation?.RoomPrice +( (context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.RoomNavgation?.BillNavgation?.BikeNumber"
 			Title="Tổng tiền" />
 		</Table>
 		}
