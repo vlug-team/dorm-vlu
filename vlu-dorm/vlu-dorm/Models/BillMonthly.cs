@@ -16,9 +16,6 @@ namespace vlu_dorm.Models
         public double WaterNumber { get; set; }
         public DateTime BillMonth { get; set; }
 
-        [DisplayName("Số lượng xe")]
-        [Required(AllowEmptyStrings = false)]
-        public int BikeNumber { get; set; }
         public virtual ICollection<Room> RoomsNavgation { get; set; }
     }
 }

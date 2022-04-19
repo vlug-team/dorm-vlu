@@ -36,7 +36,11 @@ namespace vlu_dorm.Models
         [Required(AllowEmptyStrings = false)]
         public string Email { get; set; }
         [DisplayName("Giới tính")]
+
         public string Gender { get; set; }
+        [DisplayName("Số lượng xe")]
+        [Required(AllowEmptyStrings = false)]
+        public int BikeNumber { get; set; }
         public bool IsConfirm { get; set; }
         public bool IsActive { get; set; }
 

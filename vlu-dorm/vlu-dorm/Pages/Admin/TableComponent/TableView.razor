@@ -15,7 +15,7 @@
 		Field="@(context?.RoomNavgation?.RoomNumber == null? "Chưa": context.RoomNavgation.RoomNumber)" Sortable />
 	<Column Title="Tháng" Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Format="MM/yyyy" Sortable />
 	<Column Title="Tổng tiền"
-		Field="(context?.RoomNavgation?.RoomPrice +((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.RoomNavgation?.BillNavgation?.BikeNumber"
+		Field="(context?.RoomNavgation?.RoomPrice +((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.BikeNumber"
 		Sortable />
 	<ActionColumn Title="Action">
 		<Space>

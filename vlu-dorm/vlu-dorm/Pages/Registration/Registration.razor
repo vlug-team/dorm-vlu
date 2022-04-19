@@ -91,6 +91,17 @@
                 </Col>
             </Row>
         </FormItem>
+        <FormItem>
+                @if (isBike == false)
+                {
+                <Switch @bind-Checked="isBike"/>
+                }
+                else
+                {
+                <Input @bind-Value="context.BikeNumber" Placeholder="Số lượng xe"></Input>
+
+                }
+        </FormItem>
         <FormItem WrapperColOffset="13" WrapperColSpan="4">
             <Button Type="@ButtonType.Primary" HtmlType="submit">
                 Đăng ký
@@ -103,6 +114,7 @@
     private bool isSucess = false;
     private string notice;
     private string type;
+    private bool isBike = false;
     private bool gender = true;
     DateTime dateTime = new DateTime(2005, 1, 1);
 
