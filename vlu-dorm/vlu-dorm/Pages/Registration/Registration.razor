@@ -64,7 +64,6 @@
             </Row>
         </FormItem>
         <FormItem>
-
             <Row>
                 <Col Span="7">
                 <Input @bind-Value="context.Email" Placeholder="Email trường cấp" Type="email"></Input>
@@ -74,6 +73,28 @@
                 </Col>
             </Row>
         </FormItem>
+        <Row>
+            <Col Offset="8">
+            <Text>Xe máy:</Text>
+            <br />
+            <Switch @bind-Checked="isBike" />
+            <br />
+            </Col>
+        </Row>
+        <Row Style="margin-top: 1em">
+            <Col Span="7" Offset="3">
+                    @if (isBike != false)
+                    {
+                <FormItem LabelColOffset="6">
+                    <Input @bind-Value="context.BikeNumber" Placeholder="Số lượng xe" ></Input>
+                </FormItem>
+                    }
+                    else
+                    {
+                <FormItem></FormItem>
+                    }
+            </Col>
+        </Row>
         <FormItem>
             <Row>
                 <Col Span="7">
@@ -91,17 +112,9 @@
                 </Col>
             </Row>
         </FormItem>
-        <FormItem>
-                @if (isBike == false)
-                {
-                <Switch @bind-Checked="isBike"/>
-                }
-                else
-                {
-                <Input @bind-Value="context.BikeNumber" Placeholder="Số lượng xe"></Input>
 
-                }
-        </FormItem>
+
+
         <FormItem WrapperColOffset="13" WrapperColSpan="4">
             <Button Type="@ButtonType.Primary" HtmlType="submit">
                 Đăng ký
@@ -110,6 +123,12 @@
     </Form>
     </Col>
 </Row>
+<style>
+    .ant-form-item-required {
+        margin-left:3em;
+    }
+    
+</style>
 @code {
     private bool isSucess = false;
     private string notice;
