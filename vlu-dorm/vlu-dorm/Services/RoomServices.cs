@@ -43,7 +43,7 @@ namespace vlu_dorm.Services
         public void Delete(int id)
         {
             using var context = _contextFactory.CreateDbContext();
-            var room = context.Rooms.Find(id);
+            var room = context.Rooms.Where(c=>c.Id == id).FirstOrDefault();
             context.Rooms.Remove(room);
             context.SaveChanges();
         }

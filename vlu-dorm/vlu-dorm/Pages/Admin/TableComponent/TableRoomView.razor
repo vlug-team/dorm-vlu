@@ -16,13 +16,17 @@
        Visible="isVisible"
        OnOk="@HandleOk"
        OnCancel="@HandleCancel">
-    <RoomManager Room="room" isNew="false"/>
+    <RoomManager Room="room" isNew="false" />
 </Modal>
 @code {
     [Parameter] public Room[] Rooms { get; set; }
     Room room;
     private bool isVisible = false;
-    private void Delete(int id) => RoomServices.Delete(id);
+    private void Delete(int id)
+    {
+        RoomServices.Delete(id);
+        Reload();
+    }
     private void ShowModal(int id)
     {
         isVisible = true;
