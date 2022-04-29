@@ -7,6 +7,16 @@
 @attribute [Authorize(Roles = "Admin")]
 
 <PageTitle>Quản lý</PageTitle>
+@if (isSucess)
+{
+    <Row Justify="center" Style="margin-top:1em">
+        <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+    </Row>
+}
+else
+{
+    <Row></Row>
+}
 <Row Style="margin: 3em;">
     <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModal">Quản lý đăng ký nội trú</Button>
     <Modal Title="@("Duyệt đăng kí kí túc xá")"
@@ -21,21 +31,81 @@
     <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModalRoom">Thêm phòng</Button>
     <Modal Title="@("Thêm Phòng")"
            Visible="@visibleRoom"
-           OnOk="@HandleOk"
+           OnOk="@HandelOkRoom"
            OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")"
            Width="900">
-        <RoomManager Room="room" isNew="isNew" />
+        <Form Model="room" OnFinish="OnFinish" LabelColSpan="8" WrapperColSpan="16" OnFinishFailed="OnFinishFailed"
+              Size="AntSizeLDSType.Small">
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.RoomNumber" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.Capacity" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.RoomPrice" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.ElectricPrice" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.WaterPrice" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.BikePrice" />
+            </FormItem>
+        </Form>
     </Modal>
 
     <Button Style="color: #000;  background-color: #05AC48;" Type="primary" OnClick="@ShowModalElc" Class="btn-admin">Quản lý điện, nước</Button>
     <Modal Title="@("Điện nước theo phòng")"
            Visible="@visibleElectric"
-           OnOk="@HandleOk"
+           OnOk="@HandleOkElec"
            OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")"
            Width="900">
-        <WaterElectricManager />
+        <Row>
+            <Col>
+            <Row>
+                <Text>
+                    Điện nước Tháng: <b>
+                        @DateTime.Today.Month
+                    </b>
+
+                </Text>
+                <br />
+            </Row>
+            <Row>
+                <Col Span="12">
+
+                <Text>Chọn phòng:</Text>
+                <br />
+                <Select DataSource="@Rooms" @bind-Value="value" LabelName="@nameof(Room.RoomNumber)"
+                        ValueName="@nameof(Room.RoomNumber)" SortByLabel="@SortDirection.Ascending" Placeholder="Chọn Phòng:"
+                        EnableSearch OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)">
+                </Select>
+                </Col>
+
+                @if (value != null)
+                {
+                    <Form Model="room" OnFinishFailed="OnFinishFailed" OnFinish="OnFinish">
+
+                        <FormItem>
+                            <Input @bind-Value="context.BillNavgation.ElectricNumber" Placeholder="Số điện"></Input>
+                        </FormItem>
+                        <FormItem>
+                            <Input @bind-Value="context.BillNavgation.WaterNumber" Placeholder="Số nước"></Input>
+                        </FormItem>
+                        <FormItem>
+                            <Input @bind-Value="context.BikePrice" Placeholder="Tiền xe / Tháng"></Input>
+                        </FormItem>
+
+                    </Form>
+                }
+            </Row>
+            </Col>
+        </Row>
     </Modal>
 </Row>
 <Row Style="align-items: flex-end">
@@ -65,6 +135,8 @@
 </Row>
 @code {
     List<Students> _student;
+    List<Room> Rooms;
+
     Students[] data;
     Room[] rooms;
     Room room = new();
@@ -73,8 +145,13 @@
     private bool visibleElectric = false;
     private bool isNew = true;
     private string value;
-
-    private void ShowModal() => visible = true;
+    private bool isSucess = false;
+    private string notice;
+    private string type;
+    private void ShowModal()
+    {
+        visible = true;
+    }
 
     private void ShowModalRoom() { visibleRoom = true; isNew = true; }
     private void ShowModalElc() => visibleElectric = true;
@@ -91,12 +168,30 @@
         data = data.Where(c => c.StudentCode == e).ToArray();
     }
 
-    private void HandleOk(MouseEventArgs e)
+    private async void HandleOk(MouseEventArgs e)
     {
         Reload();
-        visibleRoom = false;
         visible = false;
-        visibleElectric = false;
+
+    }
+    private async Task HandelOkRoom(MouseEventArgs e)
+    {
+
+        visibleRoom = false;
+        if (!string.IsNullOrEmpty(room.RoomNumber))
+        {
+            isSucess = true;
+            notice = "Thêm Thành Công";
+            type = "success";
+            await RoomServices.AddRoomAsync(room);
+        }
+        else
+        {
+            isSucess = true;
+            notice = "Thêm chưa thành công";
+            type = "error";
+        }
+
     }
 
     private void HandleCancel(MouseEventArgs e)
@@ -106,10 +201,46 @@
         visible = false;
         visibleElectric = false;
     }
+    private async Task HandleOkElec(MouseEventArgs e)
+    {
+        visibleElectric = false;
+        if (room.BillNavgation != null)
+        {
+            isSucess = true;
+            notice = "Thêm Thành Công";
+            type = "success";
+            room.BillNavgation.BillMonth = DateTime.Today;
+            await RoomServices.UpdateRoomAsync(room);
+        }
+        else
+        {
+            isSucess = true;
+            notice = "Thêm chưa thành công";
+            type = "error";
+        }
+    }
     protected override void OnInitialized()
     {
         _student = StudentServices.GetAll();
         data = _student.ToArray();
         rooms = RoomServices.GetAll().ToArray();
+        Rooms = RoomServices.GetAll();
+
+    }
+    private async Task OnFinish(EditContext editContext)
+    {
+        notice = "Thêm Thành Công";
+        type = "success";
+    }
+    private void OnFinishFailed(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Thêm phòng không thành công";
+        type = "error";
+    }
+    private void OnSelectedItemChangedHandler(Room value)
+    {
+        room = value;
+        room.BillNavgation = new();
     }
 }

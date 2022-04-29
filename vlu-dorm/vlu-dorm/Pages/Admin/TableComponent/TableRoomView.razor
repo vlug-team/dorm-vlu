@@ -1,4 +1,15 @@
 ﻿@inject RoomServices RoomServices
+
+@if (isSucess)
+{
+    <Row Justify="center" Style="margin-top:1em">
+        <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+    </Row>
+}
+else
+{
+    <Row></Row>
+}
 <Table DataSource="Rooms">
     <Column Title="Số Phòng" @bind-Field="@context.RoomNumber" Sortable />
     <Column Title="Tiền Phòng" @bind-Field="@context.RoomPrice" Sortable />
@@ -16,12 +27,35 @@
        Visible="isVisible"
        OnOk="@HandleOk"
        OnCancel="@HandleCancel">
-    <RoomManager Room="room" isNew="false" />
+    <Form Model="room" OnFinish="OnFinish" LabelColSpan="8" WrapperColSpan="16" OnFinishFailed="OnFinishFailed"
+          Size="AntSizeLDSType.Small">
+        <FormItem LabelColSpan="6">
+            <Input @bind-Value="context.RoomNumber" />
+        </FormItem>
+        <FormItem LabelColSpan="6">
+            <Input @bind-Value="context.Capacity" />
+        </FormItem>
+        <FormItem LabelColSpan="6">
+            <Input @bind-Value="context.RoomPrice" />
+        </FormItem>
+        <FormItem LabelColSpan="6">
+            <Input @bind-Value="context.ElectricPrice" />
+        </FormItem>
+        <FormItem LabelColSpan="6">
+            <Input @bind-Value="context.WaterPrice" />
+        </FormItem>
+        <FormItem LabelColSpan="6">
+            <Input @bind-Value="context.BikePrice" />
+        </FormItem>
+    </Form>
 </Modal>
 @code {
     [Parameter] public Room[] Rooms { get; set; }
     Room room;
     private bool isVisible = false;
+    private bool isSucess = false;
+    private string notice;
+    private string type;
     private void Delete(int id)
     {
         RoomServices.Delete(id);
@@ -32,10 +66,14 @@
         isVisible = true;
         room = RoomServices.GetRoomByID(id);
     }
-    private void HandleOk(MouseEventArgs e)
+    private async Task HandleOk(MouseEventArgs e)
     {
-        Reload();
         isVisible = false;
+        isSucess = true;
+        notice = "Sửa Thành Công";
+        type = "success";
+        await RoomServices.UpdateRoomAsync(room);
+        Reload();
     }
 
     private void HandleCancel(MouseEventArgs e)
@@ -46,5 +84,17 @@
     private void Reload()
     {
         Rooms = RoomServices.GetAll().ToArray();
+    }
+    private async Task OnFinish(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Sửa Thành Công";
+        type = "success";
+    }
+    private void OnFinishFailed(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Thêm phòng không thành công";
+        type = "error";
     }
 }
