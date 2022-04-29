@@ -57,10 +57,21 @@ namespace vlu_dorm.Services
         {
             using var context = _contextFactory.CreateDbContext();
             var student = context.Students.Where(c => c.Id == id).First();
-            var account = context.Users.Where(c => c.Email == student.Email).First();
-            context.Users.Remove(account);
             context.Students.Remove(student);
             context.SaveChanges();
+
+        }
+        public void DeleteAccount(string email)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            var account = context.Users.Where(c => c.Email == email).FirstOrDefault();
+            if (account != null)
+            {
+                var student = context.Students.Where(c => c.Email == email).FirstOrDefault();
+                context.Students.Remove(student);
+                context.Users.Remove(account);
+                context.SaveChanges();
+            }
         }
         public async Task UpdateAsync(Students students)
         {

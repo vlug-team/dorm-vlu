@@ -32,7 +32,7 @@
 						Phòng</Button>
 				}
 				<Button Type="@ButtonType.Primary" Color="Color.Yellow5" OnClick="()=>OnShow(context.Id)">Edit</Button>
-				<Button Type="@ButtonType.Primary" Color="Color.Red5" OnClick="()=>Delete(context.Id)">Delete</Button>
+				<Button Type="@ButtonType.Primary" Color="Color.Red5" OnClick="()=>Delete(context.Email)">Delete</Button>
 			</SpaceItem>
 		</Space>
 	</ActionColumn>
@@ -93,9 +93,9 @@
 		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
 	}
 
-	private void Delete(int id)
+	private void Delete(string email)
 	{
-		StudentServices.Delete(id);
+		StudentServices.DeleteAccount(email);
 		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
 	}
 }

@@ -47,15 +47,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9f24b085-adc5-49d3-aacb-d6e5a0d3aca0",
-                            ConcurrencyStamp = "8243c567-5604-475d-b532-e9cd70e0271b",
+                            Id = "87947c62-2371-4590-a737-754e9d179ad0",
+                            ConcurrencyStamp = "7a40a504-196b-4431-896d-4abb2e993009",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "b922e261-54bb-4090-bd88-fa0598ded55c",
+                            ConcurrencyStamp = "4ed5b329-91aa-4655-a655-a1dc9ef6c25e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -266,9 +266,6 @@ namespace vlu_dorm.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("BikeNumber")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("BillMonth")
                         .HasColumnType("datetime(6)");
 
@@ -322,6 +319,9 @@ namespace vlu_dorm.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BikeNumber")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("BirthDay")

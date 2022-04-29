@@ -40,8 +40,7 @@ namespace vlu_dorm.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ElectricNumber = table.Column<double>(type: "double", nullable: false),
                     WaterNumber = table.Column<double>(type: "double", nullable: false),
-                    BillMonth = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    BikeNumber = table.Column<int>(type: "int", nullable: false)
+                    BillMonth = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -246,6 +245,7 @@ namespace vlu_dorm.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Gender = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    BikeNumber = table.Column<int>(type: "int", nullable: false),
                     IsConfirm = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     RoomId = table.Column<int>(type: "int", nullable: true),
@@ -271,12 +271,12 @@ namespace vlu_dorm.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "b922e261-54bb-4090-bd88-fa0598ded55c", "Admin", "ADMIN" });
+                values: new object[] { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "4ed5b329-91aa-4655-a655-a1dc9ef6c25e", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "9f24b085-adc5-49d3-aacb-d6e5a0d3aca0", "8243c567-5604-475d-b532-e9cd70e0271b", "User", "USER" });
+                values: new object[] { "87947c62-2371-4590-a737-754e9d179ad0", "7a40a504-196b-4431-896d-4abb2e993009", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
