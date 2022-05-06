@@ -14,9 +14,7 @@
 	<Column Title="Phòng"
 		Field="@(context?.RoomNavgation?.RoomNumber == null? "Chưa": context.RoomNavgation.RoomNumber)" Sortable />
 	<Column Title="Tháng" Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Format="MM/yyyy" Sortable />
-	<Column Title="Tổng tiền"
-		Field="(context?.RoomNavgation?.RoomPrice +((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.BikeNumber"
-		Sortable />
+	<Column Title="Tổng tiền" Field="@StudentServices.GetMoney(context.Id)" Sortable />
 	<ActionColumn Title="Action">
 		<Space>
 			<SpaceItem>
@@ -32,7 +30,8 @@
 						Phòng</Button>
 				}
 				<Button Type="@ButtonType.Primary" Color="Color.Yellow5" OnClick="()=>OnShow(context.Id)">Edit</Button>
-				<Button Type="@ButtonType.Primary" Color="Color.Red5" OnClick="()=>Delete(context.Email)">Delete</Button>
+				<Button Type="@ButtonType.Primary" Color="Color.Red5"
+					OnClick="()=>Delete(context.Email)">Delete</Button>
 			</SpaceItem>
 		</Space>
 	</ActionColumn>

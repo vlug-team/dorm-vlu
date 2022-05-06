@@ -1,18 +1,29 @@
 ﻿<Properties StartupConfiguration="{E7335086-88A7-4300-BBD8-00A8CE3D91DC}|vlu-dorm">
-  <MonoDevelop.Ide.Workbench ActiveDocument="vlu-dorm/Pages/Aboutus/AboutUs.razor">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.vlu-dorm PreferredExecutionTarget="/Applications/CocCoc.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="vlu-dorm/Pages/Admin/TableComponent/TableRoomView.razor">
     <Files>
-      <File FileName="vlu-dorm/Pages/Aboutus/AboutUs.razor" Line="13" Column="35" />
+      <File FileName="vlu-dorm/Pages/Admin/Admin.razor" Line="10" Column="1" />
+      <File FileName="vlu-dorm/Pages/Admin/TableComponent/TableView.razor" Line="1" Column="1" />
+      <File FileName="vlu-dorm/Pages/Admin/TableComponent/TableRoomView.razor" Line="77" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="vlu-dorm" expanded="True">
-            <Node name="vlu-dorm" expanded="True" selected="True">
+            <Node name="vlu-dorm" expanded="True">
               <Node name="Pages" expanded="True">
                 <Node name="Aboutus" expanded="True" />
+                <Node name="Admin" expanded="True">
+                  <Node name="Modals" expanded="True" />
+                  <Node name="TableComponent" expanded="True" />
+                </Node>
                 <Node name="Shared" expanded="True" />
               </Node>
               <Node name="Properties" expanded="True" />
+              <Node name="Services" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -22,11 +33,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.vlu-dorm PreferredExecutionTarget="/Applications/CocCoc.app" />
 </Properties>

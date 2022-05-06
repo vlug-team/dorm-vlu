@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @using System.ComponentModel.DataAnnotations
 @using vlu_dorm.Data
+@using System.Globalization
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject StudentServices studentServices
@@ -20,9 +21,7 @@
 			<Column Field="context?.RoomNavgation?.ElectricPrice" Title="Giá điện" />
 			<Column Field="context?.RoomNavgation?.BillNavgation?.ElectricNumber" Title="Số điện" />
 			<Column Field="context?.RoomNavgation?.BillNavgation?.WaterNumber" Title="Số nước" />
-			<Column
-			Field="(context?.RoomNavgation?.RoomPrice +( (context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber) + (context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)) / context?.RoomNavgation?.Capacity) + context?.RoomNavgation?.BikePrice * context?.BikeNumber"
-			Title="Tổng tiền" />
+			<Column Field="@studentServices.GetMoney(context.Id)" Title="Tổng tiền" />
 		</Table>
 		}
 	</Col>
@@ -59,6 +58,7 @@
 	</Col>
 </Row>
 @code {
+	private CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
 	private List<Students> Data;
 	private bool visible = false;
 	private bool isSucess = false;
@@ -143,4 +143,5 @@
 		[Compare("NewPassword", ErrorMessage = "Mật khẩu không khớp")]
 		public string ConfirmPassword { get; set; }
 	}
+
 }
