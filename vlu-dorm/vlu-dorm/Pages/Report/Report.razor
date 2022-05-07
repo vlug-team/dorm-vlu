@@ -6,6 +6,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @inject StudentServices studentServices
+@inject RoomServices roomServices
 @inject IHttpContextAccessor httpContextAccessor
 <PageTitle>Thống kê</PageTitle>
 <Row Justify="center" Align="center" Style="margin-top:4em">
@@ -21,7 +22,9 @@
 			<Column Field="context?.RoomNavgation?.ElectricPrice" Title="Giá điện" />
 			<Column Field="context?.RoomNavgation?.BillNavgation?.ElectricNumber" Title="Số điện" />
 			<Column Field="context?.RoomNavgation?.BillNavgation?.WaterNumber" Title="Số nước" />
-			<Column Field="@studentServices.GetMoney(context.Id)" Title="Tổng tiền" />
+			<Column Field="((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber + context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)
+/GetStudentCount(context.RoomId) + (context?.BikeNumber * context?.RoomNavgation?.BikePrice) + context?.RoomNavgation?.RoomPrice
+)" Title="Tổng tiền" />
 		</Table>
 		}
 	</Col>
@@ -66,6 +69,7 @@
 	public string mounthstr = "";
 	private string notice = "";
 	private string type = "";
+    private int studentCount;
 	private ChangePassword input = new();
 	protected override void OnInitialized()
 	{
@@ -73,6 +77,10 @@
 		Data = studentServices.GetAllByEmail(username);
 		Data = Data.Where(x => x.RoomNavgation.BillNavgation.BillMonth.Month == mounth).ToList();
 	}
+    private int GetStudentCount(int id)
+    {
+        return roomServices.GetCountStudentSameRoom(id);
+    }
 	public void ShowModal()
 	{
 		visible = true;

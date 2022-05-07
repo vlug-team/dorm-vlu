@@ -6,95 +6,108 @@
 
 
 <Table DataSource="Data.Where(c => c.IsConfirm == true).ToArray()" Style="margin:2em;" @bind-PageSize="pageSize">
-	<Selection Key="@(context.Id.ToString())" />
-	<Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
-	<Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
-	<Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
-	<Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
-	<Column Title="Phòng"
-		Field="@(context?.RoomNavgation?.RoomNumber == null? "Chưa": context.RoomNavgation.RoomNumber)" Sortable />
-	<Column Title="Tháng" Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Format="MM/yyyy" Sortable />
-	<Column Title="Tổng tiền" Field="@StudentServices.GetMoney(context.Id)" Sortable />
-	<ActionColumn Title="Action">
-		<Space>
-			<SpaceItem>
-				@if (context.IsActive != true)
-				{
-					<a href="Identity/Account/Register">
-						<Button Type="@ButtonType.Primary" Color="Color.Blue5">Đăng kí</Button>
-					</a>
-				}
-				@if (context.RoomNavgation == null)
-				{
-					<Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>OnShowRoom(context.Id)">Chọn
-						Phòng</Button>
-				}
-				<Button Type="@ButtonType.Primary" Color="Color.Yellow5" OnClick="()=>OnShow(context.Id)">Edit</Button>
-				<Button Type="@ButtonType.Primary" Color="Color.Red5"
-					OnClick="()=>Delete(context.Email)">Delete</Button>
-			</SpaceItem>
-		</Space>
-	</ActionColumn>
+    <Selection Key="@(context.Id.ToString())" />
+    <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
+    <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
+    <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
+    <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
+    <Column Title="Số xe" Field="context?.BikeNumber" />
+    <Column Title="Phòng"
+            Field="@(context?.RoomNavgation?.RoomNumber == null? "Chưa": context.RoomNavgation.RoomNumber)" Sortable />
+    <Column Title="Tháng" Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Format="MM/yyyy" Sortable />
+    <Column Title="Tổng tiền"
+    Field="((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber + context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)
+/GetStudentCount(context.RoomId) + (context?.BikeNumber * context?.RoomNavgation?.BikePrice) + context?.RoomNavgation?.RoomPrice
+)" Sortable />
+   
+    <ActionColumn Title="Action">
+        <Space>
+            <SpaceItem>
+                @if (context.IsActive != true)
+                {
+                    <a href="Identity/Account/Register">
+                        <Button Type="@ButtonType.Primary" Color="Color.Blue5">Đăng kí</Button>
+                    </a>
+                }
+                @if (context.RoomNavgation == null)
+                {
+                    <Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>OnShowRoom(context.Id)">
+                        Chọn
+                        Phòng
+                    </Button>
+                }
+                <Button Type="@ButtonType.Primary" Color="Color.Yellow5" OnClick="()=>OnShow(context.Id)">Edit</Button>
+                <Button Type="@ButtonType.Primary" Color="Color.Red5"
+                        OnClick="()=>Delete(context.Email)">
+                    Delete
+                </Button>
+            </SpaceItem>
+        </Space>
+    </ActionColumn>
 </Table>
 <Modal Visible="isShow" Title="Chỉnh sửa sinh viên" Width="900" OnOk="@HandleOk" OnCancel="@HandleCancel">
-	@content
+    @content
 </Modal>
 <Modal Visible="isRoom" Title="Chọn phòng sinh viên" OnOk="@HandleOk" OnCancel="@HandleCancel">
-	@content
+    @content
 </Modal>
 @code {
-	[Parameter] public Students[] Data { get; set; }
+    [Parameter] public Students[] Data { get; set; }
 
-	private Students Student;
-	private RenderFragment content;
-	private CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+    private Students Student;
+    private RenderFragment content;
+    private CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
 
-	private double total;
-	private int pageSize = 10;
-	private bool isShow = false;
-	private bool isRoom = false;
-	private bool isSucess = false;
-	private string notice;
-	private string type;
+    private double total;
+    private int pageSize = 10;
+    private bool isShow = false;
+    private bool isRoom = false;
+    private bool isSucess = false;
+    private string notice;
+    private string type;
 
-	protected override void OnInitialized()
-	{
-		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
-	}
-	void OnShow(int id)
-	{
-		isShow = true;
-		content =@<EditStudent Id="id" />
-		;
+    protected override void OnInitialized()
+    {
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+    }
+    void OnShow(int id)
+    {
+        isShow = true;
+        content =@<EditStudent Id="id" />
+    ;
 
-		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
-	}
-	void OnShowRoom(int id)
-	{
-		isRoom = true;
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+    }
+    void OnShowRoom(int id)
+    {
+        isRoom = true;
 
-		content =@<AddStudentToRoom Id="id" />
-		;
-		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+        content =@<AddStudentToRoom Id="id" />
+    ;
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
 
-	}
+    }
+    private int GetStudentCount(int id)
+    {
+        return Data.Where(c => c.RoomId == id).ToList().Count();
+    }
 
-	private void HandleOk(MouseEventArgs e)
-	{
-		isRoom = false;
-		isShow = false;
-		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
-	}
-	private void HandleCancel(MouseEventArgs e)
-	{
-		isShow = false;
-		isRoom = false;
-		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
-	}
+    private void HandleOk(MouseEventArgs e)
+    {
+        isRoom = false;
+        isShow = false;
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+    }
+    private void HandleCancel(MouseEventArgs e)
+    {
+        isShow = false;
+        isRoom = false;
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+    }
 
-	private void Delete(string email)
-	{
-		StudentServices.DeleteAccount(email);
-		Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
-	}
+    private void Delete(string email)
+    {
+        StudentServices.DeleteAccount(email);
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == true).ToArray();
+    }
 }

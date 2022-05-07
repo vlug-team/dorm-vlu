@@ -1,34 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using vlu_dorm.Data;
 using vlu_dorm.Models;
 
 namespace vlu_dorm.Services
 {
-    public class StudentServices : PageModel
+    public class StudentServices
     {
         readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
-
         public StudentServices(IDbContextFactory<ApplicationDbContext> dbContextFactory)
         {
             _contextFactory = dbContextFactory;
         }
-
         public List<Students> GetAll()
         {
             using var context = _contextFactory.CreateDbContext();
             return context.Students
-                .Include(c => c.RoomNavgation)
-                .Include(c => c.RoomNavgation.BillNavgation)
-                .ToList();
-        }
-
-        public List<Students> GetAllById(int id)
-        {
-            using var context = _contextFactory.CreateDbContext();
-            return context.Students
-                .Where(c => c.Id == id)
                 .Include(c => c.RoomNavgation)
                 .Include(c => c.RoomNavgation.BillNavgation)
                 .ToList();
@@ -98,37 +84,6 @@ namespace vlu_dorm.Services
             await context.SaveChangesAsync();
         }
 
-        public void Update(Students students)
-        {
-            using var context = _contextFactory.CreateDbContext();
-            context.Students.Update(students);
-            context.SaveChanges();
-        }
 
-        //get money in mont of student same room
-
-        public double GetMoney(int id)
-        {
-            double sum = 0;
-            using var context = _contextFactory.CreateDbContext();
-            var student = context.Students.Where(c => c.Id == id).FirstOrDefault();
-            int bills = context.BillMonthlies.Where(c => c.Id == student.RoomId).Count();
-            sum =
-                (student.BikeNumber * student.RoomNavgation.BikePrice)
-                + student.RoomNavgation.RoomPrice
-                + (
-                    (
-                        (
-                            student.RoomNavgation.ElectricPrice
-                            * student.RoomNavgation.BillNavgation.ElectricNumber
-                        )
-                        + (
-                            student.RoomNavgation.BillNavgation.WaterNumber
-                            * student.RoomNavgation.WaterPrice
-                        )
-                    ) / bills
-                );
-            return sum;
-        }
     }
 }

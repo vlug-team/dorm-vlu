@@ -38,8 +38,15 @@ namespace vlu_dorm.Services
             context.Rooms.Update(room);
             await context.SaveChangesAsync();
         }
-
-
+        public int GetCountStudentSameRoom(int id)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            if (context.Rooms.FirstOrDefault(c => c.Id == id) == null)
+            {
+                return 0;
+            }
+            return context.Rooms.Where(c=>c.Id == id).ToList().Count;
+        }
         public void Delete(int id)
         {
             using var context = _contextFactory.CreateDbContext();
