@@ -70,7 +70,7 @@ else
             <Row>
                 <Text>
                     Điện nước Tháng: <b>
-                        @DateTime.Today.Month
+                            @DateTime.Today.Month
                     </b>
 
                 </Text>
@@ -87,8 +87,8 @@ else
                 </Select>
                 </Col>
 
-                @if (value != null)
-                {
+                    @if (value != null)
+                    {
                     <Form Model="room" OnFinishFailed="OnFinishFailed" OnFinish="OnFinish">
 
                         <FormItem>
@@ -102,7 +102,7 @@ else
                         </FormItem>
 
                     </Form>
-                }
+                    }
             </Row>
             </Col>
         </Row>
@@ -126,6 +126,13 @@ else
     </Col>
 </Row>
 <Row Style="margin-top: 5em;">
+    <Col Span="12" Offset="1" Style="margin-bottom:4em">
+    <Card Title=@("Thống kê tiền nước tháng: "+month) Style="width: 450px">
+        <Body>
+           
+        </Body>
+    </Card>
+    </Col>
     <Col Offset="1">
     <TableView Data="data" />
     </Col>
@@ -133,6 +140,7 @@ else
     <TableRoomView Rooms="rooms" />
     </Col>
 </Row>
+
 @code {
     List<Students> _student;
     List<Room> Rooms;
@@ -148,6 +156,7 @@ else
     private bool isSucess = false;
     private string notice;
     private string type;
+    private int month = DateTime.Today.Month;
     private void ShowModal()
     {
         visible = true;
@@ -242,5 +251,17 @@ else
     {
         room = value;
         room.BillNavgation = new();
+    }
+    private double Total()
+    {
+        double electric = rooms.Where(c => c.BillNavgation.BillMonth.Month == month).Sum(c => c.BillNavgation.ElectricNumber);
+        double water = rooms.Where(c => c.BillNavgation.BillMonth.Month == month).Sum(c => c.BillNavgation.WaterNumber);
+        return electric + water;
+    }
+    private double TotalAll(){
+        int countStudent = data.Count();
+        double bike = data.Sum(c => c.BikeNumber * c.RoomNavgation.BikePrice);
+        double roomprice = data.Where(c => c.RoomNavgation.BillNavgation.BillMonth.Month == month).Sum(c => c.RoomNavgation.RoomPrice);
+        return Total() + roomprice + bike;
     }
 }
