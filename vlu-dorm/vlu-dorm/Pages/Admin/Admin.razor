@@ -9,261 +9,285 @@
 <PageTitle>Quản lý</PageTitle>
 @if (isSucess)
 {
-	<Row Justify="center" Style="margin-top:1em">
-		<Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
-	</Row>
+    <Row Justify="center" Style="margin-top:1em">
+        <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+    </Row>
 }
 else
 {
-	<Row></Row>
+    <Row></Row>
 }
 <Row Style="margin: 3em;">
-	<Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModal">Quản
-		lý đăng ký nội trú</Button>
-	<Modal Title="@("Duyệt đăng kí kí túc xá")" Visible="@visible" OnOk="@HandleOk" OnCancel="@HandleCancel"
-		MaxBodyHeight="@("60vh")" Width="1200">
-		<SubscriptionManagement Data="data" Students="_student" Rooms="rooms" />
-	</Modal>
+    <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin" OnClick="@ShowModal">
+        Quản
+        lý đăng ký nội trú
+    </Button>
+    <Modal Title="@("Duyệt đăng kí kí túc xá")" Visible="@visible" OnOk="@HandleOk" OnCancel="@HandleCancel"
+           MaxBodyHeight="@("60vh")" Width="1200">
+        <SubscriptionManagement Data="data" Students="_student" Rooms="rooms" />
+    </Modal>
 
-	<Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin"
-		OnClick="@ShowModalRoom">Thêm phòng</Button>
-	<Modal Title="@("Thêm Phòng")" Visible="@visibleRoom" OnOk="@HandelOkRoom" OnCancel="@HandleCancel"
-		MaxBodyHeight="@("60vh")" Width="900">
-		<Form Model="room" OnFinish="OnFinish" LabelColSpan="8" WrapperColSpan="16" OnFinishFailed="OnFinishFailed"
-			Size="AntSizeLDSType.Small">
-			<FormItem LabelColSpan="6">
-				<Input @bind-Value="context.RoomNumber" />
-			</FormItem>
-			<FormItem LabelColSpan="6">
-				<Input @bind-Value="context.Capacity" />
-			</FormItem>
-			<FormItem LabelColSpan="6">
-				<Input @bind-Value="context.RoomPrice" />
-			</FormItem>
-			<FormItem LabelColSpan="6">
-				<Input @bind-Value="context.ElectricPrice" />
-			</FormItem>
-			<FormItem LabelColSpan="6">
-				<Input @bind-Value="context.WaterPrice" />
-			</FormItem>
-			<FormItem LabelColSpan="6">
-				<Input @bind-Value="context.BikePrice" />
-			</FormItem>
-		</Form>
-	</Modal>
+    <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin"
+            OnClick="@ShowModalRoom">
+        Thêm phòng
+    </Button>
+    <Modal Title="@("Thêm Phòng")" Visible="@visibleRoom" OnOk="@HandelOkRoom" OnCancel="@HandleCancel"
+           MaxBodyHeight="@("60vh")" Width="900">
+        <Form Model="room" OnFinish="OnFinish" LabelColSpan="8" WrapperColSpan="16" OnFinishFailed="OnFinishFailed"
+              Size="AntSizeLDSType.Small">
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.RoomNumber" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.Capacity" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.RoomPrice" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.ElectricPrice" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.WaterPrice" />
+            </FormItem>
+            <FormItem LabelColSpan="6">
+                <Input @bind-Value="context.BikePrice" />
+            </FormItem>
+        </Form>
+    </Modal>
 
-	<Button Style="color: #000;  background-color: #05AC48;" Type="primary" OnClick="@ShowModalElc"
-		Class="btn-admin">Quản lý điện, nước</Button>
-	<Modal Title="@("Điện nước theo phòng")" Visible="@visibleElectric" OnOk="@HandleOkElec" OnCancel="@HandleCancel"
-		MaxBodyHeight="@("60vh")" Width="900">
-		<Row>
-			<Col>
-			<Row>
-				<Text>
-					Điện nước Tháng: <b>
-							@DateTime.Today.Month
-					</b>
+    <Button Style="color: #000;  background-color: #05AC48;" Type="primary" OnClick="@ShowModalElc"
+            Class="btn-admin">
+        Quản lý điện, nước
+    </Button>
+    <Modal Title="@("Điện nước theo phòng")" Visible="@visibleElectric" OnOk="@HandleOkElec" OnCancel="@HandleCancel"
+           MaxBodyHeight="@("60vh")" Width="900">
+        <Row>
+            <Col>
+            <Row>
+                <Text>
+                    Điện nước Tháng: <b>
+                            @DateTime.Today.Month
+                    </b>
 
-				</Text>
-				<br />
-			</Row>
-			<Row>
-				<Col Span="12">
+                </Text>
+                <br />
+            </Row>
+            <Row>
+                <Col Span="12">
 
-				<Text>Chọn phòng:</Text>
-				<br />
-				<Select DataSource="@Rooms" @bind-Value="value" LabelName="@nameof(Room.RoomNumber)"
-					ValueName="@nameof(Room.RoomNumber)" SortByLabel="@SortDirection.Ascending"
-					Placeholder="Chọn Phòng:" EnableSearch
-					OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)">
-				</Select>
-				</Col>
+                <Text>Chọn phòng:</Text>
+                <br />
+                <Select DataSource="@Rooms" @bind-Value="value" LabelName="@nameof(Room.RoomNumber)"
+                        ValueName="@nameof(Room.RoomNumber)" SortByLabel="@SortDirection.Ascending"
+                        Placeholder="Chọn Phòng:" EnableSearch
+                        OnSelectedItemChanged="(Room room)=>OnSelectedItemChangedHandler(room)">
+                </Select>
+                </Col>
 
-					@if (value != null)
-					{
-					<Form Model="room" OnFinishFailed="OnFinishFailed" OnFinish="OnFinish">
+                    @if (value != null)
+                    {
+                    <Form Model="room" OnFinishFailed="OnFinishFailed" OnFinish="OnFinish">
 
-						<FormItem>
-							<Input @bind-Value="context.BillNavgation.ElectricNumber" Placeholder="Số điện"></Input>
-						</FormItem>
-						<FormItem>
-							<Input @bind-Value="context.BillNavgation.WaterNumber" Placeholder="Số nước"></Input>
-						</FormItem>
-						<FormItem>
-							<Input @bind-Value="context.BikePrice" Placeholder="Tiền xe / Tháng"></Input>
-						</FormItem>
+                        <FormItem>
+                            <Input @bind-Value="context.BillNavgation.ElectricNumber" Placeholder="Số điện"></Input>
+                        </FormItem>
+                        <FormItem>
+                            <Input @bind-Value="context.BillNavgation.WaterNumber" Placeholder="Số nước"></Input>
+                        </FormItem>
+                        <FormItem>
+                            <Input @bind-Value="context.BikePrice" Placeholder="Tiền xe / Tháng"></Input>
+                        </FormItem>
 
-					</Form>
-					}
-			</Row>
-			</Col>
-		</Row>
-	</Modal>
+                    </Form>
+                    }
+            </Row>
+            </Col>
+        </Row>
+    </Modal>
 </Row>
 <Row Style="align-items: flex-end">
-	<Col Span="6" Offset="1">
-	<Text>Tìm kiếm MSSV</Text>
-	<Select DataSource="@(data.Where(c=>c.IsConfirm == true).Select(c=>c.StudentCode).ToList())" @bind-Value="@value"
-		SortByLabel="@SortDirection.Ascending" Placeholder="Tìm MSSV:" OnSelectedItemChanged="OnSearch"
-		OnClearSelected="Reload" EnableSearch AllowClear>
-	</Select>
-	</Col>
-	<Col Offset="1">
-	<Button Icon="@IconType.Outline.Reload" OnClick="Reload"></Button>
-	</Col>
+    <Col Span="6" Offset="1">
+    <Text>Tìm kiếm MSSV</Text>
+    <Select DataSource="@(data.Where(c=>c.IsConfirm == true).Select(c=>c.StudentCode).ToList())" @bind-Value="@value"
+            SortByLabel="@SortDirection.Ascending" Placeholder="Tìm MSSV:" OnSelectedItemChanged="OnSearch"
+            OnClearSelected="Reload" EnableSearch AllowClear>
+    </Select>
+    </Col>
+    <Col Offset="1">
+    <Button Icon="@IconType.Outline.Reload" OnClick="Reload"></Button>
+    </Col>
 </Row>
 <Row Style="margin-top: 5em;">
-	<Col Span="12" Offset="1" Style="margin-bottom:4em">
-	<Card Title=@("Thống kê tiền nước tháng: "+month) Style="width: 450px">
+    <Col Span="12" Offset="1" Style="margin-bottom:4em">
+    <Card Title=@("Thống kê tiền nước tháng: "+month) Style="width: 450px">
 
-		<Body>
-				@if (bills != null)
-				{
-				<p>Số điện: <strong>@(bills.Sum(c=>c.BillNavgation.ElectricNumber))</strong></p>
-				<p>Số nước: <strong> @(bills.Sum(c=>c.BillNavgation.ElectricNumber))</strong></p>
-				<p>Tổng tiền (Điện + Nước):<strong>@Total()</strong></p>
-				<p>Tổng tiền (Điện + Nước + Tiền phòng + Tiền xe): <strong>@TotalAll()</strong></p>
-				}
-				else
-				{
+        <Body>
+                @if (bills != null)
+                {
 
-				}
-		</Body>
-	</Card>
-	</Col>
-	<Col Offset="1">
-	<TableView Data="data" />
-	</Col>
-	<Col Offset="1">
-	<TableRoomView Rooms="rooms" />
-	</Col>
+                <p>Số điện: <strong>@(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
+                <p>Số nước: <strong> @(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
+                <p>Tổng tiền (Điện + Nước):<strong>@Total()</strong></p>
+                <p>Tổng tiền (Điện + Nước + Tiền phòng + Tiền xe): <strong>@TotalAll()</strong></p>
+                }
+
+
+        </Body>
+    </Card>
+    </Col>
+    <Col Offset="1">
+    <TableView Data="data" />
+    </Col>
+    <Col Offset="1">
+    <TableRoomView Rooms="rooms" />
+    </Col>
 </Row>
 
 @code {
-	List<Students> _student;
-	List<Room> Rooms;
-	List<Room> bills;
-	Students[] data;
-	Room[] rooms;
-	Room room = new();
-	private bool visible = false;
-	private bool visibleRoom = false;
-	private bool visibleElectric = false;
-	private bool isNew = true;
-	private string value;
-	private bool isSucess = false;
-	private string notice;
-	private string type;
-	private int month = DateTime.Today.Month;
-	private void ShowModal()
-	{
-		visible = true;
-	}
-
-	private void ShowModalRoom() { visibleRoom = true; isNew = true; }
-	private void ShowModalElc() => visibleElectric = true;
+    List<Students> _student;
+    List<Room> Rooms;
+    List<Room> bills;
+    Students[] data;
+    Room[] rooms;
+    Room room = new();
+    private bool visible = false;
+    private bool visibleRoom = false;
+    private bool visibleElectric = false;
+    private bool isNew = true;
+    private string value;
+    private bool isSucess = false;
+    private string notice;
+    private string type;
+    private int month = DateTime.Today.Month;
 
 
-	private void Reload()
-	{
-		_student = StudentServices.GetAll();
-		data = _student.Where(c => c.IsConfirm == true).ToArray();
-		rooms = RoomServices.GetAll().ToArray();
-		bills = RoomServices.GetBillMonthlies();
-	}
-	private void OnSearch(string e)
-	{
-		data = data.Where(c => c.StudentCode == e).ToArray();
-	}
+    protected override void OnInitialized()
+    {
+        _student = StudentServices.GetAll();
+        data = _student.ToArray();
+        rooms = RoomServices.GetAll().ToArray();
+        Rooms = RoomServices.GetAll();
+        if (rooms.FirstOrDefault().BillNavgation != null)
+        {
+            bills = RoomServices.GetBillMonthlies();
+        }
 
-	private async void HandleOk(MouseEventArgs e)
-	{
-		Reload();
-		visible = false;
+    }
 
-	}
-	private async Task HandelOkRoom(MouseEventArgs e)
-	{
 
-		visibleRoom = false;
-		if (!string.IsNullOrEmpty(room.RoomNumber))
-		{
-			isSucess = true;
-			notice = "Thêm Thành Công";
-			type = "success";
-			await RoomServices.AddRoomAsync(room);
-		}
-		else
-		{
-			isSucess = true;
-			notice = "Thêm chưa thành công";
-			type = "error";
-		}
+    private void ShowModal()
+    {
+        visible = true;
+    }
 
-	}
+    private void ShowModalRoom() { visibleRoom = true; isNew = true; }
+    private void ShowModalElc() => visibleElectric = true;
 
-	private void HandleCancel(MouseEventArgs e)
-	{
-		Reload();
-		visibleRoom = false;
-		visible = false;
-		visibleElectric = false;
-	}
-	private async Task HandleOkElec(MouseEventArgs e)
-	{
-		visibleElectric = false;
-		if (room.BillNavgation != null)
-		{
-			isSucess = true;
-			notice = "Thêm Thành Công";
-			type = "success";
-			room.BillNavgation.BillMonth = DateTime.Today;
-			await RoomServices.UpdateRoomAsync(room);
-		}
-		else
-		{
-			isSucess = true;
-			notice = "Thêm chưa thành công";
-			type = "error";
-		}
-	}
-	protected override void OnInitialized()
-	{
-		_student = StudentServices.GetAll();
-		data = _student.ToArray();
-		rooms = RoomServices.GetAll().ToArray();
-		Rooms = RoomServices.GetAll();
-		bills = RoomServices.GetBillMonthlies();
 
-	}
-	private async Task OnFinish(EditContext editContext)
-	{
-		notice = "Thêm Thành Công";
-		type = "success";
-	}
-	private void OnFinishFailed(EditContext editContext)
-	{
-		isSucess = true;
-		notice = "Thêm phòng không thành công";
-		type = "error";
-	}
-	private void OnSelectedItemChangedHandler(Room value)
-	{
-		room = value;
-		room.BillNavgation = new();
-	}
-	private double Total()
-	{
-		double electric = bills.Sum(c => c.BillNavgation.ElectricNumber) * bills.FirstOrDefault().ElectricPrice;
-		double water = bills.Sum(c => c.BillNavgation.WaterNumber) * bills.FirstOrDefault().WaterPrice;
-		return electric + water;
-	}
-	private double TotalAll()
-	{
-		int countStudent = data.Count();
-		double bike = data.Sum(c => c.BikeNumber * c.RoomNavgation.BikePrice);
-		double roomprice = data.Where(c => c.RoomNavgation.BillNavgation.BillMonth.Month == month).Sum(c =>
-		c.RoomNavgation.RoomPrice);
-		return Total() + roomprice + bike;
-	}
+    private void Reload()
+    {
+        _student = StudentServices.GetAll();
+        data = _student.Where(c => c.IsConfirm == true).ToArray();
+        rooms = RoomServices.GetAll().ToArray();
+        bills = RoomServices.GetBillMonthlies();
+
+
+    }
+    private void OnSearch(string e)
+    {
+        data = data.Where(c => c.StudentCode == e).ToArray();
+    }
+
+    private async void HandleOk(MouseEventArgs e)
+    {
+        Reload();
+        visible = false;
+
+    }
+    private async Task HandelOkRoom(MouseEventArgs e)
+    {
+
+        visibleRoom = false;
+        if (!string.IsNullOrEmpty(room.RoomNumber))
+        {
+            isSucess = true;
+            notice = "Thêm Thành Công";
+            type = "success";
+            await RoomServices.AddRoomAsync(room);
+        }
+        else
+        {
+            isSucess = true;
+            notice = "Thêm chưa thành công";
+            type = "error";
+        }
+
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        Reload();
+        visibleRoom = false;
+        visible = false;
+        visibleElectric = false;
+    }
+    private async Task HandleOkElec(MouseEventArgs e)
+    {
+        visibleElectric = false;
+        if (room.BillNavgation != null)
+        {
+            isSucess = true;
+            notice = "Thêm Thành Công";
+            type = "success";
+            room.BillNavgation.BillMonth = DateTime.Today;
+            await RoomServices.UpdateRoomAsync(room);
+        }
+        else
+        {
+            isSucess = true;
+            notice = "Thêm chưa thành công";
+            type = "error";
+        }
+    }
+
+    private async Task OnFinish(EditContext editContext)
+    {
+        notice = "Thêm Thành Công";
+        type = "success";
+    }
+    private void OnFinishFailed(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Thêm phòng không thành công";
+        type = "error";
+    }
+    private void OnSelectedItemChangedHandler(Room value)
+    {
+        room = value;
+        room.BillNavgation = new();
+    }
+    private double Total()
+    {
+        if (rooms.First().BillNavgation == null)
+        {
+            return 0;
+        }
+        else
+        {
+            double electric = bills.Sum(c => c?.BillNavgation?.ElectricNumber!).Value * bills.FirstOrDefault().ElectricPrice;
+            double water = bills.Sum(c => c?.BillNavgation?.WaterNumber!).Value * bills.FirstOrDefault().WaterPrice;
+            return electric + water;
+        }
+
+
+    }
+    private double TotalAll()
+    {
+        int countStudent = data.Count();
+        double bike = data.Sum(c => c.BikeNumber * c.RoomNavgation.BikePrice);
+        double roomprice = data.Where(c => c.RoomNavgation.BillNavgation.BillMonth.Month == month).Sum(c =>
+        c.RoomNavgation.RoomPrice);
+        return Total() + roomprice + bike;
+    }
 }

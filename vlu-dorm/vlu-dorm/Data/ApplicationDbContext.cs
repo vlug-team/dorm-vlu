@@ -42,6 +42,7 @@ namespace vlu_dorm.Data
                 .HasConstraintName("fk_User_Stundet");
             });
 
+            builder.Entity<Room>().HasData(new Room { Id = 1, BikePrice = 60000, Capacity = 4, ElectricPrice = 4000, WaterPrice = 4000, RoomNumber = "101", RoomPrice= 300000 });
             //Create roles Admin && User
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "User", NormalizedName = "USER", Id = Guid.NewGuid().ToString(), ConcurrencyStamp = Guid.NewGuid().ToString() });
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "Admin", NormalizedName = "ADMIN", Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9", ConcurrencyStamp = Guid.NewGuid().ToString() });

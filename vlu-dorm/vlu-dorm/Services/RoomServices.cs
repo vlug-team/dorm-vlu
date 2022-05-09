@@ -22,11 +22,15 @@ namespace vlu_dorm.Services
             using var context = _contextFactory.CreateDbContext();
             return context.Rooms.Include(c=>c.BillNavgation).FirstOrDefault(c => c.Id == id);
         }
-        //get bill on month
         public List<Room> GetBillMonthlies()
         {
             using var context = _contextFactory.CreateDbContext();
-            return context.Rooms.Include(c=>c.BillNavgation).ThenInclude(c=>c.RoomsNavgation).Where(c => c.BillNavgation.BillMonth.Month == DateTime.Today.Month).ToList();
+            var room = context.Rooms.Include(c => c.BillNavgation).ThenInclude(c => c.RoomsNavgation).Where(c => c.BillNavgation.BillMonth.Month == DateTime.Today.Month).ToList();
+            if (room == null)
+            {
+                return null;
+            }
+            return room;
         }
         public void UpdateRoom(Room room)
         {
