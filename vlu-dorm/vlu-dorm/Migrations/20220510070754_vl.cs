@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace vlu_dorm.Migrations
 {
-    public partial class vlu : Migration
+    public partial class vl : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -274,8 +274,8 @@ namespace vlu_dorm.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4496d5ab-a36b-4959-8b53-130c699bb557", "d12305d9-b1dc-4a17-aaf8-52c93bb8642e", "User", "USER" },
-                    { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "0e6146f0-61ee-44ca-bcb1-d800ef1601e0", "Admin", "ADMIN" }
+                    { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "74a581d4-f3fd-4d42-a85c-d116a1ba150d", "Admin", "ADMIN" },
+                    { "fff774d6-7e64-4d7a-b46a-92293ecf1e71", "373dc351-960f-4a5e-aca5-c67253fb74bf", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

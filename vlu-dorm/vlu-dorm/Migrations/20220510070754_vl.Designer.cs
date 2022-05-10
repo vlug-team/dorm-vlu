@@ -11,8 +11,8 @@ using vlu_dorm.Data;
 namespace vlu_dorm.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220509084133_vlu")]
-    partial class vlu
+    [Migration("20220510070754_vl")]
+    partial class vl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,15 +49,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "4496d5ab-a36b-4959-8b53-130c699bb557",
-                            ConcurrencyStamp = "d12305d9-b1dc-4a17-aaf8-52c93bb8642e",
+                            Id = "fff774d6-7e64-4d7a-b46a-92293ecf1e71",
+                            ConcurrencyStamp = "373dc351-960f-4a5e-aca5-c67253fb74bf",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "0e6146f0-61ee-44ca-bcb1-d800ef1601e0",
+                            ConcurrencyStamp = "74a581d4-f3fd-4d42-a85c-d116a1ba150d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
