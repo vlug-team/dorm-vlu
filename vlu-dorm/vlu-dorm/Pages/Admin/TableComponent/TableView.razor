@@ -17,8 +17,15 @@
     <Column Title="Tháng" Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Format="MM/yyyy" Sortable />
     @if (context.RoomNavgation != null)
     {
-        <Column Field="((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber + context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)
-/GetStudentCount(context.RoomId.Value) + (context?.BikeNumber * context?.RoomNavgation?.BikePrice) + context?.RoomNavgation?.RoomPrice)" Title="Tổng tiền" />
+        var a = ((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber + context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)
+        / GetStudentCount(context.RoomId.Value) + (context?.BikeNumber * context?.RoomNavgation?.BikePrice) + context?.RoomNavgation?.RoomPrice);
+        var b = Math.Round((double)(a));
+
+        <Column Field="b" Title="Tổng tiền" />
+    }
+    else
+    {
+        <Column Field="0" Title="Tổng tiền"></Column>
     }
 
     <ActionColumn Title="Action">
@@ -60,7 +67,7 @@
     private CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
 
     private double total;
-    private int pageSize = 10;
+    private int pageSize = 5;
     private bool isShow = false;
     private bool isRoom = false;
     private bool isSucess = false;

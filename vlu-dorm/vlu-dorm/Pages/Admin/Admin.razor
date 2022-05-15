@@ -208,6 +208,7 @@ else
             notice = "Thêm Thành Công";
             type = "success";
             await RoomServices.AddRoomAsync(room);
+            Reload();
         }
         else
         {
@@ -262,7 +263,7 @@ else
     }
     private double Total()
     {
-        if (rooms.First().BillNavgation == null)
+        if (data.First().RoomNavgation == null)
         {
             return 0;
         }
@@ -282,7 +283,7 @@ else
         double roomprice = bills.Sum(c => c.RoomPrice);
         if (data.First().RoomNavgation != null)
         {
-            bike = data.Sum(c => c.BikeNumber) * data.FirstOrDefault().RoomNavgation.BikePrice;
+            bike = data.Where(c => c.IsConfirm == true).Sum(c => c.BikeNumber) * data.FirstOrDefault().RoomNavgation.BikePrice;
         }
         return Total() + roomprice + bike;
     }

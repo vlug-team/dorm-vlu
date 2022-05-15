@@ -10,7 +10,7 @@ else
 {
     <Row></Row>
 }
-<Table DataSource="Rooms">
+<Table DataSource="Rooms" PageSize="5">
     <Column Title="Số Phòng" @bind-Field="@context.RoomNumber" Sortable />
     <Column Title="Tiền Phòng" @bind-Field="@context.RoomPrice" Sortable />
     <Column Title="Tiền Điện / m3" @bind-Field="@context.ElectricPrice" Sortable />

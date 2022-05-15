@@ -9,149 +9,156 @@
 @inject RoomServices roomServices
 @inject IHttpContextAccessor httpContextAccessor
 <PageTitle>Thống kê</PageTitle>
-<Row Justify="center" Align="center" Style="margin-top:4em">
+<Row Justify="center" Align="center" Style="margin-top:4em; margin-bottom:100%;">
 
-	<Col>
-	@if (Data != null)
-		{
-		<Table DataSource="Data.ToArray()">
-			<Column Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Title="Tháng" Format="MM/yyyy" Sortable />
-			<Column Field="context?.RoomNavgation?.RoomNumber" Title="Số phòng" />
-			<Column Field="context?.RoomNavgation?.RoomPrice" Title="Giá phòng" />
-			<Column Field="context?.RoomNavgation?.WaterPrice" Title="Giá nước" />
-			<Column Field="context?.RoomNavgation?.ElectricPrice" Title="Giá điện" />
-			<Column Field="context?.RoomNavgation?.BillNavgation?.ElectricNumber" Title="Số điện" />
-			<Column Field="context?.RoomNavgation?.BillNavgation?.WaterNumber" Title="Số nước" />
-			@if(context.RoomNavgation != null)
-                        {
-        <Column Field="((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber + context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)
-/GetStudentCount(context.RoomId.Value) + (context?.BikeNumber * context?.RoomNavgation?.BikePrice) + context?.RoomNavgation?.RoomPrice)" Title="Tổng tiền" />
-                        }
-		</Table>
-		}
-	</Col>
-	<Col Offset="4">
-	<Button OnClick="ShowModal" Color="Color.Red5">Đổi mật khẩu</Button>
-	<Modal Visible="visible" OnOk="@HandleOk" OnCancel="@HandleCancel">
-		<Row Style="margin-top:3em">
-			<Form Model="input" OnFinish="OnFinish" OnFinishFailed="OnFinishFailed">
-					@if (isSucess)
-					{
-					<Row Justify="center" Style="margin-top:1em">
-						<FormItem>
-							<Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
-						</FormItem>
-					</Row>
-					}
-				<FormItem>
-					<Input @bind-Value="context.OldPassword" Placeholder="Mật khẩu cũ" />
-				</FormItem>
-				<FormItem>
-					<Input @bind-Value="context.NewPassword" Placeholder="Mật khẩu mới" />
-				</FormItem>
-				<FormItem>
-					<Input @bind-Value="context.ConfirmPassword" Placeholder="Xác nhận mật khẩu" />
-				</FormItem>
-				<FormItem WrapperColOffset="13" WrapperColSpan="4">
-					<Button HtmlType="submit" Type="@ButtonType.Primary">
-						Xác nhận
-					</Button>
-				</FormItem>
-			</Form>
-		</Row>
-	</Modal>
-	</Col>
+    <Col>
+        @if (Data != null)
+        {
+        <Table DataSource="Data.ToArray()">
+            <Column Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Title="Tháng" Format="MM/yyyy" Sortable />
+            <Column Field="context?.RoomNavgation?.RoomNumber" Title="Số phòng" />
+            <Column Field="context?.RoomNavgation?.RoomPrice" Title="Giá phòng" />
+            <Column Field="context?.RoomNavgation?.WaterPrice" Title="Giá nước" />
+            <Column Field="context?.RoomNavgation?.ElectricPrice" Title="Giá điện" />
+            <Column Field="context?.RoomNavgation?.BillNavgation?.ElectricNumber" Title="Số điện" />
+            <Column Field="context?.RoomNavgation?.BillNavgation?.WaterNumber" Title="Số nước" />
+                @if (context.RoomNavgation != null)
+                {
+                    var a = ((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber + context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)
+                    / GetStudentCount(context.RoomId.Value) + (context?.BikeNumber * context?.RoomNavgation?.BikePrice) + context?.RoomNavgation?.RoomPrice);
+                    var b = Math.Round((double)(a));
+            <Column Title="Tổng tiền" Field="b"></Column>
+                }
+                else
+                {
+            <Column Field="0" Title="Tổng tiền"></Column>
+                }
+    </Table>
+        }
+
+    </Col>
+    <Col Offset="4">
+    <Button OnClick="ShowModal" Color="Color.Red5">Đổi mật khẩu</Button>
+    <Modal Visible="visible" OnOk="@HandleOk" OnCancel="@HandleCancel">
+        <Row Style="margin-top:3em">
+            <Form Model="input" OnFinish="OnFinish" OnFinishFailed="OnFinishFailed">
+                    @if (isSucess)
+                    {
+                    <Row Justify="center" Style="margin-top:1em">
+                        <FormItem>
+                            <Alert Message="@notice" Type="@type" CloseText="x" Closable Style="width:500px" />
+                        </FormItem>
+                    </Row>
+                    }
+                <FormItem>
+                    <Input @bind-Value="context.OldPassword" Placeholder="Mật khẩu cũ" />
+                </FormItem>
+                <FormItem>
+                    <Input @bind-Value="context.NewPassword" Placeholder="Mật khẩu mới" />
+                </FormItem>
+                <FormItem>
+                    <Input @bind-Value="context.ConfirmPassword" Placeholder="Xác nhận mật khẩu" />
+                </FormItem>
+                <FormItem WrapperColOffset="13" WrapperColSpan="4">
+                    <Button HtmlType="submit" Type="@ButtonType.Primary">
+                        Xác nhận
+                    </Button>
+                </FormItem>
+            </Form>
+        </Row>
+    </Modal>
+    </Col>
 </Row>
 @code {
-	private CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
-	private List<Students> Data;
-	private bool visible = false;
-	private bool isSucess = false;
-	public int mounth = DateTime.Now.Month;
-	public string mounthstr = "";
-	private string notice = "";
-	private string type = "";
+    private CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+    private List<Students> Data;
+    private bool visible = false;
+    private bool isSucess = false;
+    public int mounth = DateTime.Now.Month;
+    public string mounthstr = "";
+    private string notice = "";
+    private string type = "";
     private int studentCount;
-	private ChangePassword input = new();
-	protected override void OnInitialized()
-	{
-		var username = httpContextAccessor.HttpContext.User.Identity.Name;
-		Data = studentServices.GetAllByEmail(username);
-		Data = Data.Where(x => x.RoomNavgation.BillNavgation.BillMonth.Month == mounth).ToList();
-	}
+    private ChangePassword input = new();
+    protected override void OnInitialized()
+    {
+        var username = httpContextAccessor.HttpContext.User.Identity.Name;
+        Data = studentServices.GetAllByEmail(username);
+        Data = Data.Where(x => x.RoomNavgation.BillNavgation.BillMonth.Month == mounth).ToList();
+    }
     private int GetStudentCount(int id)
     {
         return roomServices.GetCountStudentSameRoom(id);
     }
-	public void ShowModal()
-	{
-		visible = true;
-	}
-	private void HandleOk(MouseEventArgs e)
-	{
-		visible = false;
-	}
-	// onsearch
-	private void OnSelectedItemsChangedHandler(string e)
-	{
-		mounth = int.Parse(e);
-		Data = Data.Where(x => x.RoomNavgation.BillNavgation.BillMonth.Month == mounth).ToList();
-	}
-	private void HandleCancel(MouseEventArgs e)
-	{
-		visible = false;
-	}
+    public void ShowModal()
+    {
+        visible = true;
+    }
+    private void HandleOk(MouseEventArgs e)
+    {
+        visible = false;
+    }
+    // onsearch
+    private void OnSelectedItemsChangedHandler(string e)
+    {
+        mounth = int.Parse(e);
+        Data = Data.Where(x => x.RoomNavgation.BillNavgation.BillMonth.Month == mounth).ToList();
+    }
+    private void HandleCancel(MouseEventArgs e)
+    {
+        visible = false;
+    }
 
-	private async Task OnFinish(EditContext editContext)
-	{
-		var user = await UserManager.GetUserAsync(httpContextAccessor.HttpContext.User);
-		if (user == null)
-		{
-			notice = "Không tìm thấy tài khoản";
-			type = "error";
-		}
-		else
-		{
-			var result = await UserManager.ChangePasswordAsync(user, input.OldPassword, input.NewPassword);
-			if (result.Succeeded)
-			{
-				isSucess = true;
-				notice = "Đổi mật khẩu thành công";
-				type = "success";
-			}
-			else
-			{
-				isSucess = false;
-				notice = "Đổi mật khẩu thất bại";
-				type = "error";
-			}
-		}
-	}
-	private void OnFinishFailed(EditContext editContext)
-	{
-		isSucess = true;
-		notice = "Đổi mật khẩu thất bại";
-		type = "error";
-	}
-	public class ChangePassword
-	{
-		[Required]
-		[DataType(DataType.Password)]
-		[Display(Name = "Mật khẩu cũ")]
-		public string OldPassword { get; set; }
+    private async Task OnFinish(EditContext editContext)
+    {
+        var user = await UserManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+        if (user == null)
+        {
+            notice = "Không tìm thấy tài khoản";
+            type = "error";
+        }
+        else
+        {
+            var result = await UserManager.ChangePasswordAsync(user, input.OldPassword, input.NewPassword);
+            if (result.Succeeded)
+            {
+                isSucess = true;
+                notice = "Đổi mật khẩu thành công";
+                type = "success";
+            }
+            else
+            {
+                isSucess = false;
+                notice = "Đổi mật khẩu thất bại";
+                type = "error";
+            }
+        }
+    }
+    private void OnFinishFailed(EditContext editContext)
+    {
+        isSucess = true;
+        notice = "Đổi mật khẩu thất bại";
+        type = "error";
+    }
+    public class ChangePassword
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mật khẩu cũ")]
+        public string OldPassword { get; set; }
 
-		[Required]
-		[StringLength(100, ErrorMessage = "Mật khẩu phải có đủ chữ cái thường, chữ cái in hoa, kí tự đặc biệt, và số",
-		MinimumLength = 6)]
-		[DataType(DataType.Password)]
-		[Display(Name = "Mật khẩu mới")]
-		public string NewPassword { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có đủ chữ cái thường, chữ cái in hoa, kí tự đặc biệt, và số",
+        MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mật khẩu mới")]
+        public string NewPassword { get; set; }
 
-		[Required]
-		[DataType(DataType.Password)]
-		[Display(Name = "Xác nhận mật khẩu")]
-		[Compare("NewPassword", ErrorMessage = "Mật khẩu không khớp")]
-		public string ConfirmPassword { get; set; }
-	}
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("NewPassword", ErrorMessage = "Mật khẩu không khớp")]
+        public string ConfirmPassword { get; set; }
+    }
 
 }

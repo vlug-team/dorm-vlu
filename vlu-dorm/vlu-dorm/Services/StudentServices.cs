@@ -73,8 +73,13 @@ namespace vlu_dorm.Services
                 var student = context.Students.Where(c => c.Email == email).FirstOrDefault();
                 context.Students.Remove(student);
                 context.Users.Remove(account);
-                context.SaveChanges();
             }
+            else
+            {
+                var student = context.Students.Where(c => c.Email == email).FirstOrDefault();
+                context.Students.Remove(student);
+            }
+                context.SaveChanges();
         }
 
         public async Task UpdateAsync(Students students)
