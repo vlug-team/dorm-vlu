@@ -125,18 +125,15 @@ else
         <Body>
                 @if (bills != null)
                 {
-
                 <p>Số điện: <strong>@(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
                 <p>Số nước: <strong> @(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
                 <p>Tổng tiền (Điện + Nước):<strong>@Total()</strong></p>
                 <p>Tổng tiền (Điện + Nước + Tiền phòng + Tiền xe): <strong>@TotalAll()</strong></p>
                 }
-
-
         </Body>
     </Card>
     </Col>
-    <Col Offset="1">
+    <Col Offset="1" Span="12">
     <TableView Data="data" />
     </Col>
     <Col Offset="1">
@@ -168,11 +165,7 @@ else
         data = _student.ToArray();
         rooms = RoomServices.GetAll().ToArray();
         Rooms = RoomServices.GetAll();
-        if (rooms.FirstOrDefault().BillNavgation != null)
-        {
-            bills = RoomServices.GetBillMonthlies();
-        }
-
+        bills = RoomServices.GetBillMonthlies();
     }
 
 
@@ -285,9 +278,12 @@ else
     private double TotalAll()
     {
         int countStudent = data.Count();
-        double bike = data.Sum(c => c.BikeNumber * c.RoomNavgation.BikePrice);
-        double roomprice = data.Where(c => c.RoomNavgation.BillNavgation.BillMonth.Month == month).Sum(c =>
-        c.RoomNavgation.RoomPrice);
+        double bike = 0;
+        double roomprice = bills.Sum(c => c.RoomPrice);
+        if (data.First().RoomNavgation != null)
+        {
+            bike = data.Sum(c => c.BikeNumber) * data.FirstOrDefault().RoomNavgation.BikePrice;
+        }
         return Total() + roomprice + bike;
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace vlu_dorm.Migrations
 {
-    public partial class vl : Migration
+    public partial class v : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -248,7 +248,7 @@ namespace vlu_dorm.Migrations
                     BikeNumber = table.Column<int>(type: "int", nullable: false),
                     IsConfirm = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
@@ -259,8 +259,7 @@ namespace vlu_dorm.Migrations
                         name: "fk_Student_Room",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "fk_User_Stundet",
                         column: x => x.UserId,
@@ -274,8 +273,8 @@ namespace vlu_dorm.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "74a581d4-f3fd-4d42-a85c-d116a1ba150d", "Admin", "ADMIN" },
-                    { "fff774d6-7e64-4d7a-b46a-92293ecf1e71", "373dc351-960f-4a5e-aca5-c67253fb74bf", "User", "USER" }
+                    { "4aac28af-6ded-4720-94cf-bab3cb4072e9", "569331ec-47b9-4340-80ce-ee9cbcd93893", "Admin", "ADMIN" },
+                    { "baef22d1-a8d0-4edc-b957-cea790e4c06b", "b1f3b221-4d5f-4899-86c8-56d153467061", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(

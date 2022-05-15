@@ -47,15 +47,15 @@ namespace vlu_dorm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "fff774d6-7e64-4d7a-b46a-92293ecf1e71",
-                            ConcurrencyStamp = "373dc351-960f-4a5e-aca5-c67253fb74bf",
+                            Id = "baef22d1-a8d0-4edc-b957-cea790e4c06b",
+                            ConcurrencyStamp = "b1f3b221-4d5f-4899-86c8-56d153467061",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "4aac28af-6ded-4720-94cf-bab3cb4072e9",
-                            ConcurrencyStamp = "74a581d4-f3fd-4d42-a85c-d116a1ba150d",
+                            ConcurrencyStamp = "569331ec-47b9-4340-80ce-ee9cbcd93893",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -376,7 +376,7 @@ namespace vlu_dorm.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("varchar(11)");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int?>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<string>("StudentCode")
@@ -470,8 +470,6 @@ namespace vlu_dorm.Migrations
                     b.HasOne("vlu_dorm.Models.Room", "RoomNavgation")
                         .WithMany("StudentsNavgation")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_Student_Room");
 
                     b.HasOne("vlu_dorm.Data.ApplicationUser", "UserNavgation")
