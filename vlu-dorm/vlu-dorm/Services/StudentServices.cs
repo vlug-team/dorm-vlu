@@ -70,7 +70,7 @@ namespace vlu_dorm.Services
             var account = context.Users.Where(c => c.Email == email).FirstOrDefault();
             if (account != null)
             {
-                var student = context.Students.Where(c => c.Email == email).FirstOrDefault();
+                var student = context.Students.Where(c => c.Email == email).Include(c=>c.RoomNavgation).ThenInclude(c=>c.BillNavgation).FirstOrDefault();
                 context.Students.Remove(student);
                 context.Users.Remove(account);
             }

@@ -24,7 +24,7 @@ else
     </Button>
     <Modal Title="@("Duyệt đăng kí kí túc xá")" Visible="@visible" OnOk="@HandleOk" OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")" Width="1200">
-        <SubscriptionManagement Data="data" Students="_student" Rooms="rooms" />
+        <SubscriptionManagement/>
     </Modal>
 
     <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin"
@@ -184,8 +184,6 @@ else
         data = _student.Where(c => c.IsConfirm == true).ToArray();
         rooms = RoomServices.GetAll().ToArray();
         bills = RoomServices.GetBillMonthlies();
-
-
     }
     private void OnSearch(string e)
     {
@@ -194,7 +192,8 @@ else
 
     private async void HandleOk(MouseEventArgs e)
     {
-        Reload();
+        _student = StudentServices.GetAll();
+        data = _student.Where(c => c.IsConfirm == true).ToArray();
         visible = false;
 
     }
@@ -263,14 +262,14 @@ else
     }
     private double Total()
     {
-        if (data.First().RoomNavgation == null)
+        if (bills == null)
         {
             return 0;
         }
         else
         {
-            double electric = bills.Sum(c => c?.BillNavgation?.ElectricNumber!).Value * bills.FirstOrDefault().ElectricPrice;
-            double water = bills.Sum(c => c?.BillNavgation?.WaterNumber!).Value * bills.FirstOrDefault().WaterPrice;
+            double electric = bills.Sum(c => c?.BillNavgation?.ElectricNumber!).Value * rooms.FirstOrDefault().ElectricPrice;
+            double water = bills.Sum(c => c?.BillNavgation?.WaterNumber!).Value * rooms.FirstOrDefault().WaterPrice;
             return electric + water;
         }
 
@@ -278,12 +277,11 @@ else
     }
     private double TotalAll()
     {
-        int countStudent = data.Count();
         double bike = 0;
         double roomprice = bills.Sum(c => c.RoomPrice);
-        if (data.First().RoomNavgation != null)
+        if (data != null)
         {
-            bike = data.Where(c => c.IsConfirm == true).Sum(c => c.BikeNumber) * data.FirstOrDefault().RoomNavgation.BikePrice;
+            bike = data.Where(c => c.IsConfirm == true && c.IsActive ==true).Sum(c => c.BikeNumber) * rooms.FirstOrDefault().BikePrice;
         }
         return Total() + roomprice + bike;
     }

@@ -32,19 +32,21 @@
     </ActionColumn>
 </Table>
 @code {
-    [Parameter] public List<Students> Students { get; set; }
-    [Parameter] public Students[] Data { get; set; }
-    [Parameter] public Room[] Rooms { get; set; }
+    public List<Students> Data { get; set; }
 
     private string value;
     private string value2;
     private int pageSize = 5;
     private void Ok(int id)
     {
-        Students students = Students.Find(c => c.Id == id);
+        Students students = Data.Find(c => c.Id == id);
         students.IsConfirm = true;
         StudentServices.Confirm(students);
         Reload();
+    }
+    protected override void OnInitialized()
+    {
+        Data = StudentServices.GetAll();
     }
 
     private void Delete(int id)
@@ -54,12 +56,10 @@
     }
     private void Reload()
     {
-        Students = StudentServices.GetAll();
-        Data = Students.Where(c => c.IsConfirm == false).ToArray();
+        Data = Data.Where(c => c.IsConfirm == false).ToList();
     }
     private void OnSearch(string e)
     {
-        Data = Students.Where(c => c.IsConfirm == false).ToArray();
-        Data = Data.Where(c => c.StudentCode == e).ToArray();
+        Data = Data.Where(c => c.StudentCode == e).ToList();
     }
 }
