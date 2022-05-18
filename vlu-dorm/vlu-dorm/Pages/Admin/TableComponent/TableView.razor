@@ -15,13 +15,12 @@
     <Column Title="Phòng"
             Field="@(context?.RoomNavgation?.RoomNumber == null? "Chưa": context.RoomNavgation.RoomNumber)" Sortable />
     <Column Title="Tháng" Field="context?.RoomNavgation?.BillNavgation?.BillMonth" Format="MM/yyyy" Sortable />
-    @if (context.RoomNavgation != null)
+    @if (context.RoomNavgation != null && context.RoomNavgation.BillNavgation != null)
     {
         var a = ((context?.RoomNavgation?.WaterPrice * context?.RoomNavgation?.BillNavgation?.WaterNumber + context?.RoomNavgation?.BillNavgation?.ElectricNumber * context?.RoomNavgation?.ElectricPrice)
         / GetStudentCount(context.RoomId.Value) + (context?.BikeNumber * context?.RoomNavgation?.BikePrice) + context?.RoomNavgation?.RoomPrice);
         var b = Math.Round((double)(a));
-
-        <Column Field="b" Title="Tổng tiền" />
+        <Column Title="Tổng tiền" Field="b"></Column>
     }
     else
     {
