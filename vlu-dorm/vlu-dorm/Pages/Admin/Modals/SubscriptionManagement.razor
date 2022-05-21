@@ -13,14 +13,13 @@
         AllowClear>
 </Select>
     </Col>
-<Table DataSource="Data.Where(c=>c.IsConfirm == false)"
+<Table DataSource="Data"
        @bind-PageSize="pageSize">
     <Selection Key="@(context.Id.ToString())" />
     <Column Title="Ngày Đăng kí" @bind-Field="@context.CreateAt" Format="dd-MM-yyyy | HH:mm" Sortable />
     <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
     <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
     <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
-    <Column Title="Email" @bind-Field="@context.Email" Sortable />
     <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
     <Column Title="Khoa" @bind-Field="@context.Department" Sortable />
     <Column Title="SĐT" @bind-Field="@context.PhoneNumeber" Sortable />
@@ -46,11 +45,12 @@
     }
     protected override void OnInitialized()
     {
-        Data = StudentServices.GetAll();
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == false).ToList();
     }
 
     private void Delete(int id)
     {
+        Data.Remove(Data.Where(c => c.Id == id).FirstOrDefault());
         StudentServices.Delete(id);
         Reload();
     }

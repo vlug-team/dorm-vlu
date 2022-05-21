@@ -20,11 +20,11 @@
     <FormItem>
         <Row>
             <Col Span="7">
-            <Input @bind-Value="context.FullName" Placeholder="Họ và tên"></Input>
+            <Input Disabled="true" @bind-Value="context.FullName" Placeholder="Họ và tên"></Input>
             </Col>
             <br />
             <Col Offset="2">
-            <RadioGroup @bind-Value="context.Gender">
+            <RadioGroup Disabled="true" @bind-Value="context.Gender">
                 <Radio Value="@("Nam")">Nam</Radio>
                 <Radio Value="@("Nữ")">Nữ</Radio>
             </RadioGroup>
@@ -34,10 +34,10 @@
     <FormItem>
         <Row>
             <Col Span="7">
-            <Input @bind-Value="context.StudentCode" Placeholder="Mã số sinh viên"></Input>
+            <Input Disabled="true" @bind-Value="context.StudentCode" Placeholder="Mã số sinh viên"></Input>
             </Col>
             <Col Span="4" Offset="2">
-            <Select @bind-Value="@context.Course" TItem="string" TItemValue="string" Placeholder="Khóa học">
+            <Select Disabled="true" @bind-Value="@context.Course" TItem="string" TItemValue="string" Placeholder="Khóa học">
                 <SelectOptions>
                         @foreach (var item in _course)
                         {
@@ -51,27 +51,27 @@
     <FormItem>
         <Row>
             <Col Span="7">
-            <Input @bind-Value="context.Email" Placeholder="Email trường cấp" Type="email"></Input>
+            <Input Disabled="true" @bind-Value="context.Email" Placeholder="Email trường cấp" Type="email"></Input>
             </Col>
             <Col Offset="2">
-            <AutoComplete @bind-Value="context.Department" Options="@_department.Distinct()" Pl aceholder="Khoa" />
+            <AutoComplete Disabled="true" @bind-Value="context.Department" Options="@_department.Distinct()" Pl aceholder="Khoa" />
             </Col>
         </Row>
     </FormItem>
     <FormItem>
         <Row>
             <Col Span="7">
-            <Input @bind-Value="context.PhoneNumeber" Placeholder="Số điện thoại"></Input>
+            <Input Disabled="true" @bind-Value="context.PhoneNumeber" Placeholder="Số điện thoại"></Input>
             </Col>
             <Col Offset="2">
-            <DatePicker @bind-Value="context.BirthDay" Format="dd/MM/yyyy" />
+            <DatePicker Disabled="true" @bind-Value="context.BirthDay" Format="dd/MM/yyyy" />
             </Col>
         </Row>
     </FormItem>
     <FormItem>
         <Row>
             <Col Span="15">
-            <Input @bind-Value="context.PermanentAddress" Placeholder="Địa chỉ: 69 Đặng thùy trâm,..."></Input>
+            <Input Disabled="true" @bind-Value="context.PermanentAddress" Placeholder="Địa chỉ: 69 Đặng thùy trâm,..."></Input>
             </Col>
         </Row>
     </FormItem>

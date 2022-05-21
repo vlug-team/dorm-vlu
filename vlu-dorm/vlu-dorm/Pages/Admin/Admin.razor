@@ -34,7 +34,7 @@ else
     <Modal Title="@("Thêm Phòng")" Visible="@visibleRoom" OnOk="@HandelOkRoom" OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")" Width="900">
         <Form Model="room" OnFinish="OnFinish" LabelColSpan="8" WrapperColSpan="16" OnFinishFailed="OnFinishFailed"
-              Size="AntSizeLDSType.Small">
+              Size="AntSizeLDSType.Small" >
             <FormItem LabelColSpan="6">
                 <Input @bind-Value="context.RoomNumber" />
             </FormItem>
@@ -207,6 +207,7 @@ else
             notice = "Thêm Thành Công";
             type = "success";
             await RoomServices.AddRoomAsync(room);
+            room = new();
             Reload();
         }
         else
