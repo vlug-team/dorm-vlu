@@ -24,7 +24,7 @@ else
     </Button>
     <Modal Title="@("Duyệt đăng kí kí túc xá")" Visible="@visible" OnOk="@HandleOk" OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")" Width="1200">
-        <SubscriptionManagement/>
+        <SubscriptionManagement />
     </Modal>
 
     <Button Style="color: #000;  background-color: #05AC48;" Type="primary" Class="btn-admin"
@@ -34,7 +34,7 @@ else
     <Modal Title="@("Thêm Phòng")" Visible="@visibleRoom" OnOk="@HandelOkRoom" OnCancel="@HandleCancel"
            MaxBodyHeight="@("60vh")" Width="900">
         <Form Model="room" OnFinish="OnFinish" LabelColSpan="8" WrapperColSpan="16" OnFinishFailed="OnFinishFailed"
-              Size="AntSizeLDSType.Small" >
+              Size="AntSizeLDSType.Small">
             <FormItem LabelColSpan="6">
                 <Input @bind-Value="context.RoomNumber" />
             </FormItem>
@@ -279,11 +279,12 @@ else
     private double TotalAll()
     {
         double bike = 0;
-        double roomprice = bills.Sum(c => c.RoomPrice);
+        double roomprice = bills.FirstOrDefault().RoomPrice;
+        int stu = data.Where(c => c.IsConfirm == true && c.IsActive == true).Count();
         if (data != null)
         {
-            bike = data.Where(c => c.IsConfirm == true && c.IsActive ==true).Sum(c => c.BikeNumber) * rooms.FirstOrDefault().BikePrice;
+            bike = data.Where(c => c.IsConfirm == true && c.IsActive == true).Sum(c => c.BikeNumber) * rooms.FirstOrDefault().BikePrice;
         }
-        return Total() + roomprice + bike;
+        return Total() + roomprice * stu + bike;
     }
 }
