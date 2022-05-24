@@ -5,11 +5,9 @@
 @using vlu_dorm.Pages.Admin.Modals
 
 
-<Table DataSource="Data.Where(c => c.IsConfirm == true).ToArray()" Style="margin:2em;" @bind-PageSize="pageSize">
-    <Selection Key="@(context.Id.ToString())" />
+<Table DataSource="Data.Where(c => c.IsConfirm == true).ToArray()" Style="margin:2em;" @bind-PageSize="pageSize" Size="TableSize.Middle" >
     <Column Title="MSSV" @bind-Field="@context.StudentCode" Sortable />
     <Column Title="Họ và tên" @bind-Field="@context.FullName" Sortable />
-    <Column Title="Khóa học" @bind-Field="@context.Course" Sortable />
     <Column Title="Giới tính" @bind-Field="@context.Gender" Sortable />
     <Column Title="Số xe" Field="context?.BikeNumber" />
     <Column Title="Phòng"

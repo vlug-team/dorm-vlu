@@ -133,7 +133,7 @@ else
         </Body>
     </Card>
     </Col>
-    <Col Offset="1" Span="12">
+    <Col Offset="1" Span="12" Style="width:100%">
     <TableView Data="data" />
     </Col>
     <Col Offset="1">
@@ -279,12 +279,12 @@ else
     private double TotalAll()
     {
         double bike = 0;
-        double roomprice = bills.FirstOrDefault().RoomPrice;
-        int stu = data.Where(c => c.IsConfirm == true && c.IsActive == true).Count();
-        if (data != null)
+        double stu = 0;
+        if (data != null && bills != null)
         {
+            stu = data.Where(c => c.IsConfirm == true && c.IsActive == true).Count() * rooms.FirstOrDefault().RoomPrice;
             bike = data.Where(c => c.IsConfirm == true && c.IsActive == true).Sum(c => c.BikeNumber) * rooms.FirstOrDefault().BikePrice;
         }
-        return Total() + roomprice * stu + bike;
+        return Total() + stu + bike;
     }
 }

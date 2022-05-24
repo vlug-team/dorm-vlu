@@ -90,10 +90,9 @@ namespace vlu_dorm.Areas.Identity.Pages.Account
                 var Password = $"Vlu@{userInput.StudentCode}";
                 var user = new ApplicationUser { UserName = Input.Email, FullName = userInput.FullName, Email = Input.Email, EmailConfirmed = true };
                 var result = await _userManager.CreateAsync(user, Password);
-                await _userManager.AddToRoleAsync(user, "User");
-
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "User");
                     Success(Input.Email, user);
                     _logger.LogInformation("User created a new account with password.");
                     return LocalRedirect(returnUrl);
