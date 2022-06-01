@@ -1,6 +1,6 @@
 ﻿@inject RoomServices RoomServices 
 
-<Table DataSource="room">
+<Table DataSource="rooms">
     <Column Field="context?.RoomNumber" Title="Phòng"></Column>
     <Column Field="context?.BillNavgation?.BillMonth" Format="MM/yyyy" Title="Tháng"></Column>
     <Column Field="context?.BillNavgation?.ElectricNumber" Title="Số điện" />
@@ -16,10 +16,16 @@
         </Space>
     </ActionColumn>
 </Table>
+<Modal>
+    <Form Model="room">
+
+    </Form>
+</Modal>
 @code {
-    private List<Room> room; 
+    private List<Room> rooms;
+    private Room room;
     protected override void OnInitialized()
     {
-        room = RoomServices.GetBillMonth();
+        rooms = RoomServices.GetBillMonth();
     }
 }
