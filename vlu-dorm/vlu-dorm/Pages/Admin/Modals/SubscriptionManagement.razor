@@ -3,7 +3,7 @@
 
 <Col Span="6">
 <Text>Tìm kiếm MSSV</Text>
-<Select DataSource="@(Data.Where(c=>c.IsConfirm == false).Select(c=>c.StudentCode).ToList())"
+<Select DataSource="@(Data.Select(c=>c.StudentCode).ToList())"
         @bind-Value="@value"
         SortByLabel="@SortDirection.Ascending"
         Placeholder="Tìm MSSV:"
@@ -12,6 +12,9 @@
         EnableSearch
         AllowClear>
 </Select>
+    </Col>
+<Col>
+<Button OnClick="Reload">Reload</Button>
     </Col>
 <Table DataSource="Data"
        @bind-PageSize="pageSize">
@@ -34,7 +37,6 @@
     public List<Students> Data { get; set; }
 
     private string value;
-    private string value2;
     private int pageSize = 5;
     private void Ok(int id)
     {
@@ -56,7 +58,8 @@
     }
     private void Reload()
     {
-        Data = Data.Where(c => c.IsConfirm == false).ToList();
+        Data = StudentServices.GetAll().Where(c => c.IsConfirm == false).ToList();
+        value = null;
     }
     private void OnSearch(string e)
     {

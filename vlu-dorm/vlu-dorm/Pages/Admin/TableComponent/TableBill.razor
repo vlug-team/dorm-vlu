@@ -1,0 +1,25 @@
+﻿@inject RoomServices RoomServices 
+
+<Table DataSource="room">
+    <Column Field="context?.RoomNumber" Title="Phòng"></Column>
+    <Column Field="context?.BillNavgation?.BillMonth" Format="MM/yyyy" Title="Tháng"></Column>
+    <Column Field="context?.BillNavgation?.ElectricNumber" Title="Số điện" />
+    <Column Field="context?.BillNavgation?.WaterNumber" Title="Số nước" />
+    <ActionColumn Title="Action">
+        <Space>
+            <SpaceItem>
+                <Button Type="@ButtonType.Primary" Color="Color.Yellow5" >Edit</Button>
+                <Button Type="@ButtonType.Primary" Color="Color.Red5">
+                    Delete
+                </Button>
+            </SpaceItem>
+        </Space>
+    </ActionColumn>
+</Table>
+@code {
+    private List<Room> room; 
+    protected override void OnInitialized()
+    {
+        room = RoomServices.GetBillMonth();
+    }
+}

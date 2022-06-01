@@ -32,6 +32,16 @@ namespace vlu_dorm.Services
             }
             return room;
         }
+        public List<Room> GetBillMonth()
+        {
+            using var context = _contextFactory.CreateDbContext();
+            var room = context.Rooms.Include(c => c.BillNavgation).ThenInclude(c => c.RoomsNavgation).ToList();
+            if (room == null)
+            {
+                return null;
+            }
+            return room;
+        }
         public void UpdateRoom(Room room)
         {
             using var context = _contextFactory.CreateDbContext();

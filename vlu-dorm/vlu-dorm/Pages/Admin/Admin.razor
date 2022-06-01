@@ -127,6 +127,7 @@ else
                 {
                 <p>Số điện: <strong>@(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
                 <p>Số nước: <strong> @(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
+                <p>Tổng sinh viên: <strong>@(data.Where(c => c.IsConfirm == true && c.IsActive == true).Count())</strong> </p>
                 <p>Tổng tiền (Điện + Nước):<strong>@Total()</strong></p>
                 <p>Tổng tiền (Điện + Nước + Tiền phòng + Tiền xe): <strong>@TotalAll()</strong></p>
                 }
@@ -138,6 +139,9 @@ else
     </Col>
     <Col Offset="1">
     <TableRoomView Rooms="rooms" />
+    </Col>
+    <Col Offset="1">
+    <TableBill />
     </Col>
 </Row>
 
