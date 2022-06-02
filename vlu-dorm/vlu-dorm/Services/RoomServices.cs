@@ -16,11 +16,11 @@ namespace vlu_dorm.Services
             using var context = _contextFactory.CreateDbContext();
             return context.Rooms.ToList();
         }
-    
+
         public Room GetRoomByID(int id)
         {
             using var context = _contextFactory.CreateDbContext();
-            return context.Rooms.Include(c=>c.BillNavgation).FirstOrDefault(c => c.Id == id);
+            return context.Rooms.Include(c => c.BillNavgation).FirstOrDefault(c => c.Id == id);
         }
         public List<Room> GetBillMonthlies()
         {
@@ -42,6 +42,18 @@ namespace vlu_dorm.Services
             }
             return room;
         }
+        public BillMonthly GetBill(int id)
+        {
+            var context = _contextFactory.CreateDbContext();
+            var bill = context.BillMonthlies.FirstOrDefault(c => c.Id == id);
+            return bill;
+        }
+        public void UpdateBill(BillMonthly bill)
+        {
+            using var context = _contextFactory.CreateDbContext();
+            context.BillMonthlies.Update(bill);
+            context.SaveChanges();
+        }
         public void UpdateRoom(Room room)
         {
             using var context = _contextFactory.CreateDbContext();
@@ -54,6 +66,23 @@ namespace vlu_dorm.Services
             context.Rooms.Update(room);
             await context.SaveChangesAsync();
         }
+        public void DeleteBill(int id)
+        {
+            try
+            {
+                using var context = _contextFactory.CreateDbContext();
+                var bill = context.BillMonthlies.FirstOrDefault(c => c.Id == id);
+                var room = context.Rooms.FirstOrDefault(c => c.BillId == bill.Id);
+                room.BillId = null;
+                context.BillMonthlies.Remove(bill);
+                context.Rooms.Update(room);
+                context.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+        }
         public int GetCountStudentSameRoom(int id)
         {
             using var context = _contextFactory.CreateDbContext();
@@ -61,12 +90,12 @@ namespace vlu_dorm.Services
             {
                 return 0;
             }
-            return context.Rooms.Where(c=>c.Id == id).ToList().Count;
+            return context.Rooms.Where(c => c.Id == id).ToList().Count;
         }
         public void Delete(int id)
         {
             using var context = _contextFactory.CreateDbContext();
-            var room = context.Rooms.Where(c=>c.Id == id).FirstOrDefault();
+            var room = context.Rooms.Where(c => c.Id == id).FirstOrDefault();
             context.Rooms.Remove(room);
             context.SaveChanges();
         }
@@ -76,5 +105,6 @@ namespace vlu_dorm.Services
             context.Rooms.Add(room);
             await context.SaveChangesAsync();
         }
+
     }
 }

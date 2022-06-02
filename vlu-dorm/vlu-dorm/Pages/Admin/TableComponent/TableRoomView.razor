@@ -10,6 +10,15 @@ else
 {
     <Row></Row>
 }
+<Row Style="align-items: flex-end; margin-bottom:2em" >
+    <Col Span="6" Offset="1">
+    <Text>Tìm kiếm số phòng</Text>
+    <Select DataSource="@(Rooms.Select(c=>c.RoomNumber).ToList())" @bind-Value="@value"
+            SortByLabel="@SortDirection.Ascending" Placeholder="Tìm số phòng:" OnSelectedItemChanged="OnSearch"
+            OnClearSelected="Reload" EnableSearch AllowClear>
+    </Select>
+    </Col>
+</Row>
 <Table DataSource="Rooms" PageSize="5">
     <Column Title="Số Phòng" @bind-Field="@context.RoomNumber" Sortable />
     <Column Title="Tiền Phòng" @bind-Field="@context.RoomPrice" Sortable />
@@ -17,7 +26,7 @@ else
     <Column Title="Tiền Nước / m3" @bind-Field="@context.WaterPrice" Sortable />
     <Column Title="Tiền Xe" @bind-Field="@context.BikePrice" Sortable />
     <Column Title="Số lượng người" @bind-Field="@context.Capacity" Sortable />
-    
+
     <ActionColumn Title="Action">
         <Space>
             <Button Type="@ButtonType.Primary" Color="Color.Green5" OnClick="()=>ShowModal(context.Id)">Sửa</Button>
@@ -58,6 +67,12 @@ else
     private bool isSucess = false;
     private string notice;
     private string type;
+    private string value;
+
+    private void OnSearch(string e)
+    {
+        Rooms = Rooms.Where(c => c.RoomNumber == e).ToArray();
+    }
     private void Delete(int id)
     {
         RoomServices.Delete(id);

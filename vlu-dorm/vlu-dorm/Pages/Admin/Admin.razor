@@ -1,6 +1,7 @@
 ﻿@page "/quan-ly"
 @inject StudentServices StudentServices
 @inject RoomServices RoomServices
+@inject NavigationManager _navigationManager
 @using Microsoft.AspNetCore.Authorization
 @using vlu_dorm.Pages.Admin.TableComponent
 @using vlu_dorm.Pages.Admin.Modals
@@ -155,7 +156,6 @@ else
     private bool visible = false;
     private bool visibleRoom = false;
     private bool visibleElectric = false;
-    private bool isNew = true;
     private string value;
     private bool isSucess = false;
     private string notice;
@@ -178,7 +178,7 @@ else
         visible = true;
     }
 
-    private void ShowModalRoom() { visibleRoom = true; isNew = true; }
+    private void ShowModalRoom() { visibleRoom = true; }
     private void ShowModalElc() => visibleElectric = true;
 
 
@@ -240,6 +240,7 @@ else
             type = "success";
             room.BillNavgation.BillMonth = DateTime.Today;
             await RoomServices.UpdateRoomAsync(room);
+           _navigationManager.NavigateTo("quan-ly",true);
         }
         else
         {

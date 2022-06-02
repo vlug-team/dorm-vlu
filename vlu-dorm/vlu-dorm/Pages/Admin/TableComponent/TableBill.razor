@@ -1,31 +1,62 @@
-﻿@inject RoomServices RoomServices 
+﻿@inject RoomServices RoomServices
 
 <Table DataSource="rooms">
-    <Column Field="context?.RoomNumber" Title="Phòng"></Column>
-    <Column Field="context?.BillNavgation?.BillMonth" Format="MM/yyyy" Title="Tháng"></Column>
-    <Column Field="context?.BillNavgation?.ElectricNumber" Title="Số điện" />
-    <Column Field="context?.BillNavgation?.WaterNumber" Title="Số nước" />
-    <ActionColumn Title="Action">
-        <Space>
-            <SpaceItem>
-                <Button Type="@ButtonType.Primary" Color="Color.Yellow5" >Edit</Button>
-                <Button Type="@ButtonType.Primary" Color="Color.Red5">
-                    Delete
-                </Button>
-            </SpaceItem>
-        </Space>
-    </ActionColumn>
+    @if (rooms != null && rooms.Any(c => c.BillNavgation != null))
+    {
+        <Column Field="context?.RoomNumber" Title="Phòng"></Column>
+        <Column Field="context?.BillNavgation?.BillMonth" Format="MM/yyyy" Title="Tháng"></Column>
+        <Column Field="context?.BillNavgation?.ElectricNumber" Title="Số điện" />
+        <Column Field="context?.BillNavgation?.WaterNumber" Title="Số nước" />
+        <ActionColumn Title="Action">
+            <Space>
+                <SpaceItem>
+                    <Button Type="@ButtonType.Primary" Color="Color.Yellow5" OnClick="()=>OnShow(context.BillNavgation.Id)">Edit</Button>
+                    <Button Type="@ButtonType.Primary" Color="Color.Red5" OnClick="()=>Delete(context.BillNavgation.Id)">
+                        Delete
+                    </Button>
+                </SpaceItem>
+            </Space>
+        </ActionColumn>
+    }
 </Table>
-<Modal>
-    <Form Model="room">
 
+<Modal Visible="isOpen" OnOk="@HandleOk" OnCancel="@HandleCancel" Title="Chỉnh sửa điện nước">
+    <Form Model="bill">
+        <FormItem>
+            <Input @bind-Value="context.ElectricNumber" Placeholder="Số điện"></Input>
+        </FormItem>
+        <FormItem>
+            <Input @bind-Value="context.WaterNumber" Placeholder="Số nước"></Input>
+        </FormItem>
     </Form>
 </Modal>
 @code {
     private List<Room> rooms;
-    private Room room;
+    private BillMonthly bill;
+    private bool isOpen = false;
+
     protected override void OnInitialized()
     {
         rooms = RoomServices.GetBillMonth();
+    }
+    private void OnShow(int id)
+    {
+        isOpen = true;
+        bill = RoomServices.GetBill(id);
+    }
+    private void Delete(int id)
+    {
+        RoomServices.DeleteBill(id);
+        rooms = RoomServices.GetBillMonth();
+    }
+    private async void HandleOk(MouseEventArgs e)
+    {
+        isOpen = false;
+        RoomServices.UpdateBill(bill);
+        rooms = RoomServices.GetBillMonth();
+    }
+    private void HandleCancel(MouseEventArgs e)
+    {
+        isOpen = false;
     }
 }
