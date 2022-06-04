@@ -68,7 +68,7 @@ else
             <Row>
                 <Text>
                     Điện nước Tháng: <b>
-                            @DateTime.Today.Month
+                        @DateTime.Today.Month
                     </b>
 
                 </Text>
@@ -86,8 +86,8 @@ else
                 </Select>
                 </Col>
 
-                    @if (value != null)
-                    {
+                @if (value != null)
+                {
                     <Form Model="room" OnFinishFailed="OnFinishFailed" OnFinish="OnFinish">
 
                         <FormItem>
@@ -101,7 +101,7 @@ else
                         </FormItem>
 
                     </Form>
-                    }
+                }
             </Row>
             </Col>
         </Row>
@@ -124,14 +124,16 @@ else
     <Card Title=@("Thống kê tiền nước tháng: "+month) Style="width: 450px">
 
         <Body>
-                @if (bills != null)
-                {
+            @if (bills != null)
+            {
                 <p>Số điện: <strong>@(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
-                <p>Số nước: <strong> @(bills.Sum(c=>c?.BillNavgation?.ElectricNumber))</strong></p>
-                <p>Tổng sinh viên: <strong>@(data.Where(c => c.IsConfirm == true && c.IsActive == true).Count())</strong> </p>
+                <p>Số nước: <strong> @(bills.Sum(c=>c?.BillNavgation?.WaterNumber))</strong></p>
+                <p>Tổng sinh viên đã duyệt và xác nhận: <strong>@(data.Where(c => c.IsConfirm == true && c.IsActive == true).Count())</strong> </p>
+                <p>Số sinh viên chưa duyệt: <strong>@(data.Where(c => c.IsConfirm != true).Count())</strong>(Sinh viên chưa được duyệt)</p>
+                <p>Số sinh viên chưa xác nhận: <strong>@(data.Where(c => c.IsActive == false).Count())</strong>(Sinh viên chưa được tạo mail)</p>
                 <p>Tổng tiền (Điện + Nước):<strong>@Total()</strong></p>
                 <p>Tổng tiền (Điện + Nước + Tiền phòng + Tiền xe): <strong>@TotalAll()</strong></p>
-                }
+            }
         </Body>
     </Card>
     </Col>
@@ -240,7 +242,7 @@ else
             type = "success";
             room.BillNavgation.BillMonth = DateTime.Today;
             await RoomServices.UpdateRoomAsync(room);
-           _navigationManager.NavigateTo("quan-ly",true);
+            _navigationManager.NavigateTo("quan-ly", true);
         }
         else
         {

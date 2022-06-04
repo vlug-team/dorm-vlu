@@ -39,10 +39,10 @@
             <Col Span="4" Offset="2">
             <Select Disabled="true" @bind-Value="@context.Course" TItem="string" TItemValue="string" Placeholder="Khóa học">
                 <SelectOptions>
-                        @foreach (var item in _course)
-                        {
+                    @foreach (var item in _course)
+                    {
                         <SelectOption TItemValue="string" TItem="string" Value=@item Label=@item />
-                        }
+                    }
                 </SelectOptions>
             </Select>
             </Col>
@@ -72,6 +72,13 @@
         <Row>
             <Col Span="15">
             <Input Disabled="true" @bind-Value="context.PermanentAddress" Placeholder="Địa chỉ: 69 Đặng thùy trâm,..."></Input>
+            </Col>
+        </Row>
+    </FormItem>
+    <FormItem>
+        <Row>
+            <Col Span="15">
+            <Input Type="number" min="0" max="2" @bind-Value="context.BikeNumber" Placeholder="Số xe" />
             </Col>
         </Row>
     </FormItem>

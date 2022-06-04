@@ -1,6 +1,6 @@
 ﻿@inject RoomServices RoomServices
 
-<Table DataSource="rooms">
+<Table DataSource="rooms" PageSize="5">
     @if (rooms != null && rooms.Any(c => c.BillNavgation != null))
     {
         <Column Field="context?.RoomNumber" Title="Phòng"></Column>
